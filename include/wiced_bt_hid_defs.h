@@ -42,7 +42,7 @@
 #ifndef HIDDEFS_H
 #define HIDDEFS_H
 
-#include "wiced_bt_sdp.h"
+//#include "wiced_bt_sdp.h"
 
 /*
 ** tHID_STATUS: HID result codes, returned by HID and device and host functions.

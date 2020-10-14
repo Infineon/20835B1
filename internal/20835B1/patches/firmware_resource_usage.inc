@@ -1,4 +1,4 @@
-# 20835B1 firmware build 98
+# 20835B1 firmware build 106
 # patch entries used: 85 out of 256 elf patches, 33%
 CY_PATCH_ENTRIES_BASE=85
 # additional patch entries in these libraries:
@@ -7,4 +7,4 @@ CY_PATCH_ENTRIES_BASE=85
 #   1 in i2s_aud_record_lib.a
 #   2 in mesh_optimized_continuous_scan_lib.a
 #   1 in wiced_debug_lib.a
-# patch ram used: 14264 out of 64512 bytes, 22%
+# patch ram used: 16676 out of 64512 bytes, 25%

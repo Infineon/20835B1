@@ -15,7 +15,7 @@ SDK Software Features
 - WICED HCI protocol to simplify host/MCU application development.
 - APIs and drivers to access on board peripherals
 - Bluetooth protocols include GAP, GATT, SMP, HID
-- BLE profile APIs, libraries and sample apps
+- BLE profile APIs, libraries, and sample apps
 - Support for Over-The-Air (OTA) upgrade.
 - Device Configurator for creating custom pin mapping.
 - Bluetooth Configurator for creating BLE GATT Database.
@@ -25,15 +25,15 @@ Kits
 ----
 CYW920835REF-RCU-01:
     60-QFN package, reference remote hardware, analog microphone, 16 buttons
-    (Power, Up, Down, Left, Right, etc), LEDs (for debug only), USB connector
-    for power, programming and USB-UART bridge.
+    (Power, Up, Down, Left, Right, etc), LEDs (for debug only), and a USB
+    connector for power, programming, and USB-UART bridge.
     Note: Max UART baud rate is 3M
 
 Software Tools
 --------------
-Following applications are installed with ModusToolbox on your computer.
+The following applications are installed with ModusToolbox on your computer.
 
-BT Spy :
+BT Spy:
     BTSpy is a trace viewer utility that can be used with WICED BT platforms to
     view protocol and application trace messages from the embedded device. The
     utility is located in the folder below. For more information, see readme.txt
