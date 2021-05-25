@@ -275,7 +275,7 @@ typedef struct
 typedef struct
 {
     uint8_t                         status;             /**< Status of the operation */
-    uint8_t                         role;               /**< BTM_ROLE_MASTER or BTM_ROLE_SLAVE */
+    uint8_t                         role;               /**< BTM_ROLE_CENTRAL or BTM_ROLE_PERIPHERAL */
     wiced_bt_device_address_t       bd_addr;            /**< Remote BD address involved with the switch */
 } wiced_bt_dev_switch_role_result_t;
 
@@ -483,13 +483,13 @@ enum wiced_bt_dev_le_key_type_e
     BTM_LE_KEY_PCSRK =  (1 << 2),                       /**< peer SRK */
 #if SMP_LE_SC_INCLUDED == TRUE
     BTM_LE_KEY_PLK =    (1 << 3),
-    BTM_LE_KEY_LENC =   (1 << 4),                       /**< master role security information:div */
-    BTM_LE_KEY_LID =    (1 << 5),                       /**< master device ID key */
+    BTM_LE_KEY_LENC =   (1 << 4),                       /**< Central Role security information:div */
+    BTM_LE_KEY_LID =    (1 << 5),                       /**< Central device ID key */
     BTM_LE_KEY_LCSRK =  (1 << 6),                       /**< local CSRK has been deliver to peer */
     BTM_LE_KEY_LLK =    (1 << 7),
 #else
-    BTM_LE_KEY_LENC =   (1 << 3),                       /**< master role security information:div */
-    BTM_LE_KEY_LID =    (1 << 4),                       /**< master device ID key */
+    BTM_LE_KEY_LENC =   (1 << 3),                       /**< Central Role security information:div */
+    BTM_LE_KEY_LID =    (1 << 4),                       /**< Central device ID key */
     BTM_LE_KEY_LCSRK =  (1 << 5)                        /**< local CSRK has been deliver to peer */
 #endif
 };
@@ -704,7 +704,7 @@ enum wiced_bt_management_evt_e {
     BTM_KEYPRESS_NOTIFICATION_EVT,                  /**< received KEYPRESS_NOTIFY event. Event data: #wiced_bt_dev_user_keypress_t */
     BTM_PAIRING_IO_CAPABILITIES_BR_EDR_REQUEST_EVT, /**< Requesting IO capabilities for BR/EDR pairing. Event data: #wiced_bt_dev_bredr_io_caps_req_t */
     BTM_PAIRING_IO_CAPABILITIES_BR_EDR_RESPONSE_EVT,/**< Received IO capabilities response for BR/EDR pairing. Event data: #wiced_bt_dev_bredr_io_caps_rsp_t */
-    BTM_PAIRING_IO_CAPABILITIES_BLE_REQUEST_EVT,    /**< Requesting IO capabilities for BLE pairing. Slave can check peer io capabilities in event data before updating with local io capabilities. Event data: #wiced_bt_dev_ble_io_caps_req_t */
+    BTM_PAIRING_IO_CAPABILITIES_BLE_REQUEST_EVT,    /**< Requesting IO capabilities for BLE pairing. Peripheral can check peer io capabilities in event data before updating with local io capabilities. Event data: #wiced_bt_dev_ble_io_caps_req_t */
     BTM_PAIRING_COMPLETE_EVT,                       /**< received SIMPLE_PAIRING_COMPLETE event. Event data: #wiced_bt_dev_pairing_cplt_t */
     BTM_ENCRYPTION_STATUS_EVT,                      /**< Encryption status change. Event data: #wiced_bt_dev_encryption_status_t */
     BTM_SECURITY_REQUEST_EVT,                       /**< Security request (respond using #wiced_bt_ble_security_grant). Event data: #wiced_bt_dev_security_request_t */
@@ -828,7 +828,7 @@ typedef PACKED struct
 #endif
 
     BT_OCTET8           rand;           /**< random vector for LTK generation */
-    UINT16              ediv;           /**< LTK diversifier of this slave device */
+    UINT16              ediv;           /**< LTK diversifier of this peripheral device */
     UINT16              div;            /**< local DIV  to generate local LTK=d1(ER,DIV,0) and CSRK=d1(ER,DIV,1)  */
     uint8_t             sec_level;      /**< local pairing security level */
     uint8_t             key_size;       /**< key size of the LTK delivered to peer device */
@@ -1172,6 +1172,26 @@ wiced_result_t  wiced_bt_dev_set_discoverability (uint8_t inq_mode, uint16_t dur
 wiced_result_t wiced_bt_dev_set_connectability (uint8_t page_mode, uint16_t window,
                                                       uint16_t interval);
 
+/**
+ * Function         wiced_bt_dev_vendor_specific_command
+ *
+ *                  Send a vendor specific HCI command to the controller.
+ *
+ * @param[in]       opcode              : Opcode of vendor specific command
+ * @param[in]       param_len           : Length of parameter buffer
+ * @param[in]       p_param_buf         : Parameters
+ * @param[in]       p_cback             : Callback for command complete
+ *
+ * @return
+ *
+ *                  WICED_BT_SUCCESS    : Command sent. Does not expect command complete event. (command complete callback param is NULL)
+ *                  WICED_BT_PENDING    : Command sent. Waiting for command complete event.
+ *                  WICED_BT_BUSY       : Command not sent. Waiting for command complete event for prior command.
+ *
+ */
+wiced_result_t wiced_bt_dev_vendor_specific_command (uint16_t opcode, uint8_t param_len, uint8_t *p_param_buf,
+                                wiced_bt_dev_vendor_specific_command_complete_cback_t *p_cback);
+
 #ifdef BR_EDR_API_SUPPORT
 /****************************************************************************/
 /**
@@ -1231,26 +1251,6 @@ wiced_result_t wiced_bt_cancel_inquiry(void);
  *                  WICED_BT_FAILED  : if an error occurred
  */
 wiced_result_t wiced_bt_dev_set_advanced_connection_params (wiced_bt_dev_inquiry_scan_result_t *p_inquiry_scan_result);
-
-/**
- * Function         wiced_bt_dev_vendor_specific_command
- *
- *                  Send a vendor specific HCI command to the controller.
- *
- * @param[in]       opcode              : Opcode of vendor specific command
- * @param[in]       param_len           : Length of parameter buffer
- * @param[in]       p_param_buf         : Parameters
- * @param[in]       p_cback             : Callback for command complete
- *
- * @return
- *
- *                  WICED_BT_SUCCESS    : Command sent. Does not expect command complete event. (command complete callback param is NULL)
- *                  WICED_BT_PENDING    : Command sent. Waiting for command complete event.
- *                  WICED_BT_BUSY       : Command not sent. Waiting for command complete event for prior command.
- *
- */
-wiced_result_t wiced_bt_dev_vendor_specific_command (uint16_t opcode, uint8_t param_len, uint8_t *p_param_buf,
-                                wiced_bt_dev_vendor_specific_command_complete_cback_t *p_cback);
 
 /**
  * Function         wiced_bt_dev_register_connection_status_change
@@ -1745,13 +1745,13 @@ wiced_result_t wiced_bt_dev_get_role( wiced_bt_device_address_t remote_bd_addr, 
 /**
  * Function         wiced_bt_dev_switch_role
  *
- *                  This function is called to switch the role between master and
- *                  slave.  If role is already set it will do nothing. If the
+ *                  This function is called to switch the role between central and
+ *                  peripheral.  If role is already set it will do nothing. If the
  *                  command was initiated, the callback function is called upon
  *                  completion.
  *
  * @param[in]       remote_bd_addr      : BD address of remote device
- * @param[in]       new_role            : New role (BTM_ROLE_MASTER or BTM_ROLE_SLAVE)
+ * @param[in]       new_role            : New role (BTM_ROLE_CENTRAL or BTM_ROLE_PERIPHERAL)
  * @param[in]       p_cback             : Result callback (wiced_bt_dev_switch_role_result_t will be passed to the callback)
 
  *
