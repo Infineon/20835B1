@@ -32,7 +32,7 @@
  */
 /** @file
  *
- * WICED BT App Common Utilities. This file provides the interfaces to the utilities that
+ * AIROC BTSDK App Common Utilities. This file provides the interfaces to the utilities that
  * can be used by the applications
  */
 #include "wiced_gki.h"
@@ -41,7 +41,7 @@
 #ifndef _WICED_BT_APP_COMMON_H_
 #define _WICED_BT_APP_COMMON_H_
 
-/* BLE Advertisement Maximum Length*/
+/* LE Advertisement Maximum Length*/
 #define ADV_LEN_MAX        31
 
 #ifndef WICED_SDK_MAJOR_VER
@@ -61,7 +61,7 @@
 /*****************************************************************************
 **                                                  Function Declarations
 *****************************************************************************/
-/** Wiced Bt App Initialization
+/** AIROC BTSDK App Initialization
  *
  * Initializes Application events serialization. Performs the HAL initialization
  *
