@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2021, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2022, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -297,6 +297,149 @@ typedef struct
 #define BE_STREAM_TO_UINT64(u64, p) {u64 = ((UINT64)(*((p) + 7)) + ((UINT64)(*((p) + 6)) << 8) + ((UINT64)(*((p) + 5)) << 16) + ((UINT64)(*((p) + 4)) << 24) + \
                                            ((UINT64)(*((p) + 3)) << 32) + ((UINT64)(*((p) + 2)) << 40) + ((UINT64)(*((p) + 1)) << 48) + ((UINT64)(*(p)) << 56)); (p) += 8;}
 #define BE_STREAM_TO_ARRAY(p, a, len) {register int ijk; for (ijk = 0; ijk < len; ijk++) ((UINT8 *) a)[ijk] = *p++;}
+
+typedef UINT16 SFLOAT;
+typedef UINT8 UINT24[3];
+
+static inline SFLOAT wiced_bt_types_uint16tosfloat(UINT16 uin)
+{
+    UINT8 exponent;
+    UINT16 mantissa;
+    SFLOAT sfl;
+
+    if (uin < 0x07FE)
+    {
+        exponent = 0;
+        mantissa = uin;
+    }
+    else if (uin < 0x7FE * 10)
+    {
+        exponent = 1;
+        mantissa = uin /10;
+    }
+    else if (uin < 0x7FE * 100)
+    {
+        exponent = 2;
+        mantissa = uin /100;
+    }
+    else
+    {
+        return 0;
+    }
+
+    sfl = (0x0FFF & mantissa) + ((0x0F & exponent) << 12);
+
+    return sfl;
+}
+
+static inline UINT16 wiced_bt_types_sfloattouint16(SFLOAT sfl)
+{
+    UINT8 exponent;
+    UINT16 mantissa;
+    UINT16 uin;
+    INT8 i;
+
+    exponent = (0xF000 & sfl) >> 12;
+    mantissa = (0x0FFF & sfl);
+
+    uin = mantissa;
+
+    if (exponent <= 2)
+    {
+        for (i = 0; i < exponent; i++)
+        {
+            uin *= 10;
+        }
+    }
+    else
+    {
+        uin = 0;
+    }
+
+    return uin;
+}
+
+static inline SFLOAT uint8_uint8tosfloat(UINT8 minus, UINT8 uin, UINT8 bdp)
+{
+    INT8 exponent;
+    UINT16 mantissa;
+    SFLOAT fl;
+    UINT16 temp;
+    int i;
+
+    exponent = 0;
+    temp = bdp;
+
+    //eliminated 0
+    while(1)
+    {
+        if (temp == 0)
+        {
+            break;
+        }
+        else if (temp % 10 == 0)
+        {
+            temp /= 10;
+        }
+        else
+        {
+            break;
+        }
+    }
+    bdp = temp;
+
+    while(1)
+    {
+        if (temp / 10)
+        {
+            temp /= 10;
+            exponent--;
+        }
+        else
+        {
+            if (temp)
+            {
+                exponent--;
+            }
+            break;
+        }
+    }
+
+    for (i = 0; i > exponent; i--)
+    {
+        uin *= 10;
+    }
+
+    temp = uin+bdp;
+
+    if (temp < 0x07FE)
+    {
+        mantissa = temp;
+    }
+    else if (temp < 0x07FE * 10)
+    {
+        exponent+= 1;
+        mantissa = temp /10;
+    }
+    else if (uin < 0x07FFE * 100)
+    {
+        exponent += 2;
+        mantissa = temp / 100;
+    }
+
+    if (minus)
+    {
+        mantissa = (mantissa -1) ^ 0x0FFF ;
+    }
+
+    fl = (0x0FFF & mantissa) + ((0x0F & exponent) << 12);
+
+    return fl;
+}
+
+#define UINT16toSFLOAT(p) wiced_bt_types_uint16tosfloat(p)
+#define SFLOATtoUINT16(p) wiced_bt_types_sfloattouint16(p)
+#define UINT8_UINT8toSFLOAT(p, q, r) uint8_uint8tosfloat(p, q, r)
 
 
 /********************************************************************************
