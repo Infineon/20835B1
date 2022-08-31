@@ -574,7 +574,7 @@
 #undef  BT_SLIMBUS
 
 /*
- * BT LE Over WLAN (BLOW) configuration, this option depends on TBFC.
+ * Bluetooth LE Over WLAN (BLOW) configuration, this option depends on TBFC.
  */
 
 /*

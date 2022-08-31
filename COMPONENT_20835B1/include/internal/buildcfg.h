@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*MPAF bt stack configuration*/
+/*MPAF Bluetooth stack configuration*/
 #ifdef MPAF_BT_STACK_ENABLE
 
 #define BR_INCLUDED         TRUE

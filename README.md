@@ -1,4 +1,3 @@
-------------------------------------------------------------------------------------
 # AIROC&#8482; BTSDK - CYW20835
 
 ## Overview
@@ -42,5 +41,3 @@ The Infineon AIROC&#8482; CYW20835 Bluetooth&#174; LE system on chip is a stand-
   (Power, Up, Down, Left, Right, etc), LEDs (for debug only), and a USB
   connector for power, programming, and USB-UART bridge.
   Note: Max UART baud rate is 3M
-
-------------------------------------------------------------------------------------
