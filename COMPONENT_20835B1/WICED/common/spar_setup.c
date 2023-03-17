@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2022, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -48,6 +48,7 @@
 
 #include "wiced.h"
 #include "wiced_sleep.h"
+#include "wiced_memory_pre_init.h"
 
 /*****************************************************************
 *   External definitions
@@ -166,6 +167,20 @@ void wiced_platform_default_lpo_init()
 }
 #endif
 
+/**
+ * this weak symbol will have the default values for memory pre-init firmware allocations
+ * declare this structure again, with no attribute, in app code
+ * initialize with desired values to override
+ */
+WICED_MEM_PRE_INIT_CONTROL g_mem_pre_init __attribute__((weak)) =
+{
+    WICED_MEM_PRE_INIT_IGNORE,
+    WICED_MEM_PRE_INIT_IGNORE,
+    WICED_MEM_PRE_INIT_IGNORE,
+    WICED_MEM_PRE_INIT_IGNORE,
+    WICED_MEM_PRE_INIT_IGNORE
+};
+
 __attribute__ ((section(".spar_setup")))
 void SPAR_CRT_SETUP(void)
 {
@@ -203,6 +218,9 @@ void SPAR_CRT_SETUP(void)
 
     // Install included libraries and patches if any
     install_libs();
+
+    // optimize memory - use WICED_MEM_PRE_INIT_IGNORE to make no change
+    wiced_memory_pre_init(&g_mem_pre_init);
 
     // Setup the application start function.
     wiced_bt_app_pre_init = application_start_internal;

@@ -207,6 +207,13 @@ sfi_exit_deep_power_down                         , SYMBOL, PUBLIC, 0, , 1
 sfi_enter_deep_power_down                        , SYMBOL, PUBLIC, 0, , 1
 pmu_attemptSleepState                            , SYMBOL, PUBLIC, 0, , 1
 #
+# quuppa
+#
+quuppa_proprietary_freq_enable                   , SYMBOL, PUBLIC, 0, , 1
+quuppa_proprietary_freq_is_enabled               , SYMBOL, PUBLIC, 0, , 1
+quuppa_scan_enable                               , SYMBOL, PUBLIC, 0, , 1
+quuppa_scan_is_enabled                           , SYMBOL, PUBLIC, 0, , 1
+#
 # irtx
 #
 irtx_doneInterruptHandler      , SYMBOL, PUBLIC, 2, wiced_irtx_doneInterruptHandler, 1
