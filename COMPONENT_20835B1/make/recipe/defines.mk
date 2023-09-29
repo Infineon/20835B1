@@ -96,6 +96,9 @@ endif
 # use btp file to determine flash layout
 CY_CORE_LD_DEFS+=BTP=$(CY_CORE_BTP)
 
+# indicate DS upgrade support to determine flash layout
+CY_CORE_LD_DEFS+=DS_UPGRADE=$(OTA_FW_UPGRADE)
+
 #
 # Core flags and defines
 #
@@ -128,9 +131,9 @@ CY_CORE_DEFINES+=\
 
 CY_CORE_EXTRA_DEFINES=\
 	-DWICED_SDK_MAJOR_VER=4 \
-	-DWICED_SDK_MINOR_VER=3 \
-	-DWICED_SDK_REV_NUMBER=0 \
-	-DWICED_SDK_BUILD_NUMBER=57034
+	-DWICED_SDK_MINOR_VER=4 \
+	-DWICED_SDK_REV_NUMBER=2 \
+	-DWICED_SDK_BUILD_NUMBER=14114
 
 #
 # Set the output file paths
