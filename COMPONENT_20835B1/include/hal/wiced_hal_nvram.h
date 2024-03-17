@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -56,8 +56,8 @@
 enum
 {
     /* Wiced applications */
-    WICED_NVRAM_VSID_START              = 0x200,
-    WICED_NVRAM_VSID_END                = 0x3FFF
+    WICED_NVRAM_VSID_START = 0x200,
+    WICED_NVRAM_VSID_END   = 0x3FFF,
 };
 
 
@@ -83,10 +83,10 @@ enum
  *
  * @return  number of bytes written, 0 on error
  */
-uint16_t wiced_hal_write_nvram( uint16_t vs_id,
-            uint16_t         data_length,
-        uint8_t        * p_data,
-        wiced_result_t * p_status);
+uint16_t wiced_hal_write_nvram(uint16_t vs_id,
+                               uint16_t         data_length,
+                               uint8_t *p_data,
+                               wiced_result_t *p_status);
 
 /** Reads the data from NVRAM
  *
@@ -103,10 +103,10 @@ uint16_t wiced_hal_write_nvram( uint16_t vs_id,
  *
  * @return  the number of bytes read, 0 on failure
  */
-uint16_t wiced_hal_read_nvram( uint16_t vs_id,
-            uint16_t         data_length,
-        uint8_t        * p_data,
-        wiced_result_t * p_status);
+uint16_t wiced_hal_read_nvram(uint16_t vs_id,
+                              uint16_t         data_length,
+                              uint8_t *p_data,
+                              wiced_result_t *p_status);
 
 /** deletes data from NVRAM at specified VS id
  *
@@ -120,7 +120,7 @@ uint16_t wiced_hal_read_nvram( uint16_t vs_id,
  *
  * @return  void
  */
-void wiced_hal_delete_nvram( uint16_t vs_id, wiced_result_t * p_status);
+void wiced_hal_delete_nvram(uint16_t vs_id, wiced_result_t *p_status);
 
 /** @} */
 

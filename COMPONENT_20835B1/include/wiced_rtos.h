@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -73,32 +73,32 @@ typedef enum
 {
     ALLOW_THREAD_TO_SLEEP, /**<  Allow the current running thread to sleep */
     KEEP_THREAD_ACTIVE,    /**<  Keep the current running thread active */
-}wiced_delay_type_t;
+} wiced_delay_type_t;
 
 /******************************************************
  *                 Type Definitions
  ******************************************************/
 
 /** Callback invoked on timer expiry  */
-typedef void (*timer_handler_t)( int32_t arg );
+typedef void (*timer_handler_t)(int32_t arg);
 
 /******************************************************
  *             Structures
  ******************************************************/
 
-typedef struct _wiced_thread_t        wiced_thread_t        ;
-typedef struct _thread_monitor_info_t thread_monitor_info_t ;
-typedef struct _wiced_queue_t         wiced_queue_t         ;
-typedef struct _wiced_rtos_timer_t    wiced_rtos_timer_t    ;
-typedef struct _wiced_semaphore_t     wiced_semaphore_t     ;
-typedef struct _wiced_mutex_t         wiced_mutex_t         ;
-typedef struct _wiced_event_flags_t   wiced_event_flags_t   ;
-typedef struct _wiced_worker_thread_t wiced_worker_thread_t ;
-typedef struct _wiced_timed_event_t   wiced_timed_event_t   ;
+typedef struct _wiced_thread_t        wiced_thread_t;
+typedef struct _thread_monitor_info_t thread_monitor_info_t;
+typedef struct _wiced_queue_t         wiced_queue_t;
+typedef struct _wiced_rtos_timer_t    wiced_rtos_timer_t;
+typedef struct _wiced_semaphore_t     wiced_semaphore_t;
+typedef struct _wiced_mutex_t         wiced_mutex_t;
+typedef struct _wiced_event_flags_t   wiced_event_flags_t;
+typedef struct _wiced_worker_thread_t wiced_worker_thread_t;
+typedef struct _wiced_timed_event_t   wiced_timed_event_t;
 
-typedef wiced_result_t (*event_handler_t)( void* arg );
+typedef wiced_result_t (*event_handler_t)(void *arg);
 
-typedef void (*wiced_thread_function_t)( uint32_t arg );
+typedef void (*wiced_thread_function_t)(uint32_t arg);
 
 /******************************************************
  *             Function declarations
@@ -135,7 +135,7 @@ extern wiced_worker_thread_t wiced_networking_worker_thread;
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_thread_t*  wiced_rtos_create_thread( void );
+wiced_thread_t *wiced_rtos_create_thread(void);
 
 /** Initializes and starts a new thread
  *
@@ -151,7 +151,7 @@ wiced_thread_t*  wiced_rtos_create_thread( void );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_init_thread( wiced_thread_t* thread, uint8_t priority, const char* name, wiced_thread_function_t function, uint32_t stack_size, void* arg );
+wiced_result_t wiced_rtos_init_thread(wiced_thread_t *thread, uint8_t priority, const char *name, wiced_thread_function_t function, uint32_t stack_size, void *arg);
 
 #ifdef WICED_RTOS_D
 /** Deletes a terminated thread
@@ -161,7 +161,7 @@ wiced_result_t wiced_rtos_init_thread( wiced_thread_t* thread, uint8_t priority,
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_delete_thread( wiced_thread_t* thread );
+wiced_result_t wiced_rtos_delete_thread(wiced_thread_t *thread);
 
 #endif // WICED_RTOS_D
 
@@ -172,7 +172,7 @@ wiced_result_t wiced_rtos_delete_thread( wiced_thread_t* thread );
  * @return    TRUE  : stack overflow
  * @return    FALSE : not stack overflow
  */
-wiced_bool_t wiced_rtos_check_for_stack_overflow( void );
+wiced_bool_t wiced_rtos_check_for_stack_overflow(void);
 
 /** Return the thread stack size
  *
@@ -181,7 +181,7 @@ wiced_bool_t wiced_rtos_check_for_stack_overflow( void );
  * @return    uint32_t  : size
  * @return    0         : invalid thread pointer
  */
-uint32_t wiced_rtos_thread_stack_size( wiced_thread_t* thread );
+uint32_t wiced_rtos_thread_stack_size(wiced_thread_t *thread);
 
 /** Returns maximum stack usage of the thread
  *
@@ -192,7 +192,7 @@ uint32_t wiced_rtos_thread_stack_size( wiced_thread_t* thread );
  *
  * @return          maximum stack usage
  *******************************************************************/
-uint32_t wiced_bt_rtos_max_stack_use( wiced_thread_t* thread );
+uint32_t wiced_bt_rtos_max_stack_use(wiced_thread_t *thread);
 
 /** Sleep for a given period of milliseconds
  *
@@ -209,7 +209,7 @@ uint32_t wiced_bt_rtos_max_stack_use( wiced_thread_t* thread );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_delay_milliseconds( uint32_t milliseconds, wiced_delay_type_t delay_type);
+wiced_result_t wiced_rtos_delay_milliseconds(uint32_t milliseconds, wiced_delay_type_t delay_type);
 
 /** Delay for a given period of microseconds
  *
@@ -225,7 +225,7 @@ wiced_result_t wiced_rtos_delay_milliseconds( uint32_t milliseconds, wiced_delay
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_delay_microseconds( uint32_t microseconds );
+wiced_result_t wiced_rtos_delay_microseconds(uint32_t microseconds);
 
 /** Sleeps until another thread has terminated
  *
@@ -239,7 +239,7 @@ wiced_result_t wiced_rtos_delay_microseconds( uint32_t microseconds );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_thread_join( wiced_thread_t* thread );
+wiced_result_t wiced_rtos_thread_join(wiced_thread_t *thread);
 
 
 /** Forcibly wakes another thread
@@ -253,7 +253,7 @@ wiced_result_t wiced_rtos_thread_join( wiced_thread_t* thread );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_thread_force_awake( wiced_thread_t* thread );
+wiced_result_t wiced_rtos_thread_force_awake(wiced_thread_t *thread);
 
 
 /** Checks if a thread is the current thread
@@ -265,7 +265,7 @@ wiced_result_t wiced_rtos_thread_force_awake( wiced_thread_t* thread );
  * @return    WICED_SUCCESS : specified thread is the current thread
  * @return    WICED_ERROR   : specified thread is not currently running
  */
-wiced_result_t wiced_rtos_is_current_thread( wiced_thread_t* thread );
+wiced_result_t wiced_rtos_is_current_thread(wiced_thread_t *thread);
 
 
 /** Checks the stack of the current thread
@@ -273,7 +273,7 @@ wiced_result_t wiced_rtos_is_current_thread( wiced_thread_t* thread );
  * @return    WICED_SUCCESS : if the current thread stack is within limits
  * @return    WICED_ERROR   : if the current thread stack has extended beyond its limits
  */
-wiced_result_t wiced_rtos_check_stack( void ) DEPRECATE_RTOS_CHECK_STACK;
+wiced_result_t wiced_rtos_check_stack(void) DEPRECATE_RTOS_CHECK_STACK;
 
 
 /** @} */
@@ -298,7 +298,7 @@ wiced_result_t wiced_rtos_check_stack( void ) DEPRECATE_RTOS_CHECK_STACK;
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_worker_thread_t* wiced_rtos_create_worker_thread(void);
+wiced_worker_thread_t *wiced_rtos_create_worker_thread(void);
 
 
 /** Initializes and starts a worker thread
@@ -317,7 +317,7 @@ wiced_worker_thread_t* wiced_rtos_create_worker_thread(void);
  * Note :     The number of buffers in wiced_bt_cfg_settings_t.max_number_of_buffer_pools
  *            must be increased for each worker thread the application will utilize.
  */
-wiced_result_t wiced_rtos_init_worker_thread( wiced_worker_thread_t* worker_thread, uint8_t priority, uint32_t stack_size, uint32_t event_queue_size );
+wiced_result_t wiced_rtos_init_worker_thread(wiced_worker_thread_t *worker_thread, uint8_t priority, uint32_t stack_size, uint32_t event_queue_size);
 
 #ifdef WICED_RTOS_D
 /** Deletes a worker thread
@@ -329,7 +329,7 @@ wiced_result_t wiced_rtos_init_worker_thread( wiced_worker_thread_t* worker_thre
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_delete_worker_thread( wiced_worker_thread_t* worker_thread );
+wiced_result_t wiced_rtos_delete_worker_thread(wiced_worker_thread_t *worker_thread);
 
 #endif // WICED_RTOS_D
 
@@ -353,7 +353,7 @@ wiced_result_t wiced_rtos_delete_worker_thread( wiced_worker_thread_t* worker_th
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_semaphore_t*  wiced_rtos_create_semaphore( void );
+wiced_semaphore_t *wiced_rtos_create_semaphore(void);
 
 
 /** Initialises a semaphore
@@ -365,7 +365,7 @@ wiced_semaphore_t*  wiced_rtos_create_semaphore( void );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_init_semaphore( wiced_semaphore_t* semaphore );
+wiced_result_t wiced_rtos_init_semaphore(wiced_semaphore_t *semaphore);
 
 
 /** Set (post/put/increment) a semaphore
@@ -377,7 +377,7 @@ wiced_result_t wiced_rtos_init_semaphore( wiced_semaphore_t* semaphore );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_set_semaphore( wiced_semaphore_t* semaphore );
+wiced_result_t wiced_rtos_set_semaphore(wiced_semaphore_t *semaphore);
 
 
 /** Get (wait/decrement) a semaphore
@@ -392,7 +392,7 @@ wiced_result_t wiced_rtos_set_semaphore( wiced_semaphore_t* semaphore );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_get_semaphore( wiced_semaphore_t* semaphore, uint32_t timeout_ms );
+wiced_result_t wiced_rtos_get_semaphore(wiced_semaphore_t *semaphore, uint32_t timeout_ms);
 
 
 #ifdef WICED_RTOS_D
@@ -405,7 +405,7 @@ wiced_result_t wiced_rtos_get_semaphore( wiced_semaphore_t* semaphore, uint32_t 
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deinit_semaphore( wiced_semaphore_t* semaphore );
+wiced_result_t wiced_rtos_deinit_semaphore(wiced_semaphore_t *semaphore);
 
 #endif // WICED_RTOS_D
 
@@ -429,7 +429,7 @@ wiced_result_t wiced_rtos_deinit_semaphore( wiced_semaphore_t* semaphore );
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_mutex_t*  wiced_rtos_create_mutex( void );
+wiced_mutex_t *wiced_rtos_create_mutex(void);
 
 
 /** Initialises a mutex
@@ -444,7 +444,7 @@ wiced_mutex_t*  wiced_rtos_create_mutex( void );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_init_mutex( wiced_mutex_t* mutex );
+wiced_result_t wiced_rtos_init_mutex(wiced_mutex_t *mutex);
 
 
 /** Obtains the lock on a mutex
@@ -458,7 +458,7 @@ wiced_result_t wiced_rtos_init_mutex( wiced_mutex_t* mutex );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_lock_mutex( wiced_mutex_t* mutex );
+wiced_result_t wiced_rtos_lock_mutex(wiced_mutex_t *mutex);
 
 
 /** Releases the lock on a mutex
@@ -471,7 +471,7 @@ wiced_result_t wiced_rtos_lock_mutex( wiced_mutex_t* mutex );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_unlock_mutex( wiced_mutex_t* mutex );
+wiced_result_t wiced_rtos_unlock_mutex(wiced_mutex_t *mutex);
 
 
 #ifdef WICED_RTOS_D
@@ -484,7 +484,7 @@ wiced_result_t wiced_rtos_unlock_mutex( wiced_mutex_t* mutex );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deinit_mutex( wiced_mutex_t* mutex );
+wiced_result_t wiced_rtos_deinit_mutex(wiced_mutex_t *mutex);
 
 #endif // WICED_RTOS_D
 
@@ -508,7 +508,7 @@ wiced_result_t wiced_rtos_deinit_mutex( wiced_mutex_t* mutex );
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_queue_t*  wiced_rtos_create_queue( void );
+wiced_queue_t *wiced_rtos_create_queue(void);
 
 
 /** Initialises a queue
@@ -528,7 +528,7 @@ wiced_queue_t*  wiced_rtos_create_queue( void );
  * increase max_number_of_buffer_pools (in wiced_bt_cfg_settings_t structure)
  * by the number of rtos queues initialized - i.e. one per call to this API.
  */
-wiced_result_t wiced_rtos_init_queue( wiced_queue_t* queue, const char* name, uint32_t message_size, uint32_t number_of_messages );
+wiced_result_t wiced_rtos_init_queue(wiced_queue_t *queue, const char *name, uint32_t message_size, uint32_t number_of_messages);
 
 
 /** Pushes an object onto a queue
@@ -543,7 +543,7 @@ wiced_result_t wiced_rtos_init_queue( wiced_queue_t* queue, const char* name, ui
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error or timeout occurred
  */
-wiced_result_t wiced_rtos_push_to_queue( wiced_queue_t* queue, void* message, uint32_t timeout_ms );
+wiced_result_t wiced_rtos_push_to_queue(wiced_queue_t *queue, void *message, uint32_t timeout_ms);
 
 
 /** Pops an object off a queue
@@ -561,7 +561,7 @@ wiced_result_t wiced_rtos_push_to_queue( wiced_queue_t* queue, void* message, ui
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error or timeout occurred
  */
-wiced_result_t wiced_rtos_pop_from_queue( wiced_queue_t* queue, void* message, uint32_t timeout_ms );
+wiced_result_t wiced_rtos_pop_from_queue(wiced_queue_t *queue, void *message, uint32_t timeout_ms);
 
 
 #ifdef WICED_RTOS_D
@@ -574,7 +574,7 @@ wiced_result_t wiced_rtos_pop_from_queue( wiced_queue_t* queue, void* message, u
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deinit_queue( wiced_queue_t* queue );
+wiced_result_t wiced_rtos_deinit_queue(wiced_queue_t *queue);
 
 #endif // WICED_RTOS_D
 
@@ -585,7 +585,7 @@ wiced_result_t wiced_rtos_deinit_queue( wiced_queue_t* queue );
  * @return    WICED_SUCCESS : queue is empty.
  * @return    WICED_ERROR   : queue is not empty.
  */
-wiced_bool_t wiced_rtos_is_queue_empty( wiced_queue_t* queue );
+wiced_bool_t wiced_rtos_is_queue_empty(wiced_queue_t *queue);
 
 
 /** Check if a queue is full
@@ -595,7 +595,7 @@ wiced_bool_t wiced_rtos_is_queue_empty( wiced_queue_t* queue );
  * @return    WICED_SUCCESS : queue is full.
  * @return    WICED_ERROR   : queue is not full.
  */
-wiced_bool_t wiced_rtos_is_queue_full( wiced_queue_t* queue );
+wiced_bool_t wiced_rtos_is_queue_full(wiced_queue_t *queue);
 
 
 /** Get the queue occupancy
@@ -606,7 +606,7 @@ wiced_bool_t wiced_rtos_is_queue_full( wiced_queue_t* queue );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_get_queue_occupancy( wiced_queue_t* queue, uint32_t *count );
+wiced_result_t wiced_rtos_get_queue_occupancy(wiced_queue_t *queue, uint32_t *count);
 
 
 /** @} */
@@ -631,7 +631,7 @@ wiced_result_t wiced_rtos_get_queue_occupancy( wiced_queue_t* queue, uint32_t *c
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_rtos_timer_t*  wiced_rtos_create_timer( void ) DEPRECATE_RTOS_TIMER;
+wiced_rtos_timer_t *wiced_rtos_create_timer(void) DEPRECATE_RTOS_TIMER;
 
 
 /** Initialises a RTOS timer
@@ -647,7 +647,7 @@ wiced_rtos_timer_t*  wiced_rtos_create_timer( void ) DEPRECATE_RTOS_TIMER;
  *
  * @return
  */
-wiced_result_t wiced_rtos_init_timer( wiced_rtos_timer_t* timer, uint32_t time_ms, timer_handler_t function, void* arg ) DEPRECATE_RTOS_TIMER;
+wiced_result_t wiced_rtos_init_timer(wiced_rtos_timer_t *timer, uint32_t time_ms, timer_handler_t function, void *arg) DEPRECATE_RTOS_TIMER;
 
 
 /** Starts a RTOS timer running
@@ -660,7 +660,7 @@ wiced_result_t wiced_rtos_init_timer( wiced_rtos_timer_t* timer, uint32_t time_m
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_start_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
+wiced_result_t wiced_rtos_start_timer(wiced_rtos_timer_t *timer) DEPRECATE_RTOS_TIMER;
 
 
 /** Stops a running RTOS timer
@@ -673,7 +673,7 @@ wiced_result_t wiced_rtos_start_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTO
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_stop_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
+wiced_result_t wiced_rtos_stop_timer(wiced_rtos_timer_t *timer) DEPRECATE_RTOS_TIMER;
 
 
 #ifdef WICED_RTOS_D
@@ -686,7 +686,7 @@ wiced_result_t wiced_rtos_stop_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deinit_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
+wiced_result_t wiced_rtos_deinit_timer(wiced_rtos_timer_t *timer) DEPRECATE_RTOS_TIMER;
 
 #endif // WICED_RTOS_D
 
@@ -697,7 +697,7 @@ wiced_result_t wiced_rtos_deinit_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RT
  * @return    WICED_SUCCESS : if running.
  * @return    WICED_ERROR   : if not running
  */
-wiced_result_t wiced_rtos_is_timer_running( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
+wiced_result_t wiced_rtos_is_timer_running(wiced_rtos_timer_t *timer) DEPRECATE_RTOS_TIMER;
 
 /** @} */
 
@@ -729,7 +729,7 @@ wiced_result_t wiced_rtos_is_timer_running( wiced_rtos_timer_t* timer ) DEPRECAT
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_register_timed_event( wiced_timed_event_t* event_object, wiced_worker_thread_t* worker_thread, event_handler_t function, uint32_t time_ms, void* arg );
+wiced_result_t wiced_rtos_register_timed_event(wiced_timed_event_t *event_object, wiced_worker_thread_t *worker_thread, event_handler_t function, uint32_t time_ms, void *arg);
 
 
 #ifdef WICED_RTOS_D
@@ -743,7 +743,7 @@ wiced_result_t wiced_rtos_register_timed_event( wiced_timed_event_t* event_objec
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deregister_timed_event( wiced_timed_event_t* event_object );
+wiced_result_t wiced_rtos_deregister_timed_event(wiced_timed_event_t *event_object);
 
 #endif // WICED_RTOS_D
 
@@ -758,7 +758,7 @@ wiced_result_t wiced_rtos_deregister_timed_event( wiced_timed_event_t* event_obj
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_send_asynchronous_event( wiced_worker_thread_t* worker_thread, event_handler_t function, void* arg );
+wiced_result_t wiced_rtos_send_asynchronous_event(wiced_worker_thread_t *worker_thread, event_handler_t function, void *arg);
 
 /** @} */
 /*****************************************************************************/
@@ -780,7 +780,7 @@ wiced_result_t wiced_rtos_send_asynchronous_event( wiced_worker_thread_t* worker
  * @return    valid pointer : on success.
  * @return    NULL          : if an error occurred
  */
-wiced_event_flags_t*  wiced_rtos_create_event_flags( void );
+wiced_event_flags_t *wiced_rtos_create_event_flags(void);
 
 
 /** Initialise an event flags
@@ -790,7 +790,7 @@ wiced_event_flags_t*  wiced_rtos_create_event_flags( void );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_init_event_flags( wiced_event_flags_t* event_flags );
+wiced_result_t wiced_rtos_init_event_flags(wiced_event_flags_t *event_flags);
 
 
 /** Wait for event flags to be set
@@ -805,7 +805,7 @@ wiced_result_t wiced_rtos_init_event_flags( wiced_event_flags_t* event_flags );
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_wait_for_event_flags( wiced_event_flags_t* event_flags, uint32_t flags_to_wait_for, uint32_t* flags_set, wiced_bool_t clear_set_flags, wiced_event_flags_wait_option_t wait_option, uint32_t timeout_ms );
+wiced_result_t wiced_rtos_wait_for_event_flags(wiced_event_flags_t *event_flags, uint32_t flags_to_wait_for, uint32_t *flags_set, wiced_bool_t clear_set_flags, wiced_event_flags_wait_option_t wait_option, uint32_t timeout_ms);
 
 
 /** Set event flags
@@ -816,7 +816,7 @@ wiced_result_t wiced_rtos_wait_for_event_flags( wiced_event_flags_t* event_flags
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_set_event_flags( wiced_event_flags_t* event_flags, uint32_t flags_to_set );
+wiced_result_t wiced_rtos_set_event_flags(wiced_event_flags_t *event_flags, uint32_t flags_to_set);
 
 
 #ifdef WICED_RTOS_D
@@ -827,7 +827,7 @@ wiced_result_t wiced_rtos_set_event_flags( wiced_event_flags_t* event_flags, uin
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error occurred
  */
-wiced_result_t wiced_rtos_deinit_event_flags( wiced_event_flags_t* event_flags );
+wiced_result_t wiced_rtos_deinit_event_flags(wiced_event_flags_t *event_flags);
 
 #endif // WICED_RTOS_D
 

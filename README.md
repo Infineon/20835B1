@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Infineon AIROC&#8482; CYW20835 Bluetooth&#174; LE system on chip is a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting Bluetooth&#174; Low Energy and core spec compliant to 5.2.
+The Infineon AIROC&#8482; CYW20835 Bluetooth&#174; LE system on chip is a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting Bluetooth&#174; Low Energy and core spec compliant to 5.4.
 
 ## SDK Software Features
 - Bluetooth&#174; Low Energy stack included in the ROM (LE).

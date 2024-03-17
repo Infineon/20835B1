@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -52,7 +52,7 @@
  * pool of the desired size. (Refer APIs wiced_transport_create_buffer_pool,
  * wiced_transport_allocate_buffer,wiced_transport_send_buffer)
  *
- *If the application wants to receive packet of size more than the max size of the buffer
+ * If the application wants to receive packet of size more than the max size of the buffer
  * available in the generic pool, application can do so by configuring a receive buffer pool
  * of the desired size when doing transport init.
  *
@@ -73,34 +73,34 @@ typedef enum
 {
     WICED_TRANSPORT_UART,
     WICED_TRANSPORT_SPI,
-    WICED_TRANSPORT_UNDEFINED
-}wiced_transport_type_t;
+    WICED_TRANSPORT_UNDEFINED,
+} wiced_transport_type_t;
 
 /** Wiced uart transport mode */
 typedef enum
 {
     WICED_TRANSPORT_UART_HCI_MODE,
     WICED_TRANSPORT_UART_RAW_MODE,
-}wiced_transport_uart_mode_t;
+} wiced_transport_uart_mode_t;
 
 
 /** wiced transport buffer pool */
 typedef struct _wiced_trans_buffer_pool_t wiced_transport_buffer_pool_t;
 
 /** Wiced transport status handler  */
-typedef void (*wiced_transport_status_handler_t)( wiced_transport_type_t type );
+typedef void (*wiced_transport_status_handler_t)(wiced_transport_type_t type);
 
 /** Wiced transport data handler
-* Call back registered by the application to receive data. Application has to free the
-* buffer in which data is received. Use the API wiced_transport_free_buffer to free
-* the rx buffer
-*
-* @param[in] p_data : Pointer to the received data buffer.
-* @param[in] data_len : length of the data pointed to by p_data in bytes.
-*
-* @Return the status in case of UART in HCI mode
-*/
-typedef uint32_t (*wiced_tranport_data_handler_t)( uint8_t* p_data, uint32_t data_len );
+ * Call back registered by the application to receive data. Application has to free the
+ * buffer in which data is received. Use the API wiced_transport_free_buffer to free
+ * the rx buffer
+ *
+ * @param[in] p_data : Pointer to the received data buffer.
+ * @param[in] data_len : length of the data pointed to by p_data in bytes.
+ *
+ * @Return the status in case of UART in HCI mode
+ */
+typedef uint32_t (*wiced_tranport_data_handler_t)(uint8_t *p_data, uint32_t data_len);
 
 /** Wiced transport tx complete indication. Indicates the application that a packet is sent using
  *    a buffer in the indicated pool.
@@ -109,58 +109,58 @@ typedef uint32_t (*wiced_tranport_data_handler_t)( uint8_t* p_data, uint32_t dat
  *
  * @return : None
  */
-typedef void (*wiced_transport_tx_complete_t)( wiced_transport_buffer_pool_t* p_pool );
+typedef void (*wiced_transport_tx_complete_t)(wiced_transport_buffer_pool_t *p_pool);
 
 #pragma pack(1)
 
 /** UART transport config */
 typedef PACKED struct
 {
-    wiced_transport_uart_mode_t     mode;                        /**<  UART mode, HCI or Raw */
-    uint32_t                        baud_rate;                   /**<  UART baud rate */
-}wiced_uart_transport_cfg_t;
+    wiced_transport_uart_mode_t mode;                            /**<  UART mode, HCI or Raw */
+    uint32_t                    baud_rate;                       /**<  UART baud rate */
+} wiced_uart_transport_cfg_t;
 
 /** SPI transport config */
 typedef PACKED struct
 {
-    uint8_t          dev_role;            /**<  SPI HW to play either master (1) or slave (2) */
-    uint32_t         spi_gpio_cfg;        /**< Pins to use for the data and clk lines. Refer  spiffdriver.h for details */
-    uint16_t         spi_pin_pull_config; /**< Pin pull-up or pull-down */
-    uint32_t         clock_speed;         /**< Clock speed (non-zero for master, zero for slave).*/
-    SPI_ENDIAN       endian;              /**< Direction of bit data flow (MSB or LSB first) */
-    SPI_SS_POLARITY  polarity;            /**< Active high or active low for chip select line */
-    SPI_MODE         mode;                /**< SPI mode (0-3). */
-    uint8_t          cs_pin;              /**< GPIO pin of chip select line */
-    uint8_t          slave_ready_pin;     /**< GPIO pin to be used as slave ready */
-}wiced_spi_transport_cfg_t;
+    uint8_t         dev_role;             /**<  SPI HW to play either master (1) or slave (2) */
+    uint32_t        spi_gpio_cfg;         /**< Pins to use for the data and clk lines. Refer  spiffdriver.h for details */
+    uint16_t        spi_pin_pull_config;  /**< Pin pull-up or pull-down */
+    uint32_t        clock_speed;          /**< Clock speed (non-zero for master, zero for slave).*/
+    SPI_ENDIAN      endian;               /**< Direction of bit data flow (MSB or LSB first) */
+    SPI_SS_POLARITY polarity;             /**< Active high or active low for chip select line */
+    SPI_MODE        mode;                 /**< SPI mode (0-3). */
+    uint8_t         cs_pin;               /**< GPIO pin of chip select line */
+    uint8_t         slave_ready_pin;      /**< GPIO pin to be used as slave ready */
+} wiced_spi_transport_cfg_t;
 
 /** Wiced transport interface config */
 typedef PACKED union
 {
     wiced_uart_transport_cfg_t uart_cfg;
     wiced_spi_transport_cfg_t  spi_cfg;
-}wiced_transport_interface_cfg_t;
+} wiced_transport_interface_cfg_t;
 
 /** Wiced receive buffer pool configuration. Application shall use this to receive
-* packet of size( i.e if payload size > 252 ) > 268 bytes
-*/
+ * packet of size( i.e if payload size > 252 ) > 268 bytes
+ */
 
 typedef PACKED struct
 {
     uint32_t buffer_size;
     uint32_t buffer_count;
-}wiced_transport_rx_buff_pool_cfg_t;
+} wiced_transport_rx_buff_pool_cfg_t;
 
 /** Wiced transport config */
 typedef PACKED struct
 {
-    wiced_transport_type_t              type;                   /**< Wiced transport type. */
-    wiced_transport_interface_cfg_t     cfg;                    /**< Wiced transport interface config. */
-    wiced_transport_rx_buff_pool_cfg_t  rx_buff_pool_cfg;       /**< Wiced rx buffer pool config. */
-    wiced_transport_status_handler_t    p_status_handler;       /**< Wiced transport status handler.*/
-    wiced_tranport_data_handler_t       p_data_handler;         /**< Wiced transport receive data handler. */
-    wiced_transport_tx_complete_t       p_tx_complete_cback;    /**< Wiced transport tx complete callback. */
-}wiced_transport_cfg_t;
+    wiced_transport_type_t             type;                    /**< Wiced transport type. */
+    wiced_transport_interface_cfg_t    cfg;                     /**< Wiced transport interface config. */
+    wiced_transport_rx_buff_pool_cfg_t rx_buff_pool_cfg;        /**< Wiced rx buffer pool config. */
+    wiced_transport_status_handler_t   p_status_handler;        /**< Wiced transport status handler.*/
+    wiced_tranport_data_handler_t      p_data_handler;          /**< Wiced transport receive data handler. */
+    wiced_transport_tx_complete_t      p_tx_complete_cback;     /**< Wiced transport tx complete callback. */
+} wiced_transport_cfg_t;
 
 #pragma pack()
 
@@ -178,7 +178,7 @@ typedef PACKED struct
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_transport_init( const wiced_transport_cfg_t* p_cfg );
+wiced_result_t wiced_transport_init(const wiced_transport_cfg_t *p_cfg);
 
 /**
  * Function         wiced_transport_create_buffer_pool
@@ -194,7 +194,7 @@ wiced_result_t wiced_transport_init( const wiced_transport_cfg_t* p_cfg );
  *
  * @return     : pointer to the buffer pool on success, NULL on failure
  */
-wiced_transport_buffer_pool_t* wiced_transport_create_buffer_pool( uint32_t buffer_size, uint32_t buffer_count );
+wiced_transport_buffer_pool_t *wiced_transport_create_buffer_pool(uint32_t buffer_size, uint32_t buffer_count);
 
 /**
  * Function         wiced_transport_allocate_buffer
@@ -206,7 +206,7 @@ wiced_transport_buffer_pool_t* wiced_transport_create_buffer_pool( uint32_t buff
  * @return     : Pointer to the payload on success, NULL on failure.
  *                   Application shall write the payload starting from this location
  */
-void* wiced_transport_allocate_buffer( wiced_transport_buffer_pool_t* p_pool );
+void *wiced_transport_allocate_buffer(wiced_transport_buffer_pool_t *p_pool);
 
 /**
  * Function         wiced_transport_get_buffer_size
@@ -217,7 +217,7 @@ void* wiced_transport_allocate_buffer( wiced_transport_buffer_pool_t* p_pool );
  *
  * @return     : size of the buffers of the pool
  */
-uint32_t wiced_transport_get_buffer_size( wiced_transport_buffer_pool_t *p_pool );
+uint32_t wiced_transport_get_buffer_size(wiced_transport_buffer_pool_t *p_pool);
 /**
  * Function         wiced_transport_get_buffer_count
  *
@@ -227,7 +227,7 @@ uint32_t wiced_transport_get_buffer_size( wiced_transport_buffer_pool_t *p_pool 
  *
  * @return     : the number of buffers available in the pool
  */
-uint32_t wiced_transport_get_buffer_count( wiced_transport_buffer_pool_t *p_pool );
+uint32_t wiced_transport_get_buffer_count(wiced_transport_buffer_pool_t *p_pool);
 
 /**
  * Function         wiced_transport_send_buffer
@@ -246,7 +246,7 @@ uint32_t wiced_transport_get_buffer_count( wiced_transport_buffer_pool_t *p_pool
  *@param[in]    length               :Payload length
  * @return   wiced_result_t
  */
-wiced_result_t wiced_transport_send_buffer( uint16_t code, uint8_t* p_buf, uint16_t length );
+wiced_result_t wiced_transport_send_buffer(uint16_t code, uint8_t *p_buf, uint16_t length);
 
 /**
  * Function         wiced_transport_free_buffer
@@ -261,15 +261,15 @@ wiced_result_t wiced_transport_send_buffer( uint16_t code, uint8_t* p_buf, uint1
  *
  * @return   None
  */
-void wiced_transport_free_buffer( void * p_buf );
+void wiced_transport_free_buffer(void *p_buf);
 
 /**
  * Function         wiced_transport_send_data
  *
- *Send the packet to the host over the transport.
-*This function allocates a buffer internally and prepare the header, copy the payload
- *and then sends the packet over the transport. Maximum size of the buffer that can be
- *allocated is 268 bytes
+ * Send the packet to the host over the transport.
+ * This function allocates a buffer internally and prepare the header, copy the payload
+ * and then sends the packet over the transport. Maximum size of the buffer that can be
+ * allocated is 268 bytes
  *
  * Transport internally uses a buffer from the pool which is available for all general purposes
  * Following are the configuration of the internal pool
@@ -286,7 +286,7 @@ void wiced_transport_free_buffer( void * p_buf );
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_transport_send_data ( uint16_t code, uint8_t* p_data, uint16_t length );
+wiced_result_t wiced_transport_send_data(uint16_t code, uint8_t *p_data, uint16_t length);
 
 /**
  * Function         wiced_transport_send_hci_trace
@@ -308,8 +308,8 @@ wiced_result_t wiced_transport_send_data ( uint16_t code, uint8_t* p_data, uint1
  *                                    WICED_NO_MEMORY if buffers not available to send,
  *                                    WICED_ERROR otherwise
  */
-wiced_result_t wiced_transport_send_hci_trace( wiced_transport_buffer_pool_t *hci_trans_pool ,
-                                                             wiced_bt_hci_trace_type_t type, uint16_t length, uint8_t* p_data );
+wiced_result_t wiced_transport_send_hci_trace(wiced_transport_buffer_pool_t *hci_trans_pool,
+                                              wiced_bt_hci_trace_type_t type, uint16_t length, uint8_t *p_data);
 
 /**
  * Function         wiced_set_hci_uart_cts_rts_flow_control

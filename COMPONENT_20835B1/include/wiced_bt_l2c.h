@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -54,20 +54,20 @@
 
 
 /**
-*  @addtogroup  l2cap_data_types        Data Types
-*  @ingroup     l2cap
-*
-*  <b> Data Types </b> for @b Logical Link Control and Adaptation Layer Protocol (L2CAP).
-*
-*  @{
-*/
+ *  @addtogroup  l2cap_data_types        Data Types
+ *  @ingroup     l2cap
+ *
+ *  <b> Data Types </b> for @b Logical Link Control and Adaptation Layer Protocol (L2CAP).
+ *
+ *  @{
+ */
 /*****************************************************************************
  *  Constants
  ****************************************************************************/
 
 /* Define the minimum offset that L2CAP needs in a buffer. This is made up of
  *  HCI type(1), len(2), handle(2), L2CAP len(2) and CID(2) => 9
-*/
+ */
 
 #define L2CAP_MINIMUM_OFFSET    13      /**< plus control(2), SDU length(2) */
 
@@ -148,7 +148,7 @@ typedef uint8_t wiced_bt_l2cap_chnl_data_rate_t;
 /** Validity check for PSM.  PSM values must be odd.  Also, all PSM values must
  *  be assigned such that the least significant bit of the most sigificant
  *  octet equals zero.
-*/
+ */
 #define L2C_INVALID_PSM(psm)    (((psm) & 0x0101) != 0x0001)
 #define L2C_IS_VALID_PSM(psm)   (((psm) & 0x0101) == 0x0001)
 
@@ -156,7 +156,7 @@ typedef uint8_t wiced_bt_l2cap_chnl_data_rate_t;
  *  Fixed LE_PSMs are in the range 0x0001 - 0x007F.
  *  Dynamic LE_PSM are in the range 0x0080 - 0x00FF.
  *  The values 0x0000 and 0x0100 - 0xFFFF are reserved.
-*/
+ */
 #define MINIMIUM_DYNAMIC_LE_PSM 0x0080
 #define MAXIMUM_LE_PSM          0x00FF
 #define L2C_BLE_INVALID_PSM(le_psm) (!(le_psm) || (le_psm) > MAX_LE_PSM)
@@ -184,24 +184,24 @@ typedef struct
 } wiced_bt_l2cap_fcr_options_t;
 
 /** Define a structure to hold the configuration parameters. Since the
-*   parameters are optional, for each parameter there is a boolean to
-*   use to signify its presence or absence.
+ *   parameters are optional, for each parameter there is a boolean to
+ *   use to signify its presence or absence.
  *  Refer to Volume 3, Part A, section 5.4 of the Bluetooth Core specification for details
-*/
+ */
 typedef struct
 {
-    uint16_t        result;                 /**< Only used in confirm messages */
-    wiced_bool_t    mtu_present;            /**< TRUE if MTU option present */
-    uint16_t        mtu;                    /**< Maximum transmission unit size */
-    wiced_bool_t    qos_present;            /**< QoS configuration present */
-    wiced_bt_flow_spec_t qos;               /**< QoS configuration */
-    wiced_bool_t    flush_timeout_present;  /**< TRUE if flush option present */
-    uint16_t        flush_timeout;          /**< Flush timeout value (1 msec increments) */
-    wiced_bool_t    fcr_present;            /**< TRUE if Enhanced retransmission & flow control option present */
-    wiced_bt_l2cap_fcr_options_t fcr;       /**< Enhanced flow control and retransmission parameters */
-    wiced_bool_t    fcs_present;            /**< TRUE if Frame check sequence option present */
-    uint8_t         fcs;                    /**< '0' if desire is to bypass FCS, otherwise '1' */
-    uint16_t        flags;                  /**< bit 0: 0-no continuation, 1-continuation */
+    uint16_t                     result;      /**< Only used in confirm messages */
+    wiced_bool_t                 mtu_present; /**< TRUE if MTU option present */
+    uint16_t                     mtu;         /**< Maximum transmission unit size */
+    wiced_bool_t                 qos_present; /**< QoS configuration present */
+    wiced_bt_flow_spec_t         qos;         /**< QoS configuration */
+    wiced_bool_t                 flush_timeout_present; /**< TRUE if flush option present */
+    uint16_t                     flush_timeout; /**< Flush timeout value (1 msec increments) */
+    wiced_bool_t                 fcr_present; /**< TRUE if Enhanced retransmission & flow control option present */
+    wiced_bt_l2cap_fcr_options_t fcr;         /**< Enhanced flow control and retransmission parameters */
+    wiced_bool_t                 fcs_present; /**< TRUE if Frame check sequence option present */
+    uint8_t                      fcs;         /**< '0' if desire is to bypass FCS, otherwise '1' */
+    uint16_t                     flags;       /**< bit 0: 0-no continuation, 1-continuation */
 } wiced_bt_l2cap_cfg_information_t;
 
 /* L2CAP channel configured field bitmap */
@@ -216,17 +216,16 @@ typedef uint16_t wiced_bt_l2cap_ch_cfg_bits_t;
 
 
 /** Structure that applications use to create or accept
-*   connections with enhanced retransmission mode.
-*/
+ *   connections with enhanced retransmission mode.
+ */
 typedef struct
 {
-    uint8_t       preferred_mode;     /**< Preferred mode: ERTM, Streaming, or Basic */
-    uint8_t       allowed_modes;      /**< Bitmask for allowed modes */
-    uint8_t       user_rx_pool_id;    /**< TODO */
-    uint8_t       user_tx_pool_id;    /**< TODO */
-    uint8_t       fcr_rx_pool_id;     /**< TODO */
-    uint8_t       fcr_tx_pool_id;     /**< TODO */
-
+    uint8_t preferred_mode;           /**< Preferred mode: ERTM, Streaming, or Basic */
+    uint8_t allowed_modes;            /**< Bitmask for allowed modes */
+    uint8_t user_rx_pool_id;          /**< TODO */
+    uint8_t user_tx_pool_id;          /**< TODO */
+    uint8_t fcr_rx_pool_id;           /**< TODO */
+    uint8_t fcr_tx_pool_id;           /**< TODO */
 } wiced_bt_l2cap_ertm_information_t;
 
 /**@}  Data Types */
@@ -235,13 +234,13 @@ typedef struct
  *  Callback Functions Prototypes
  *********************************/
 /**
-*  @addtogroup  l2cap_callbacks        Callback Functions
-*  @ingroup     l2cap
-*
-*  <b> Callback functions </b> for @b Logical Link Control and Adaptation Layer Protocol (L2CAP).
-*
-*  @{
-*/
+ *  @addtogroup  l2cap_callbacks        Callback Functions
+ *  @ingroup     l2cap
+ *
+ *  <b> Callback functions </b> for @b Logical Link Control and Adaptation Layer Protocol (L2CAP).
+ *
+ *  @{
+ */
 
 /**
  *  Connection established callback prototype.
@@ -252,7 +251,7 @@ typedef struct
  *  @param peer_mtu         : Peer MTU
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_connected_cback_t) (void *context, wiced_bt_device_address_t bd_addr, uint16_t local_cid, uint16_t peer_mtu);
 
 /**
@@ -263,7 +262,7 @@ typedef void (wiced_bt_l2cap_connected_cback_t) (void *context, wiced_bt_device_
  *  @param ack              : Boolean whether upper layer should ack this
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_disconnect_indication_cback_t) (void *context, uint16_t local_cid, wiced_bool_t ack);
 
 /**
@@ -274,7 +273,7 @@ typedef void (wiced_bt_l2cap_disconnect_indication_cback_t) (void *context, uint
  *  @param result           : Result
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_disconnect_confirm_cback_t) (void *context, uint16_t local_cid, uint16_t result);
 
 /**
@@ -285,7 +284,7 @@ typedef void (wiced_bt_l2cap_disconnect_confirm_cback_t) (void *context, uint16_
  *  @param p_addr_buff      : Address of buffer
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_data_indication_cback_t) (void *context, uint16_t local_cid, uint8_t *p_buff, uint16_t buf_len);
 
 /**
@@ -298,7 +297,7 @@ typedef void (wiced_bt_l2cap_data_indication_cback_t) (void *context, uint16_t l
  *  @param congested        : TRUE if congested, FALSE if uncongested
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_congestion_status_cback_t) (void *context, uint16_t local_cid, wiced_bool_t congested);
 
 /**
@@ -312,7 +311,7 @@ typedef void (wiced_bt_l2cap_congestion_status_cback_t) (void *context, uint16_t
  *  @param num_sdu          : Number of SDUs sent or dropped
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_tx_complete_cback_t) (void *context, uint16_t local_cid, uint16_t num_sdu);
 
 /**
@@ -322,7 +321,7 @@ typedef void (wiced_bt_l2cap_tx_complete_cback_t) (void *context, uint16_t local
  *  callback and "congestion status" callback.
  *  Additionally, if registering client for dynamic PSM, connect_ind_cb() must
  *  be NULL since dynamic PSMs use this as a flag for "virtual PSM".
-*/
+ */
 typedef struct
 {
     wiced_bt_l2cap_connected_cback_t             *connected_cback;              /**< BR/EDR connected event */
@@ -332,16 +331,16 @@ typedef struct
     wiced_bt_l2cap_congestion_status_cback_t     *congestion_status_cback;      /**< Connection (un)congested event */
     wiced_bt_l2cap_tx_complete_cback_t           *tx_complete_cback;            /**< BR/EDR transmit complete event */
 
-    uint16_t                        mtu;
-    wiced_bool_t                    qos_present;
-    wiced_bt_flow_spec_t            qos;
-    wiced_bool_t                    flush_timeout_present;
-    uint16_t                        flush_timeout;
-    wiced_bool_t                    fcr_present;
-    wiced_bt_l2cap_fcr_options_t    fcr;
-    wiced_bool_t                    fcs_present;
-    uint8_t                         fcs;            /**< '0' if desire is to bypass FCS, otherwise '1' */
-    wiced_bool_t                    is_ob_only;     /**< Set to TRUE if registration is for outbound only to a dynamic PSM */
+    uint16_t                     mtu;
+    wiced_bool_t                 qos_present;
+    wiced_bt_flow_spec_t         qos;
+    wiced_bool_t                 flush_timeout_present;
+    uint16_t                     flush_timeout;
+    wiced_bool_t                 fcr_present;
+    wiced_bt_l2cap_fcr_options_t fcr;
+    wiced_bool_t                 fcs_present;
+    uint8_t                      fcs;               /**< '0' if desire is to bypass FCS, otherwise '1' */
+    wiced_bool_t                 is_ob_only;        /**< Set to TRUE if registration is for outbound only to a dynamic PSM */
 } wiced_bt_l2cap_appl_information_t;
 
 /*
@@ -359,9 +358,9 @@ typedef struct
  *  @param transport        : Bluetooth Transport (BR/EDR or LE)
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_fixed_chnl_cback_t) (wiced_bt_device_address_t bd_addr, wiced_bool_t connected,
-    uint16_t reason, tBT_TRANSPORT transport);
+                                                  uint16_t reason, tBT_TRANSPORT transport);
 
 /**
  *  Signalling data received.
@@ -370,7 +369,7 @@ typedef void (wiced_bt_l2cap_fixed_chnl_cback_t) (wiced_bt_device_address_t bd_a
  *  @param p_buff           : Pointer to buffer with data
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_fixed_data_cback_t) (wiced_bt_device_address_t bd_addr, uint8_t *p_buff, uint16_t buf_len);
 
 /**
@@ -382,23 +381,23 @@ typedef void (wiced_bt_l2cap_fixed_data_cback_t) (wiced_bt_device_address_t bd_a
  *  @param congested        : TRUE if congested, FALSE if uncongested
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_fixed_congestion_status_cback_t) (wiced_bt_device_address_t bd_addr, wiced_bool_t congested);
 
 /**
  *  Fixed channel registration info (the callback addresses and channel config)
-*/
+ */
 typedef struct
 {
     uint16_t                                        channel_id;
     uint8_t                                         in_use;
-    wiced_bt_l2cap_fixed_chnl_cback_t               *fixed_conn_cback;  /**< TODO */
-    wiced_bt_l2cap_fixed_data_cback_t               *fixed_data_cback;  /**< TODO */
-    wiced_bt_l2cap_fixed_congestion_status_cback_t  *fixed_cong_cback;  /**< TODO */
+    wiced_bt_l2cap_fixed_chnl_cback_t              *fixed_conn_cback;   /**< TODO */
+    wiced_bt_l2cap_fixed_data_cback_t              *fixed_data_cback;   /**< TODO */
+    wiced_bt_l2cap_fixed_congestion_status_cback_t *fixed_cong_cback;   /**< TODO */
 
-    uint16_t                                        default_idle_timeout;  /**< TODO */
-    wiced_bt_l2cap_tx_complete_cback_t              *fixed_tx_complete_cback;
-    void                                            *context;
+    uint16_t                            default_idle_timeout;              /**< TODO */
+    wiced_bt_l2cap_tx_complete_cback_t *fixed_tx_complete_cback;
+    void                               *context;
 } wiced_bt_l2cap_fixed_chnl_reg_t;
 
 /**
@@ -412,9 +411,9 @@ typedef struct
  *  @param mtu_peer         : MTU of the peer
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_le_connect_indication_cback_t) (void *context, wiced_bt_device_address_t bd_addr,
-    uint16_t local_cid, uint16_t psm, uint8_t id, uint16_t mtu_peer);
+                                                             uint16_t local_cid, uint16_t psm, uint8_t id, uint16_t mtu_peer);
 
 
 /**
@@ -426,9 +425,9 @@ typedef void (wiced_bt_l2cap_le_connect_indication_cback_t) (void *context, wice
  *  @param mtu_peer         : MTU of the peer
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_le_connect_confirm_cback_t) (void *context, uint16_t local_cid,
-    uint16_t result, uint16_t mtu_peer);
+                                                          uint16_t result, uint16_t mtu_peer);
 
 
 /**
@@ -442,7 +441,7 @@ typedef void (wiced_bt_l2cap_le_connect_confirm_cback_t) (void *context, uint16_
  *  @param buf_count        : Number of buffers sent
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_le_tx_complete_cback_t)(void *context, uint16_t local_cid, uint16_t buf_count);
 
 
@@ -451,7 +450,7 @@ typedef void (wiced_bt_l2cap_le_tx_complete_cback_t)(void *context, uint16_t loc
  *
  *
  *  @return void
-*/
+ */
 typedef void (wiced_bt_l2cap_le_conformance_test_cback_t) (uint16_t);
 #endif
 
@@ -463,20 +462,19 @@ typedef void (wiced_bt_l2cap_le_conformance_test_cback_t) (uint16_t);
  *  callback and "congestion status" callback.
  *  Additionally, if registering client for dynamic PSM, connect_ind_cb() must
  *  be NULL since dynamic PSMs use this as a flag for "virtual PSM".
-*/
+ */
 typedef struct
 {
-    wiced_bt_l2cap_le_connect_indication_cback_t  *le_connect_indication_cback; /**< LE connect indication event */
-    wiced_bt_l2cap_le_connect_confirm_cback_t     *le_connect_confirm_cback;    /**< LE connect confirm event */
-    wiced_bt_l2cap_disconnect_indication_cback_t  *disconnect_indication_cback; /**< LE disconnect indication event */
-    wiced_bt_l2cap_disconnect_confirm_cback_t     *disconnect_confirm_cback;    /**< LE disconnect confirm event */
-    wiced_bt_l2cap_data_indication_cback_t        *data_indication_cback;       /**< LE data received indication */
-    wiced_bt_l2cap_congestion_status_cback_t      *congestion_status_cback;     /**< LE congestion status change*/
-    wiced_bt_l2cap_le_tx_complete_cback_t         *le_tx_complete_cback;        /**< LE tx complete (if using private tx pool) */
+    wiced_bt_l2cap_le_connect_indication_cback_t *le_connect_indication_cback;  /**< LE connect indication event */
+    wiced_bt_l2cap_le_connect_confirm_cback_t    *le_connect_confirm_cback;     /**< LE connect confirm event */
+    wiced_bt_l2cap_disconnect_indication_cback_t *disconnect_indication_cback;  /**< LE disconnect indication event */
+    wiced_bt_l2cap_disconnect_confirm_cback_t    *disconnect_confirm_cback;     /**< LE disconnect confirm event */
+    wiced_bt_l2cap_data_indication_cback_t       *data_indication_cback;        /**< LE data received indication */
+    wiced_bt_l2cap_congestion_status_cback_t     *congestion_status_cback;      /**< LE congestion status change*/
+    wiced_bt_l2cap_le_tx_complete_cback_t        *le_tx_complete_cback;         /**< LE tx complete (if using private tx pool) */
 #if (L2CAP_LE_COC_CONFORMANCE_TESTING == TRUE)
-    wiced_bt_l2cap_le_conformance_test_cback_t    *conformance_test_cback;      /**< TODO */
+    wiced_bt_l2cap_le_conformance_test_cback_t *conformance_test_cback;         /**< TODO */
 #endif
-
 } wiced_bt_l2cap_le_appl_information_t;
 
 /**@} l2cap_callbacks */
@@ -490,15 +488,15 @@ extern "C"
 #endif
 
 /**
-*  @addtogroup  l2cap_api_functions       API Functions
-*  @ingroup     l2cap
-*
-*  <b> API Functions </b> module for @b L2CAP.
-*
-*  @{
-*/
+ *  @addtogroup  l2cap_api_functions       API Functions
+ *  @ingroup     l2cap
+ *
+ *  <b> API Functions </b> module for @b L2CAP.
+ *
+ *  @{
+ */
 
-#if ( defined(L2CAP_FIXED_CHANNELS_SUPPORTED) && ( L2CAP_FIXED_CHANNELS_SUPPORTED == TRUE ))
+#if (defined(L2CAP_FIXED_CHANNELS_SUPPORTED) && (L2CAP_FIXED_CHANNELS_SUPPORTED == TRUE))
 /**
  *
  *  Function        wiced_bt_l2cap_register_fixed_channel
@@ -511,7 +509,7 @@ extern "C"
  *  @return:   TRUE if registered OK
  *
  */
-wiced_bool_t  wiced_bt_l2cap_register_fixed_channel (uint16_t fixed_cid, wiced_bt_l2cap_fixed_chnl_reg_t *p_freg);
+wiced_bool_t wiced_bt_l2cap_register_fixed_channel(uint16_t fixed_cid, wiced_bt_l2cap_fixed_chnl_reg_t *p_freg);
 
 
 /**
@@ -526,7 +524,7 @@ wiced_bool_t  wiced_bt_l2cap_register_fixed_channel (uint16_t fixed_cid, wiced_b
  *  @return:   TRUE if connection started
  *
  */
-wiced_bool_t wiced_bt_l2cap_connect_fixed_chnl (uint16_t fixed_cid, wiced_bt_device_address_t bd_addr);
+wiced_bool_t wiced_bt_l2cap_connect_fixed_chnl(uint16_t fixed_cid, wiced_bt_device_address_t bd_addr);
 
 
 /**
@@ -543,9 +541,8 @@ wiced_bool_t wiced_bt_l2cap_connect_fixed_chnl (uint16_t fixed_cid, wiced_bt_dev
  *                  L2CAP_DATAWRITE_FAILED,  if error
  *
  */
-uint16_t wiced_bt_l2cap_send_fixed_chnl_data (uint16_t fixed_cid, wiced_bt_device_address_t rem_bda,
-                                            uint8_t *p_buf, uint16_t buf_len);
-
+uint16_t wiced_bt_l2cap_send_fixed_chnl_data(uint16_t fixed_cid, wiced_bt_device_address_t rem_bda,
+                                             uint8_t *p_buf, uint16_t buf_len);
 
 
 /**
@@ -561,7 +558,7 @@ uint16_t wiced_bt_l2cap_send_fixed_chnl_data (uint16_t fixed_cid, wiced_bt_devic
  *  @return:   TRUE if channel removed
  *
  */
-wiced_bool_t wiced_bt_l2cap_remove_fixed_chnl (uint16_t fixed_cid, wiced_bt_device_address_t rem_bda);
+wiced_bool_t wiced_bt_l2cap_remove_fixed_chnl(uint16_t fixed_cid, wiced_bt_device_address_t rem_bda);
 
 
 /**
@@ -585,7 +582,7 @@ wiced_bool_t wiced_bt_l2cap_remove_fixed_chnl (uint16_t fixed_cid, wiced_bt_devi
  *  @return         TRUE if command succeeded, FALSE if failed
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_fixed_channel_timeout (wiced_bt_device_address_t rem_bda, uint16_t fixed_cid, uint16_t idle_timeout);
+wiced_bool_t wiced_bt_l2cap_set_fixed_channel_timeout(wiced_bt_device_address_t rem_bda, uint16_t fixed_cid, uint16_t idle_timeout);
 
 
 #endif /* (L2CAP_NUM_FIXED_CHNLS > 0) */
@@ -605,9 +602,9 @@ wiced_bool_t wiced_bt_l2cap_set_fixed_channel_timeout (wiced_bt_device_address_t
  *  @return     TRUE if successful
  *
  */
-wiced_bool_t wiced_bt_l2cap_get_current_config (uint16_t lcid,
-    wiced_bt_l2cap_cfg_information_t **pp_our_cfg,  wiced_bt_l2cap_ch_cfg_bits_t *p_our_cfg_bits,
-    wiced_bt_l2cap_cfg_information_t **pp_peer_cfg, wiced_bt_l2cap_ch_cfg_bits_t *p_peer_cfg_bits);
+wiced_bool_t wiced_bt_l2cap_get_current_config(uint16_t lcid,
+                                               wiced_bt_l2cap_cfg_information_t **pp_our_cfg, wiced_bt_l2cap_ch_cfg_bits_t *p_our_cfg_bits,
+                                               wiced_bt_l2cap_cfg_information_t **pp_peer_cfg, wiced_bt_l2cap_ch_cfg_bits_t *p_peer_cfg_bits);
 
 
 /**
@@ -628,7 +625,7 @@ wiced_bool_t wiced_bt_l2cap_get_current_config (uint16_t lcid,
  *                  and BTM_SetSecurityLevel().
  *
  */
-uint16_t wiced_bt_l2cap_register (uint16_t psm, wiced_bt_l2cap_appl_information_t *p_cb_information,  void *context);
+uint16_t wiced_bt_l2cap_register(uint16_t psm, wiced_bt_l2cap_appl_information_t *p_cb_information, void *context);
 
 
 /**
@@ -643,7 +640,7 @@ uint16_t wiced_bt_l2cap_register (uint16_t psm, wiced_bt_l2cap_appl_information_
  *  @return         void
  *
  */
-void wiced_bt_l2cap_deregister (uint16_t psm);
+void wiced_bt_l2cap_deregister(uint16_t psm);
 
 
 /**
@@ -656,7 +653,7 @@ void wiced_bt_l2cap_deregister (uint16_t psm);
  *  @return         PSM to use.
  *
  */
-uint16_t wiced_bt_l2cap_allocate_psm (void);
+uint16_t wiced_bt_l2cap_allocate_psm(void);
 
 
 /**
@@ -675,7 +672,7 @@ uint16_t wiced_bt_l2cap_allocate_psm (void);
  *  @return         the CID of the connection, or 0 if it failed to start
  *
  */
-uint16_t wiced_bt_l2cap_connect_req (uint16_t psm, wiced_bt_device_address_t p_bd_addr, wiced_bt_l2cap_ertm_information_t *p_ertm_information);
+uint16_t wiced_bt_l2cap_connect_req(uint16_t psm, wiced_bt_device_address_t p_bd_addr, wiced_bt_l2cap_ertm_information_t *p_ertm_information);
 
 
 /**
@@ -692,7 +689,7 @@ uint16_t wiced_bt_l2cap_connect_req (uint16_t psm, wiced_bt_device_address_t p_b
  * @return          void
  *
  */
-void wiced_bt_l2cap_ertm_enable (void);
+void wiced_bt_l2cap_ertm_enable(void);
 
 
 /**
@@ -712,8 +709,8 @@ void wiced_bt_l2cap_ertm_enable (void);
  *  @return         the CID of the connection, or 0 if it failed to start
  *
  */
-uint16_t wiced_bt_l2cap_ertm_connect_req (uint16_t psm, wiced_bt_device_address_t p_bd_addr,
-    wiced_bt_l2cap_ertm_information_t *p_ertm_information);
+uint16_t wiced_bt_l2cap_ertm_connect_req(uint16_t psm, wiced_bt_device_address_t p_bd_addr,
+                                         wiced_bt_l2cap_ertm_information_t *p_ertm_information);
 
 
 /**
@@ -727,7 +724,7 @@ uint16_t wiced_bt_l2cap_ertm_connect_req (uint16_t psm, wiced_bt_device_address_
  *  @return         TRUE if disconnect sent, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_disconnect_req (uint16_t cid);
+wiced_bool_t wiced_bt_l2cap_disconnect_req(uint16_t cid);
 
 
 /**
@@ -742,7 +739,7 @@ wiced_bool_t wiced_bt_l2cap_disconnect_req (uint16_t cid);
  *  @return         void
  *
  */
-wiced_bool_t wiced_bt_l2cap_disconnect_rsp (uint16_t cid);
+wiced_bool_t wiced_bt_l2cap_disconnect_rsp(uint16_t cid);
 
 
 /**
@@ -762,7 +759,7 @@ wiced_bool_t wiced_bt_l2cap_disconnect_rsp (uint16_t cid);
  *                  L2CAP_DATAWRITE_FAILED, if error
  *
  */
-uint8_t wiced_bt_l2cap_data_write (uint16_t cid, uint8_t *p_buf, uint16_t buf_len, uint16_t flags);
+uint8_t wiced_bt_l2cap_data_write(uint16_t cid, uint8_t *p_buf, uint16_t buf_len, uint16_t flags);
 
 /**
  *
@@ -783,8 +780,8 @@ uint8_t wiced_bt_l2cap_data_write (uint16_t cid, uint8_t *p_buf, uint16_t buf_le
  *  @return         TRUE if command succeeded, FALSE if failed
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_idle_timeout (uint16_t cid, uint16_t timeout,
-    wiced_bool_t is_global);
+wiced_bool_t wiced_bt_l2cap_set_idle_timeout(uint16_t cid, uint16_t timeout,
+                                             wiced_bool_t is_global);
 
 
 /**
@@ -809,8 +806,8 @@ wiced_bool_t wiced_bt_l2cap_set_idle_timeout (uint16_t cid, uint16_t timeout,
  *  NOTE             This timeout applies to all logical channels active on the
  *                  ACL link.
  */
-wiced_bool_t wiced_bt_l2cap_set_idle_timeout_by_bd_addr (wiced_bt_device_address_t bd_addr, uint16_t timeout,
-                                                  tBT_TRANSPORT transport);
+wiced_bool_t wiced_bt_l2cap_set_idle_timeout_by_bd_addr(wiced_bt_device_address_t bd_addr, uint16_t timeout,
+                                                        tBT_TRANSPORT transport);
 
 /**
  *
@@ -824,7 +821,7 @@ wiced_bool_t wiced_bt_l2cap_set_idle_timeout_by_bd_addr (wiced_bt_device_address
  *  @return         the new (current) trace level
  *
  */
-uint8_t wiced_bt_l2cap_set_trace_level (uint8_t trace_level);
+uint8_t wiced_bt_l2cap_set_trace_level(uint8_t trace_level);
 
 
 /**
@@ -845,7 +842,7 @@ uint8_t wiced_bt_l2cap_set_trace_level (uint8_t trace_level);
  *  @return     the new (current) role
  *
  */
-uint8_t wiced_bt_l2cap_set_desire_role (uint8_t new_role);
+uint8_t wiced_bt_l2cap_set_desire_role(uint8_t new_role);
 
 
 /**
@@ -865,7 +862,7 @@ uint8_t wiced_bt_l2cap_set_desire_role (uint8_t new_role);
  *  @return     Number of buffers left queued for that CID
  *
  */
-uint16_t   wiced_bt_l2cap_flush_channel (uint16_t lcid, uint16_t num_to_flush);
+uint16_t wiced_bt_l2cap_flush_channel(uint16_t lcid, uint16_t num_to_flush);
 
 
 /**
@@ -880,7 +877,7 @@ uint16_t   wiced_bt_l2cap_flush_channel (uint16_t lcid, uint16_t num_to_flush);
  *  @return         TRUE if a valid channel, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_acl_priority (wiced_bt_device_address_t bd_addr, uint8_t priority);
+wiced_bool_t wiced_bt_l2cap_set_acl_priority(wiced_bt_device_address_t bd_addr, uint8_t priority);
 
 /**
  *
@@ -896,7 +893,7 @@ wiced_bool_t wiced_bt_l2cap_set_acl_priority (wiced_bt_device_address_t bd_addr,
  *  @return         TRUE if a valid channel, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_acl_priority_ext (wiced_bt_device_address_t bd_addr, uint8_t priority, uint8_t direction);
+wiced_bool_t wiced_bt_l2cap_set_acl_priority_ext(wiced_bt_device_address_t bd_addr, uint8_t priority, uint8_t direction);
 
 
 /**
@@ -913,7 +910,7 @@ wiced_bool_t wiced_bt_l2cap_set_acl_priority_ext (wiced_bt_device_address_t bd_a
  *  @return         TRUE if valid channel, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_flow_control (uint16_t cid, wiced_bool_t data_enabled);
+wiced_bool_t wiced_bt_l2cap_flow_control(uint16_t cid, wiced_bool_t data_enabled);
 
 
 /**
@@ -929,7 +926,7 @@ wiced_bool_t wiced_bt_l2cap_flow_control (uint16_t cid, wiced_bool_t data_enable
  *  @return         TRUE if a valid channel, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_tx_priority (uint16_t cid, wiced_bt_l2cap_chnl_priority_t priority);
+wiced_bool_t wiced_bt_l2cap_set_tx_priority(uint16_t cid, wiced_bt_l2cap_chnl_priority_t priority);
 
 /**
  *
@@ -953,9 +950,7 @@ wiced_bool_t wiced_bt_l2cap_set_tx_priority (uint16_t cid, wiced_bt_l2cap_chnl_p
  *  NOTE             This flush timeout applies to all logical channels active on the
  *                  ACL link.
  */
-wiced_bool_t wiced_bt_l2cap_set_flush_timeout (wiced_bt_device_address_t bd_addr, uint16_t flush_timeout);
-
-
+wiced_bool_t wiced_bt_l2cap_set_flush_timeout(wiced_bt_device_address_t bd_addr, uint16_t flush_timeout);
 
 
 /**
@@ -971,7 +966,7 @@ wiced_bool_t wiced_bt_l2cap_set_flush_timeout (wiced_bt_device_address_t bd_addr
  *  @return         TRUE if CID found, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_set_chnl_flushability (uint16_t cid, wiced_bool_t is_flushable);
+wiced_bool_t wiced_bt_l2cap_set_chnl_flushability(uint16_t cid, wiced_bool_t is_flushable);
 
 
 /**
@@ -987,7 +982,7 @@ wiced_bool_t wiced_bt_l2cap_set_chnl_flushability (uint16_t cid, wiced_bool_t is
  *  @return:    TRUE if peer is connected
  *
  */
-wiced_bool_t wiced_bt_l2cap_get_peer_features (wiced_bt_device_address_t bd_addr, uint32_t *p_ext_feat, uint8_t *p_chnl_mask);
+wiced_bool_t wiced_bt_l2cap_get_peer_features(wiced_bt_device_address_t bd_addr, uint32_t *p_ext_feat, uint8_t *p_chnl_mask);
 
 
 /**
@@ -1002,7 +997,7 @@ wiced_bool_t wiced_bt_l2cap_get_peer_features (wiced_bt_device_address_t bd_addr
  *  @return:    TRUE if found lcb for the given handle, FALSE otherwise
  *
  */
-wiced_bool_t wiced_bt_l2cap_get_bdaddrby_handle (uint16_t handle, wiced_bt_device_address_t bd_addr);
+wiced_bool_t wiced_bt_l2cap_get_bdaddrby_handle(uint16_t handle, wiced_bt_device_address_t bd_addr);
 
 #ifdef WICED_BT_L2CAP_GET_HANDLEBY_BDADDR_SUPPORTED
 /**
@@ -1031,7 +1026,7 @@ uint16_t wiced_bt_l2cap_get_handleby_bdaddr(BD_ADDR peer_bda);
  *  @return:    Channel mode
  *
  */
-uint8_t wiced_bt_l2cap_get_chnl_fcr_mode (uint16_t lcid);
+uint8_t wiced_bt_l2cap_get_chnl_fcr_mode(uint16_t lcid);
 
 
 /**
@@ -1045,7 +1040,7 @@ uint8_t wiced_bt_l2cap_get_chnl_fcr_mode (uint16_t lcid);
  *  @return:   TRUE if connection was cancelled
  *
  */
-wiced_bool_t wiced_bt_l2cap_cancel_ble_connect_req (wiced_bt_device_address_t rem_bda);
+wiced_bool_t wiced_bt_l2cap_cancel_ble_connect_req(wiced_bt_device_address_t rem_bda);
 
 
 /**
@@ -1063,7 +1058,7 @@ wiced_bool_t wiced_bt_l2cap_cancel_ble_connect_req (wiced_bt_device_address_t re
  *  @return:   TRUE if update started
  *
  */
-wiced_bool_t wiced_bt_l2cap_update_ble_conn_params (wiced_bt_device_address_t rem_bdRa, uint16_t min_int, uint16_t max_int, uint16_t latency, uint16_t timeout);
+wiced_bool_t wiced_bt_l2cap_update_ble_conn_params(wiced_bt_device_address_t rem_bdRa, uint16_t min_int, uint16_t max_int, uint16_t latency, uint16_t timeout);
 
 
 /**
@@ -1078,7 +1073,7 @@ wiced_bool_t wiced_bt_l2cap_update_ble_conn_params (wiced_bt_device_address_t re
  *  @return:   TRUE if update started
  *
  */
-wiced_bool_t wiced_bt_l2cap_enable_update_ble_conn_params (wiced_bt_device_address_t rem_bda, wiced_bool_t enable);
+wiced_bool_t wiced_bt_l2cap_enable_update_ble_conn_params(wiced_bt_device_address_t rem_bda, wiced_bool_t enable);
 
 
 /**
@@ -1092,7 +1087,7 @@ wiced_bool_t wiced_bt_l2cap_enable_update_ble_conn_params (wiced_bt_device_addre
  *  @return         link role.
  *
  */
-uint8_t wiced_bt_l2cap_get_ble_conn_role (wiced_bt_device_address_t bd_addr);
+uint8_t wiced_bt_l2cap_get_ble_conn_role(wiced_bt_device_address_t bd_addr);
 
 
 /**
@@ -1107,7 +1102,7 @@ uint8_t wiced_bt_l2cap_get_ble_conn_role (wiced_bt_device_address_t bd_addr);
  *  @return         disconnect reason
  *
  */
-uint16_t wiced_bt_l2cap_get_disconnect_reason (wiced_bt_device_address_t remote_bda, tBT_TRANSPORT transport);
+uint16_t wiced_bt_l2cap_get_disconnect_reason(wiced_bt_device_address_t remote_bda, tBT_TRANSPORT transport);
 
 
 /**
@@ -1127,7 +1122,7 @@ uint16_t wiced_bt_l2cap_get_disconnect_reason (wiced_bt_device_address_t remote_
  *                  in the calls to wiced_bt_l2cap_le_connect_req() and wiced_bt_l2cap_le_deregister().
  *
  */
-uint16_t wiced_bt_l2cap_le_register (uint16_t le_psm, wiced_bt_l2cap_le_appl_information_t *p_cb_information, void *context);
+uint16_t wiced_bt_l2cap_le_register(uint16_t le_psm, wiced_bt_l2cap_le_appl_information_t *p_cb_information, void *context);
 
 
 /**
@@ -1142,7 +1137,7 @@ uint16_t wiced_bt_l2cap_le_register (uint16_t le_psm, wiced_bt_l2cap_le_appl_inf
  *  @return         void
  *
  */
-wiced_bool_t wiced_bt_l2cap_le_deregister (uint16_t le_psm);
+wiced_bool_t wiced_bt_l2cap_le_deregister(uint16_t le_psm);
 
 
 /**
@@ -1167,11 +1162,11 @@ wiced_bool_t wiced_bt_l2cap_le_deregister (uint16_t le_psm);
  *  @return         the CID of the connection, or 0 if it failed to start
  *
  */
-uint16_t wiced_bt_l2cap_le_connect_req (uint16_t le_psm, wiced_bt_device_address_t p_bd_addr,
-    wiced_bt_ble_address_type_t bd_addr_type,
-    wiced_bt_ble_conn_mode_t conn_mode,
-    uint16_t rx_mtu, uint8_t rx_sdu_pool_id,
-    uint8_t req_security, uint8_t req_encr_key_size);
+uint16_t wiced_bt_l2cap_le_connect_req(uint16_t le_psm, wiced_bt_device_address_t p_bd_addr,
+                                       wiced_bt_ble_address_type_t bd_addr_type,
+                                       wiced_bt_ble_conn_mode_t conn_mode,
+                                       uint16_t rx_mtu, uint8_t rx_sdu_pool_id,
+                                       uint8_t req_security, uint8_t req_encr_key_size);
 
 
 /**
@@ -1192,8 +1187,8 @@ uint16_t wiced_bt_l2cap_le_connect_req (uint16_t le_psm, wiced_bt_device_address
  *  @return         TRUE for success, FALSE for failure
  *
  */
-wiced_bool_t  wiced_bt_l2cap_le_connect_rsp (wiced_bt_device_address_t p_bd_addr, uint8_t id, uint16_t lcid,
-    uint16_t result, uint16_t rx_mtu, uint8_t rx_sdu_pool_id);
+wiced_bool_t wiced_bt_l2cap_le_connect_rsp(wiced_bt_device_address_t p_bd_addr, uint8_t id, uint16_t lcid,
+                                           uint16_t result, uint16_t rx_mtu, uint8_t rx_sdu_pool_id);
 
 
 /**
@@ -1208,7 +1203,7 @@ wiced_bool_t  wiced_bt_l2cap_le_connect_rsp (wiced_bt_device_address_t p_bd_addr
  *  @return         TRUE if disconnect sent, else FALSE
  *
  */
-wiced_bool_t wiced_bt_l2cap_le_disconnect_req (uint16_t lcid);
+wiced_bool_t wiced_bt_l2cap_le_disconnect_req(uint16_t lcid);
 
 
 /**
@@ -1223,7 +1218,7 @@ wiced_bool_t wiced_bt_l2cap_le_disconnect_req (uint16_t lcid);
  *  @return         void
  *
  */
-wiced_bool_t wiced_bt_l2cap_le_disconnect_rsp (uint16_t lcid);
+wiced_bool_t wiced_bt_l2cap_le_disconnect_rsp(uint16_t lcid);
 
 
 /**
@@ -1241,7 +1236,7 @@ wiced_bool_t wiced_bt_l2cap_le_disconnect_rsp (uint16_t lcid);
  *                  L2CAP_DATAWRITE_FAILED, if error
  *
  */
-uint8_t wiced_bt_l2cap_le_data_write (uint16_t cid, uint8_t *p_data, uint16_t buf_len, uint16_t flags);
+uint8_t wiced_bt_l2cap_le_data_write(uint16_t cid, uint8_t *p_data, uint16_t buf_len, uint16_t flags);
 
 
 /**
@@ -1257,7 +1252,7 @@ uint8_t wiced_bt_l2cap_le_data_write (uint16_t cid, uint8_t *p_data, uint16_t bu
  *  @return         TRUE if command processed OK
  *
  */
-wiced_bool_t  wiced_bt_l2cap_le_set_user_congestion (uint16_t lcid, wiced_bool_t is_congested);
+wiced_bool_t wiced_bt_l2cap_le_set_user_congestion(uint16_t lcid, wiced_bool_t is_congested);
 
 
 /**
@@ -1271,7 +1266,7 @@ wiced_bool_t  wiced_bt_l2cap_le_set_user_congestion (uint16_t lcid, wiced_bool_t
  *  @return         Peer MTU or 0.
  *
  */
-uint16_t wiced_bt_l2cap_le_get_peer_mtu (uint16_t lcid);
+uint16_t wiced_bt_l2cap_le_get_peer_mtu(uint16_t lcid);
 
 
 /**
@@ -1293,7 +1288,7 @@ uint16_t wiced_bt_l2cap_le_get_peer_mtu (uint16_t lcid);
  *                  L2CAP_CONN_NO_RESOURCES.
  *
  */
-uint16_t wiced_bt_l2cap_le_determ_secur_rsp (wiced_bt_device_address_t bd_addr, uint8_t req_secur, uint8_t req_encr_key_size);
+uint16_t wiced_bt_l2cap_le_determ_secur_rsp(wiced_bt_device_address_t bd_addr, uint8_t req_secur, uint8_t req_encr_key_size);
 
 
 /**@} l2cap_api_functions */

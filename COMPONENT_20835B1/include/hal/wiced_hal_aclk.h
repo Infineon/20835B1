@@ -1,6 +1,5 @@
-
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -33,45 +32,45 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* Auxiliary Clock (aclk) driver.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * Auxiliary Clock (aclk) driver.
+ *
+ */
 
 #ifndef __WICED_ACLK_H__
 #define __WICED_ACLK_H__
 
 
 /**  \addtogroup AuxClkDriver Auxiliary Clock (ACLK)
-*   \ingroup HardwareDrivers
-*
-* @{
-*
-* Defines a driver to facilitate interfacing with the auxiliary clock.
-*
-* Use this driver to output a clock to a GPIO pin for external use. Two clock
-* sources are avaliable: clk0 or clk1, as well as two base frequencies used
-* to calulate the prescaler : 1 MHz or 24 MHz. Note that the desired GPIO pin
-* must have already been configured to output for aclk. See the HW muxing
-* section in the Kit Guide or HW User Manual for your device for more information.
-*
-*/
+ *   \ingroup HardwareDrivers
+ *
+ * @{
+ *
+ * Defines a driver to facilitate interfacing with the auxiliary clock.
+ *
+ * Use this driver to output a clock to a GPIO pin for external use. Two clock
+ * sources are avaliable: clk0 or clk1, as well as two base frequencies used
+ * to calulate the prescaler : 1 MHz or 24 MHz. Note that the desired GPIO pin
+ * must have already been configured to output for aclk. See the HW muxing
+ * section in the Kit Guide or HW User Manual for your device for more information.
+ *
+ */
 
 /******************************************************************************
-*** Parameters.
-***
-*** The following enumerations are used to configure the driver or define
-*** return status. They are not modifiable.
-******************************************************************************/
+ *** Parameters.
+ ***
+ *** The following enumerations are used to configure the driver or define
+ *** return status. They are not modifiable.
+ ******************************************************************************/
 
 // Available clock sources.
 enum CLK_SRC_SEL
 {
     ACLK0,
     ACLK1,
-	WICED_ACLK0 = ACLK0,
-	WICED_ACLK1 = ACLK1
+    WICED_ACLK0 = ACLK0,
+    WICED_ACLK1 = ACLK1,
 };
 
 // Available base clock frequencies.
@@ -79,12 +78,12 @@ enum CLK_SRC_FREQ_SEL
 {
     ACLK_FREQ_1_MHZ,
     ACLK_FREQ_24_MHZ,
-	WICED_ACLK_FREQ_24_MHZ = ACLK_FREQ_24_MHZ
+    WICED_ACLK_FREQ_24_MHZ = ACLK_FREQ_24_MHZ,
 };
 
 /******************************************************************************
-*** Function prototypes and defines.
-******************************************************************************/
+ *** Function prototypes and defines.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Configures, enables, and starts the aclk to be active on a
@@ -101,8 +100,8 @@ enum CLK_SRC_FREQ_SEL
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
 void wiced_hal_aclk_enable(UINT32 frequency,
-                                         UINT32 clkSrc,
-                                         UINT32 baseFreqSel);
+                           UINT32 clkSrc,
+                           UINT32 baseFreqSel);
 
 
 ///////////////////////////////////////////////////////////////////////////////

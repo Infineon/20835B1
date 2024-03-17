@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -56,4 +56,4 @@ typedef long long SINT64;
 typedef __int64 SINT64;
 #endif
 
-#endif
+#endif // ifndef __TYPEDEF__

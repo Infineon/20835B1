@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -64,8 +64,9 @@
 */
 #define BT_EVT_MASK                 0xFF00
 #define BT_SUB_EVT_MASK             0x00FF
-                                                /* To Bluetooth Upper Layers        */
-                                                /************************************/
+
+/*                                               * To Bluetooth Upper Layers        */
+/*                                               ************************************/
 #define BT_EVT_TO_BTU_L2C_EVT       0x0900      /* L2CAP event */
 #define BT_EVT_TO_BTU_HCI_EVT       0x1000      /* HCI Event                        */
 #define BT_EVT_TO_BTU_HCI_BR_EDR_EVT (0x0000 | BT_EVT_TO_BTU_HCI_EVT)      /* event from BR/EDR controller */
@@ -87,8 +88,8 @@
 #define BT_EVT_BTSIM                0x1B00      /* Insight BTSIM event */
 #define BT_EVT_BTISE                0x1C00      /* Insight Script Engine event */
 
-                                                /* To LM                            */
-                                                /************************************/
+/*                                               * To LM                            */
+/*                                               ************************************/
 #define BT_EVT_TO_LM_HCI_CMD        0x2000      /* HCI Command                      */
 #define BT_EVT_TO_LM_HCI_ACL        0x2100      /* HCI ACL Data                     */
 #define BT_EVT_TO_LM_HCI_SCO        0x2200      /* HCI SCO Data                     */
@@ -137,9 +138,9 @@
 #define BT_EVT_TO_START_QUICK_TIMER 0x3e00
 
 
-/* for NFC                          */
-                                                /************************************/
-#define BT_EVT_TO_NFC_NCI           0x4000      /* NCI Command, Notification or Data*/
+/*                                               * for NFC                           */
+/*                                               *************************************/
+#define BT_EVT_TO_NFC_NCI           0x4000      /* NCI Command, Notification or Data */
 #define BT_EVT_TO_NFC_NCI_VS        0x4200      /* Vendor specific message */
 #define BT_EVT_TO_NFC_MSGS          0x4300      /* messages between NFC and NCI task */
 #define BT_EVT_TO_LLCP_MSGS         0x4400      /* messages for LLCP */
@@ -187,13 +188,13 @@
 #define BT_EVT_BTU_IPC_BURST_EVT   (0x000A | BT_EVT_BTU_IPC_EVT)
 
 /* Define the header of each buffer used in the Bluetooth stack.
-*/
+ */
 typedef struct
 {
-    UINT16          event;
-    UINT16          len;
-    UINT16          offset;
-    UINT16          layer_specific;
+    UINT16 event;
+    UINT16 len;
+    UINT16 offset;
+    UINT16 layer_specific;
 } BT_HDR;
 
 #define BT_HDR_SIZE (sizeof (BT_HDR))
@@ -216,7 +217,7 @@ typedef struct
 
 
 /* These macros extract the HCI opcodes from a buffer
-*/
+ */
 #define HCI_GET_CMD_HDR_OPCODE(p)    (UINT16)((*((UINT8 *)((p) + 1) + p->offset) + \
                                               (*((UINT8 *)((p) + 1) + p->offset + 1) << 8)))
 #define HCI_GET_CMD_HDR_PARAM_LEN(p) (UINT8)  (*((UINT8 *)((p) + 1) + p->offset + 2))
@@ -301,9 +302,12 @@ typedef struct
 typedef UINT16 SFLOAT;
 typedef UINT8 UINT24[3];
 
+/*
+ * wiced_bt_types_uint16tosfloat
+ */
 static inline SFLOAT wiced_bt_types_uint16tosfloat(UINT16 uin)
 {
-    UINT8 exponent;
+    UINT8  exponent;
     UINT16 mantissa;
     SFLOAT sfl;
 
@@ -332,12 +336,15 @@ static inline SFLOAT wiced_bt_types_uint16tosfloat(UINT16 uin)
     return sfl;
 }
 
+/*
+ * wiced_bt_types_sfloattouint16
+ */
 static inline UINT16 wiced_bt_types_sfloattouint16(SFLOAT sfl)
 {
-    UINT8 exponent;
+    UINT8  exponent;
     UINT16 mantissa;
     UINT16 uin;
-    INT8 i;
+    INT8   i;
 
     exponent = (0xF000 & sfl) >> 12;
     mantissa = (0x0FFF & sfl);
@@ -359,19 +366,22 @@ static inline UINT16 wiced_bt_types_sfloattouint16(SFLOAT sfl)
     return uin;
 }
 
+/*
+ * uint8_uint8tosfloat
+ */
 static inline SFLOAT uint8_uint8tosfloat(UINT8 minus, UINT8 uin, UINT8 bdp)
 {
-    INT8 exponent;
+    INT8   exponent;
     UINT16 mantissa;
     SFLOAT fl;
     UINT16 temp;
-    int i;
+    int    i;
 
     exponent = 0;
-    temp = bdp;
+    temp     = bdp;
 
     //eliminated 0
-    while(1)
+    while (1)
     {
         if (temp == 0)
         {
@@ -388,7 +398,7 @@ static inline SFLOAT uint8_uint8tosfloat(UINT8 minus, UINT8 uin, UINT8 bdp)
     }
     bdp = temp;
 
-    while(1)
+    while (1)
     {
         if (temp / 10)
         {
@@ -418,18 +428,18 @@ static inline SFLOAT uint8_uint8tosfloat(UINT8 minus, UINT8 uin, UINT8 bdp)
     }
     else if (temp < 0x07FE * 10)
     {
-        exponent+= 1;
-        mantissa = temp /10;
+        exponent += 1;
+        mantissa  = temp /10;
     }
     else if (uin < 0x07FFE * 100)
     {
         exponent += 2;
-        mantissa = temp / 100;
+        mantissa  = temp / 100;
     }
 
     if (minus)
     {
-        mantissa = (mantissa -1) ^ 0x0FFF ;
+        mantissa = (mantissa -1) ^ 0x0FFF;
     }
 
     fl = (0x0FFF & mantissa) + ((0x0F & exponent) << 12);
@@ -504,14 +514,15 @@ typedef UINT8 ACO[ACO_LEN];                 /* Authenticated ciphering offset */
 #define COF_LEN         12
 typedef UINT8 COF[COF_LEN];                 /* ciphering offset number */
 
-typedef struct {
-    UINT8               qos_flags;          /* TBD */
-    UINT8               service_type;       /* see below */
-    UINT32              token_rate;         /* bytes/second */
-    UINT32              token_bucket_size;  /* bytes */
-    UINT32              peak_bandwidth;     /* bytes/second */
-    UINT32              latency;            /* microseconds */
-    UINT32              delay_variation;    /* microseconds */
+typedef struct
+{
+    UINT8  qos_flags;                       /* TBD */
+    UINT8  service_type;                    /* see below */
+    UINT32 token_rate;                      /* bytes/second */
+    UINT32 token_bucket_size;               /* bytes */
+    UINT32 peak_bandwidth;                  /* bytes/second */
+    UINT32 latency;                         /* microseconds */
+    UINT32 delay_variation;                 /* microseconds */
 } FLOW_SPEC;
 
 /* Values for service_type */
@@ -566,15 +577,14 @@ typedef struct
 #define LEN_UUID_32     4
 #define LEN_UUID_128    16
 
-    UINT16          len;
+    UINT16 len;
 
     union
     {
-        UINT16      uuid16;
-        UINT32      uuid32;
-        UINT8       uuid128[MAX_UUID_SIZE];
+        UINT16 uuid16;
+        UINT32 uuid32;
+        UINT8  uuid128[MAX_UUID_SIZE];
     } uu;
-
 } tBT_UUID;
 
 #define BT_EIR_FLAGS_TYPE                   0x01
@@ -611,15 +621,15 @@ typedef struct
 #define BRCM_PROPRIETARY_GUID_BASE  0xda23, 0x4102, 0xa3, 0xbb, 0xc1, 0x71, 0xba, 0x09, 0x6f, 0x21
 
 /* We will not allocate a PSM in the reserved range to 3rd party apps
-*/
-#define BRCM_RESERVED_PSM_START	    0x5AE1
-#define BRCM_RESERVED_PSM_END	    0x5AFF
+ */
+#define BRCM_RESERVED_PSM_START     0x5AE1
+#define BRCM_RESERVED_PSM_END       0x5AFF
 
 #define BRCM_UTILITY_SERVICE_PSM    0x5AE1
 #define BRCM_MATCHER_PSM            0x5AE3
 
 /* Connection statistics
-*/
+ */
 
 /* Structure to hold connection stats */
 #ifndef BT_CONN_STATS_DEFINED
@@ -630,14 +640,14 @@ typedef struct
 
 typedef struct
 {
-    UINT32   is_connected;
-    INT32    rssi;
-    UINT32   bytes_sent;
-    UINT32   bytes_rcvd;
-    UINT32   duration;
+    UINT32 is_connected;
+    INT32  rssi;
+    UINT32 bytes_sent;
+    UINT32 bytes_rcvd;
+    UINT32 duration;
 } tBT_CONN_STATS;
 
-#endif
+#endif // ifndef BT_CONN_STATS_DEFINED
 
 /*****************************************************************************
 **                          Low Energy definitions
@@ -660,12 +670,12 @@ typedef UINT8 tBT_TRANSPORT;
 
 typedef struct
 {
-    tBLE_ADDR_TYPE      type;
-    BD_ADDR             bda;
+    tBLE_ADDR_TYPE type;
+    BD_ADDR        bda;
 } tBLE_BD_ADDR;
 
 /* Device Types
-*/
+ */
 #define BT_DEVICE_TYPE_BREDR   0x01
 #define BT_DEVICE_TYPE_BLE     0x02
 #define BT_DEVICE_TYPE_DUMO    0x03
@@ -763,7 +773,7 @@ typedef UINT8 tBT_DEVICE_TYPE;
 #define TRACE_ORG_USER_SCR          0x00000800
 #define TRACE_ORG_TESTER            0x00000900
 #define TRACE_ORG_MAX_NUM           10          /* 32-bit mask; must be < 32 */
-#define TRACE_LITE_ORG_MAX_NUM		6
+#define TRACE_LITE_ORG_MAX_NUM      6
 #define TRACE_ORG_ALL               0x03ff
 #define TRACE_ORG_RPC_TRANS         0x04
 
@@ -851,4 +861,4 @@ typedef UINT8 tBT_DEVICE_TYPE;
 /* Define a function for logging */
 typedef void (BT_LOG_FUNC) (int trace_type, const char *fmt_str, ...);
 
-#endif
+#endif // ifndef BT_TYPES_H

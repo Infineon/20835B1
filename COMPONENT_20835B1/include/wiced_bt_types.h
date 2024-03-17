@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -75,15 +75,14 @@ typedef struct
 #define LEN_UUID_32     4
 #define LEN_UUID_128    16
 
-    uint16_t        len;     /**< UUID length */
+    uint16_t len;            /**< UUID length */
 
     union
     {
-        uint16_t    uuid16; /**< 16-bit UUID */
-        uint32_t    uuid32; /**< 32-bit UUID */
-        uint8_t     uuid128[MAX_UUID_SIZE]; /**< 128-bit UUID */
+        uint16_t uuid16;    /**< 16-bit UUID */
+        uint32_t uuid32;    /**< 32-bit UUID */
+        uint8_t  uuid128[MAX_UUID_SIZE];    /**< 128-bit UUID */
     } uu;
-
 } wiced_bt_uuid_t;
 
 #define BT_OCTET16_LEN    16                /**<  length: 16 */
@@ -93,14 +92,15 @@ typedef uint8_t BT_OCTET16[BT_OCTET16_LEN]; /**< octet array: size 16 */
 typedef uint8_t BT_OCTET32[BT_OCTET32_LEN];   /* octet array: size 32 */
 
 /** Bluetooth QoS defintions */
-typedef struct {
-    uint8_t         qos_flags;              /**< TBD */
-    uint8_t         service_type;           /**< service type (NO_TRAFFIC, BEST_EFFORT, or GUARANTEED) */
-    uint32_t        token_rate;             /**< token rate (bytes/second) */
-    uint32_t        token_bucket_size;      /**< token bucket size (bytes) */
-    uint32_t        peak_bandwidth;         /**< peak bandwidth (bytes/second) */
-    uint32_t        latency;                /**< latency (microseconds) */
-    uint32_t        delay_variation;        /**< delay variation (microseconds) */
+typedef struct
+{
+    uint8_t  qos_flags;                     /**< TBD */
+    uint8_t  service_type;                  /**< service type (NO_TRAFFIC, BEST_EFFORT, or GUARANTEED) */
+    uint32_t token_rate;                    /**< token rate (bytes/second) */
+    uint32_t token_bucket_size;             /**< token bucket size (bytes) */
+    uint32_t peak_bandwidth;                /**< peak bandwidth (bytes/second) */
+    uint32_t latency;                       /**< latency (microseconds) */
+    uint32_t delay_variation;               /**< delay variation (microseconds) */
 } wiced_bt_flow_spec_t;
 
 /* Values for swiced_bt_flow_spec_t service_type */

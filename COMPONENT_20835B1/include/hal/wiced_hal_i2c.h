@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* Inter-Integrated Circuit (I2C, IIC) driver.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * Inter-Integrated Circuit (I2C, IIC) driver.
+ *
+ */
 
 #ifndef __WICED_I2C_DRIVER_H__
 #define __WICED_I2C_DRIVER_H__
@@ -44,30 +44,30 @@
 #include "brcm_fw_types.h"
 
 /**  \addtogroup I2CDriver I2C
-* \ingroup HardwareDrivers
-* @{
-*
-* Defines an I2C driver to facilitate communication with other devices on an
-* I2C bus (such as a temperature sensor, etc). The driver is only capable of
-* assuming a master role. Applications use this driver to obtain the status
-* from and control the behavior of the I2C hardware. This driver only offers
-* services for speed control and data transfer operations.
-*
-* Please note that even though this driver can access off-chip memory
-* (if installed; EEPROM, etc), please use the drivers found in
-* wiced_hal_ieeprom.h to access those modules, as those drivers include
-* checks to ensure safe data handling operations. This driver is intended
-* only to interface with other devices on the I2C bus, such as a motion
-* sensor.
-*
-*/
+ * \ingroup HardwareDrivers
+ * @{
+ *
+ * Defines an I2C driver to facilitate communication with other devices on an
+ * I2C bus (such as a temperature sensor, etc). The driver is only capable of
+ * assuming a master role. Applications use this driver to obtain the status
+ * from and control the behavior of the I2C hardware. This driver only offers
+ * services for speed control and data transfer operations.
+ *
+ * Please note that even though this driver can access off-chip memory
+ * (if installed; EEPROM, etc), please use the drivers found in
+ * wiced_hal_ieeprom.h to access those modules, as those drivers include
+ * checks to ensure safe data handling operations. This driver is intended
+ * only to interface with other devices on the I2C bus, such as a motion
+ * sensor.
+ *
+ */
 
 /******************************************************************************
-*** Parameters.
-***
-*** The following parameters are used to configure the driver or define
-*** return status. They are not modifiable.
-******************************************************************************/
+ *** Parameters.
+ ***
+ *** The following parameters are used to configure the driver or define
+ *** return status. They are not modifiable.
+ ******************************************************************************/
 
 /// Speed Options
 enum
@@ -93,12 +93,12 @@ enum
 
     /// The attempted operation failed, possibly because
     /// of no ack from slave.
-    I2CM_OP_FAILED
+    I2CM_OP_FAILED,
 };
 
 /******************************************************************************
-*** Function prototypes.
-******************************************************************************/
+ *** Function prototypes.
+ ******************************************************************************/
 ///////////////////////////////////////////////////////////////////////////////
 /// Initializes the I2C driver and its private values. This initialization
 /// sets the bus speed to 100KHz by default (I2CM_SPEED_100KHZ). To make
@@ -171,7 +171,7 @@ UINT8 wiced_hal_i2c_get_speed(void);
 ///
 /// \return The status of the transaction (success[0], failure[1]).
 ///////////////////////////////////////////////////////////////////////////////
-UINT8 wiced_hal_i2c_read(UINT8* data, UINT16 length, UINT8 slave);
+UINT8 wiced_hal_i2c_read(UINT8 *data, UINT16 length, UINT8 slave);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -189,7 +189,7 @@ UINT8 wiced_hal_i2c_read(UINT8* data, UINT16 length, UINT8 slave);
 ///
 /// \return The status of the transaction (success[0], failure[1]).
 ///////////////////////////////////////////////////////////////////////////////
-UINT8 wiced_hal_i2c_write(UINT8* data, UINT16 length, UINT8 slave);
+UINT8 wiced_hal_i2c_write(UINT8 *data, UINT16 length, UINT8 slave);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Configures I2C pins
@@ -211,7 +211,7 @@ void wiced_hal_i2c_select_pads(UINT8 scl_pin, UINT8 sda_pin);
 /// \param slave   slave addr
 /// \return The status of the transaction (success[0], failure[1])
 ///////////////////////////////////////////////////////////////////////////////
-UINT8 wiced_hal_i2c_combined_read(UINT8* rx_data, UINT8 rx_data_len, UINT8* tx_data, UINT16 tx_data_len, UINT8 slave);
+UINT8 wiced_hal_i2c_combined_read(UINT8 *rx_data, UINT8 rx_data_len, UINT8 *tx_data, UINT16 tx_data_len, UINT8 slave);
 
 /*******************************************************************************
  *
@@ -253,7 +253,7 @@ enum
  * Return:
  *      None
  */
-typedef void I2C_SLAVE_CALLBACK_HANDLER(uint32_t evtFlag, uint8_t* rx_PktPointer, uint16_t rx_PktLength);
+typedef void I2C_SLAVE_CALLBACK_HANDLER(uint32_t evtFlag, uint8_t *rx_PktPointer, uint16_t rx_PktLength);
 
 /*
  * wiced_hal_i2c_slave_set_device_address
@@ -312,7 +312,7 @@ void wiced_hal_i2c_slave_init(void);
  * Return:
  *      None
  */
-void wiced_hal_i2c_slave_register_cb(I2C_SLAVE_CALLBACK_HANDLER* cb);
+void wiced_hal_i2c_slave_register_cb(I2C_SLAVE_CALLBACK_HANDLER *cb);
 
 /*
  * wiced_hal_i2c_slave_synchronous_write
@@ -327,7 +327,7 @@ void wiced_hal_i2c_slave_register_cb(I2C_SLAVE_CALLBACK_HANDLER* cb);
  * Return:
  *      None
  */
-void wiced_hal_i2c_slave_synchronous_write( UINT8* buffer, UINT32 length );
+void wiced_hal_i2c_slave_synchronous_write(UINT8 *buffer, UINT32 length);
 
 
 /** @} */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,31 +32,31 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* CPU Clock.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * CPU Clock.
+ *
+ */
 
 #ifndef __WICED_CPU_CLOCK_H__
 #define __WICED_CPU_CLOCK_H__
 
 
 /**  \addtogroup CPU Clock
-* \ingroup HardwareDrivers
-* Defines a driver to facilitate interfacing with the CPU clock.
-*
-* Use this to update the CPU clock frequency.
-* Care should be taken by an App that it doesn't disable a frequency not set by it.
-*
-* @{ */
+ * \ingroup HardwareDrivers
+ * Defines a driver to facilitate interfacing with the CPU clock.
+ *
+ * Use this to update the CPU clock frequency.
+ * Care should be taken by an App that it doesn't disable a frequency not set by it.
+ *
+ * @{ */
 
 /******************************************************************************
-*** Parameters.
-***
-*** The following parameters are used to configure the driver or define
-*** return status. They are not modifiable.
-******************************************************************************/
+ *** Parameters.
+ ***
+ *** The following parameters are used to configure the driver or define
+ *** return status. They are not modifiable.
+ ******************************************************************************/
 /** Clock Frequency*/
 typedef enum
 {
@@ -65,8 +65,8 @@ typedef enum
 } wiced_cpu_clk_freq_t;
 
 /******************************************************************************
-*** Function prototypes and defines.
-******************************************************************************/
+ *** Function prototypes and defines.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// enables/disables the given cpu clock frequency.
@@ -82,7 +82,7 @@ typedef enum
 ///        it shall call the API with the argument enable set to WICED_FALSE and set the argument freq to the same frequency that it earlier requested to be set.
 ///
 ///////////////////////////////////////////////////////////////////////////////
-wiced_bool_t wiced_update_cpu_clock( wiced_bool_t enable, wiced_cpu_clk_freq_t freq);
+wiced_bool_t wiced_update_cpu_clock(wiced_bool_t enable, wiced_cpu_clk_freq_t freq);
 
 /** @} */
 #endif // __WICED_CPU_CLOCK_H__

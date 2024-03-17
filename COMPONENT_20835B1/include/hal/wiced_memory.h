@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -53,21 +53,21 @@ typedef struct wiced_pool_t wiced_bt_buffer_pool_t;
 /** AIROC Bluetooth dynamic buffer statistics */
 typedef PACKED struct
 {
-    uint8_t     pool_id;                    /**< pool id */
-    uint16_t    pool_size;                  /**< pool buffer size */
-    uint16_t    current_allocated_count;    /**< number of  buffers currently allocated */
-    uint16_t    max_allocated_count;        /**< maximum number of buffers allocated at any time */
-    uint16_t    total_count;                /**< total number of buffers */
-}wiced_bt_buffer_statistics_t;
+    uint8_t  pool_id;                       /**< pool id */
+    uint16_t pool_size;                     /**< pool buffer size */
+    uint16_t current_allocated_count;       /**< number of  buffers currently allocated */
+    uint16_t max_allocated_count;           /**< maximum number of buffers allocated at any time */
+    uint16_t total_count;                   /**< total number of buffers */
+} wiced_bt_buffer_statistics_t;
 
 #pragma pack()
 
 /*
  * Wrapper functions need to be implemented in patch
  */
-void* mpaf_memAlloc( uint32_t size );
+void *mpaf_memAlloc(uint32_t size);
 #define wiced_memory_allocate(size) mpaf_memAlloc(size)
-void* mpaf_memFree( void *memoryBlock );
+void *mpaf_memFree(void *memoryBlock);
 #define wiced_memory_free(ptr) mpaf_memFree(ptr)
 
 /**
@@ -80,7 +80,7 @@ void* mpaf_memFree( void *memoryBlock );
  * @return          pointer to the allocated memory on success
  *                  NULL on failure
  */
-void* wiced_memory_permanent_allocate( uint32_t size );
+void *wiced_memory_permanent_allocate(uint32_t size);
 
 /**
  * Function         wiced_memory_get_free_bytes
@@ -89,7 +89,7 @@ void* wiced_memory_permanent_allocate( uint32_t size );
  *
  * @return          the number of free bytes of RAM left
  */
-uint32_t wiced_memory_get_free_bytes( void );
+uint32_t wiced_memory_get_free_bytes(void);
 
 /**
  * Function         wiced_memory_set_application_thread_stack_size
@@ -120,7 +120,7 @@ wiced_bool_t wiced_memory_set_application_thread_stack_size(uint16_t new_stack_s
  *                  wiced_bt_cfg_settings_t.max_number_of_buffer_pools
  *                  must be increased for each buffer pool the application creates.
  */
-wiced_bt_buffer_pool_t* wiced_bt_create_pool( uint32_t buffer_size, uint32_t buffer_cnt );
+wiced_bt_buffer_pool_t *wiced_bt_create_pool(uint32_t buffer_size, uint32_t buffer_cnt);
 
 /**
  * Function         wiced_bt_get_buffer_from_pool
@@ -133,7 +133,7 @@ wiced_bt_buffer_pool_t* wiced_bt_create_pool( uint32_t buffer_size, uint32_t buf
  * @return          the pointer to the buffer
  *                  NULL on failure
  */
-void* wiced_bt_get_buffer_from_pool( wiced_bt_buffer_pool_t* p_pool );
+void *wiced_bt_get_buffer_from_pool(wiced_bt_buffer_pool_t *p_pool);
 
 /**
  * Function         wiced_bt_get_buffer_count
@@ -144,7 +144,7 @@ void* wiced_bt_get_buffer_from_pool( wiced_bt_buffer_pool_t* p_pool );
  *
  * @return          the number of buffers available in the pool
  */
-uint32_t wiced_bt_get_buffer_count( wiced_bt_buffer_pool_t* p_pool );
+uint32_t wiced_bt_get_buffer_count(wiced_bt_buffer_pool_t *p_pool);
 
 /**
  * Function         wiced_bt_get_buffer
@@ -157,7 +157,7 @@ uint32_t wiced_bt_get_buffer_count( wiced_bt_buffer_pool_t* p_pool );
  * @return          the pointer to the buffer
  *                  NULL on failure
  */
-void* wiced_bt_get_buffer( uint16_t buffer_size );
+void *wiced_bt_get_buffer(uint16_t buffer_size);
 
 /**
  * Function         wiced_bt_free_buffer
@@ -168,7 +168,7 @@ void* wiced_bt_get_buffer( uint16_t buffer_size );
  *
  * @return          None
  */
-void wiced_bt_free_buffer( void* p_buf );
+void wiced_bt_free_buffer(void *p_buf);
 
 /**
  * Function         wiced_bt_get_buffer_size
@@ -179,7 +179,7 @@ void wiced_bt_free_buffer( void* p_buf );
  *
  * @return          the buffer size
  */
-uint32_t wiced_bt_get_buffer_size( void* p_buf );
+uint32_t wiced_bt_get_buffer_size(void *p_buf);
 
 /**
  * Function         wiced_bt_get_buffer_usage
@@ -192,7 +192,7 @@ uint32_t wiced_bt_get_buffer_size( void* p_buf );
  *
  * @return          WICED_BT_SUCCESS on success else error
  */
-wiced_result_t wiced_bt_get_buffer_usage ( wiced_bt_buffer_statistics_t *p_buffer_stat, uint16_t size );
+wiced_result_t wiced_bt_get_buffer_usage(wiced_bt_buffer_statistics_t *p_buffer_stat, uint16_t size);
 
 /** Get specific buffer pool utilization
  *
@@ -200,6 +200,6 @@ wiced_result_t wiced_bt_get_buffer_usage ( wiced_bt_buffer_statistics_t *p_buffe
  *
  * @return          % of buffers used from 0 to 100
  */
-UINT16 wiced_bt_buffer_poolutilization (UINT8 pool_id);
+UINT16 wiced_bt_buffer_poolutilization(UINT8 pool_id);
 
 /** @} */

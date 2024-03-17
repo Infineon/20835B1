@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -49,16 +49,17 @@ typedef uint8_t wiced_bt_ble_chnl_map_t[BTM_AFH_CHNL_MAP_SIZE];
 #define BTM_BLE_SCAN_MODES
 enum wiced_bt_ble_scan_mode_e
 {
-    BTM_BLE_SCAN_MODE_PASSIVE                                              = 0x00, /**< Passive does not send scan request */
-    BTM_BLE_SCAN_MODE_ACTIVE                                               = 0x01, /**< Active sends scan request to advertiser */
-    BTM_BLE_SCAN_MODE_NONE                                                 = 0xff  /**< Disable scans */
+    BTM_BLE_SCAN_MODE_PASSIVE = 0x00,                                              /**< Passive does not send scan request */
+    BTM_BLE_SCAN_MODE_ACTIVE  = 0x01,                                              /**< Active sends scan request to advertiser */
+    BTM_BLE_SCAN_MODE_NONE    = 0xff,                                              /**< Disable scans */
 };
+
 #endif
 typedef uint8_t wiced_bt_ble_scan_mode_t;   /**< scan mode (see #wiced_bt_ble_scan_mode_e) */
 
 /*
-* Enum type received on callabck
-*/
+ * Enum type received on callabck
+ */
 enum
 {
     /// Ready to send out an adv in the next few mS. App can change ADV data if required.
@@ -68,12 +69,13 @@ enum
     WICED_BT_ADV_NOTIFICATION_READY,
 
     /// Just completed transmitting an ADV packet.
-    WICED_BT_ADV_NOTIFICATION_DONE
+    WICED_BT_ADV_NOTIFICATION_DONE,
 };
 
 
 /** Scanner filter policy */
-enum wiced_bt_ble_scanner_filter_policy_e {
+enum wiced_bt_ble_scanner_filter_policy_e
+{
     /* 0: accept adv packet from all, directed adv pkt not directed to local device is ignored */
     BTM_BLE_SCAN_POLICY_ACCEPT_ADV_RSP,
     /* 1: accept adv packet from device in Filter Accept List, directed adv packet not directed to local device is ignored */
@@ -82,17 +84,19 @@ enum wiced_bt_ble_scanner_filter_policy_e {
     BTM_BLE_SCAN_POLICY_ACCEPT_RPA_DIR_ADV_RSP,
     /* 3: accept adv packet from device in Filter Accept List, directed adv pkt not directed to me is ignored except direct adv with RPA */
     BTM_BLE_SCAN_POLICY_FILTER_RPA_DIR_ADV_RSP,
-    BTM_BLE_SCAN_POLICY_MAX
+    BTM_BLE_SCAN_POLICY_MAX,
 };
+
 typedef uint8_t   wiced_bt_ble_scanner_filter_policy_t;  /**< Scanner filter policy (see #wiced_bt_ble_scanner_filter_policy_e) */
 
 /** advertising channel map */
 enum wiced_bt_ble_advert_chnl_map_e
 {
-    BTM_BLE_ADVERT_CHNL_37  = (0x01 << 0),  /**< ADV channel */
-    BTM_BLE_ADVERT_CHNL_38  = (0x01 << 1),  /**< ADV channel */
-    BTM_BLE_ADVERT_CHNL_39  = (0x01 << 2)   /**< ADV channel */
+    BTM_BLE_ADVERT_CHNL_37 = (0x01 << 0),   /**< ADV channel */
+    BTM_BLE_ADVERT_CHNL_38 = (0x01 << 1),   /**< ADV channel */
+    BTM_BLE_ADVERT_CHNL_39 = (0x01 << 2),   /**< ADV channel */
 };
+
 typedef uint8_t wiced_bt_ble_advert_chnl_map_t;  /**< LE advertisement channel map (see #wiced_bt_ble_advert_chnl_map_e) */
 
 /* default advertising channel map */
@@ -101,13 +105,15 @@ typedef uint8_t wiced_bt_ble_advert_chnl_map_t;  /**< LE advertisement channel m
 #endif
 
 /** Advertising filter policy */
-enum wiced_bt_ble_advert_filter_policy_e {
-    BTM_BLE_ADV_POLICY_ACCEPT_CONN_AND_SCAN               = 0x00,    /**< Process scan and connection requests from all devices (i.e., the Filter Accept List is not in use) (default) */
-    BTM_BLE_ADV_POLICY_ACCEPT_CONN_FILTER_SCAN         = 0x01,    /**< Process connection requests from all devices and only scan requests from devices that are in the Filter Accept List. */
-    BTM_BLE_ADV_POLICY_FILTER_CONN_ACCEPT_SCAN         = 0x02,    /**< Process scan requests from all devices and only connection requests from devices that are in the Filter Accept List */
-    BTM_BLE_ADV_POLICY_FILTER_CONN_FILTER_SCAN   = 0x03,    /**< Process scan and connection requests only from devices in the Filter Accept List. */
-    BTM_BLE_ADV_POLICY_MAX
+enum wiced_bt_ble_advert_filter_policy_e
+{
+    BTM_BLE_ADV_POLICY_ACCEPT_CONN_AND_SCAN    = 0x00,               /**< Process scan and connection requests from all devices (i.e., the Filter Accept List is not in use) (default) */
+    BTM_BLE_ADV_POLICY_ACCEPT_CONN_FILTER_SCAN = 0x01,            /**< Process connection requests from all devices and only scan requests from devices that are in the Filter Accept List. */
+    BTM_BLE_ADV_POLICY_FILTER_CONN_ACCEPT_SCAN = 0x02,            /**< Process scan requests from all devices and only connection requests from devices that are in the Filter Accept List */
+    BTM_BLE_ADV_POLICY_FILTER_CONN_FILTER_SCAN = 0x03,      /**< Process scan and connection requests only from devices in the Filter Accept List. */
+    BTM_BLE_ADV_POLICY_MAX,
 };
+
 typedef uint8_t   wiced_bt_ble_advert_filter_policy_t;  /**< Advertising filter policy (see #wiced_bt_ble_advert_filter_policy_e) */
 
 /* default advertising filter policy */
@@ -186,50 +192,52 @@ typedef uint8_t wiced_dev_ble_signature_t[BTM_BLE_AUTH_SIGNATURE_SIZE];     /**<
 
 
 /** Advertisement data types */
-enum wiced_bt_ble_advert_type_e {
-    BTM_BLE_ADVERT_TYPE_FLAG                        = 0x01,                 /**< Advertisement flags */
-    BTM_BLE_ADVERT_TYPE_16SRV_PARTIAL               = 0x02,                 /**< List of supported services - 16 bit UUIDs (partial) */
-    BTM_BLE_ADVERT_TYPE_16SRV_COMPLETE              = 0x03,                 /**< List of supported services - 16 bit UUIDs (complete) */
-    BTM_BLE_ADVERT_TYPE_32SRV_PARTIAL               = 0x04,                 /**< List of supported services - 32 bit UUIDs (partial) */
-    BTM_BLE_ADVERT_TYPE_32SRV_COMPLETE              = 0x05,                 /**< List of supported services - 32 bit UUIDs (complete) */
-    BTM_BLE_ADVERT_TYPE_128SRV_PARTIAL              = 0x06,                 /**< List of supported services - 128 bit UUIDs (partial) */
-    BTM_BLE_ADVERT_TYPE_128SRV_COMPLETE             = 0x07,                 /**< List of supported services - 128 bit UUIDs (complete) */
-    BTM_BLE_ADVERT_TYPE_NAME_SHORT                  = 0x08,                 /**< Short name */
-    BTM_BLE_ADVERT_TYPE_NAME_COMPLETE               = 0x09,                 /**< Complete name */
-    BTM_BLE_ADVERT_TYPE_TX_POWER                    = 0x0A,                 /**< TX Power level  */
-    BTM_BLE_ADVERT_TYPE_DEV_CLASS                   = 0x0D,                 /**< Device Class */
-    BTM_BLE_ADVERT_TYPE_SIMPLE_PAIRING_HASH_C       = 0x0E,                 /**< Simple Pairing Hash C */
-    BTM_BLE_ADVERT_TYPE_SIMPLE_PAIRING_RAND_C       = 0x0F,                 /**< Simple Pairing Randomizer R */
-    BTM_BLE_ADVERT_TYPE_SM_TK                       = 0x10,                 /**< Security manager TK value */
-    BTM_BLE_ADVERT_TYPE_SM_OOB_FLAG                 = 0x11,                 /**< Security manager Out-of-Band data */
-    BTM_BLE_ADVERT_TYPE_INTERVAL_RANGE              = 0x12,                 /**< Peripheral connection interval range */
-    BTM_BLE_ADVERT_TYPE_SOLICITATION_SRV_UUID       = 0x14,                 /**< List of solicitated services - 16 bit UUIDs */
-    BTM_BLE_ADVERT_TYPE_128SOLICITATION_SRV_UUID    = 0x15,                 /**< List of solicitated services - 128 bit UUIDs */
-    BTM_BLE_ADVERT_TYPE_SERVICE_DATA                = 0x16,                 /**< Service data - 16 bit UUID */
-    BTM_BLE_ADVERT_TYPE_PUBLIC_TARGET               = 0x17,                 /**< Public target address */
-    BTM_BLE_ADVERT_TYPE_RANDOM_TARGET               = 0x18,                 /**< Random target address */
-    BTM_BLE_ADVERT_TYPE_APPEARANCE                  = 0x19,                 /**< Appearance */
-    BTM_BLE_ADVERT_TYPE_ADVERT_INTERVAL             = 0x1a,                 /**< Advertising interval */
-    BTM_BLE_ADVERT_TYPE_LE_BD_ADDR                  = 0x1b,                 /**< LE device bluetooth address */
-    BTM_BLE_ADVERT_TYPE_LE_ROLE                     = 0x1c,                 /**< LE role */
-    BTM_BLE_ADVERT_TYPE_256SIMPLE_PAIRING_HASH      = 0x1d,                 /**< Simple Pairing Hash C-256 */
-    BTM_BLE_ADVERT_TYPE_256SIMPLE_PAIRING_RAND      = 0x1e,                 /**< Simple Pairing Randomizer R-256 */
-    BTM_BLE_ADVERT_TYPE_32SOLICITATION_SRV_UUID     = 0x1f,                 /**< List of solicitated services - 32 bit UUIDs */
-    BTM_BLE_ADVERT_TYPE_32SERVICE_DATA              = 0x20,                 /**< Service data - 32 bit UUID */
-    BTM_BLE_ADVERT_TYPE_128SERVICE_DATA             = 0x21,                 /**< Service data - 128 bit UUID */
-    BTM_BLE_ADVERT_TYPE_CONN_CONFIRM_VAL            = 0x22,                 /**< LE Secure Connections Confirmation Value */
-    BTM_BLE_ADVERT_TYPE_CONN_RAND_VAL               = 0x23,                 /**< LE Secure Connections Random Value */
-    BTM_BLE_ADVERT_TYPE_URI                         = 0x24,                 /**< URI */
-    BTM_BLE_ADVERT_TYPE_INDOOR_POS                  = 0x25,                 /**< Indoor Positioning */
-    BTM_BLE_ADVERT_TYPE_TRANS_DISCOVER_DATA         = 0x26,                 /**< Transport Discovery Data */
-    BTM_BLE_ADVERT_TYPE_SUPPORTED_FEATURES          = 0x27,                 /**< LE Supported Features */
-    BTM_BLE_ADVERT_TYPE_UPDATE_CH_MAP_IND           = 0x28,                 /**< Channel Map Update Indication */
-    BTM_BLE_ADVERT_TYPE_PB_ADV                      = 0x29,                 /**< PB-ADV */
-    BTM_BLE_ADVERT_TYPE_MESH_MSG                    = 0x2A,                 /**< Mesh Message */
-    BTM_BLE_ADVERT_TYPE_MESH_BEACON                 = 0x2B,                 /**< Mesh Beacon */
-    BTM_BLE_ADVERT_TYPE_3D_INFO_DATA                = 0x3D,                 /**< 3D Information Data */
-    BTM_BLE_ADVERT_TYPE_MANUFACTURER                = 0xFF                  /**< Manufacturer data */
+enum wiced_bt_ble_advert_type_e
+{
+    BTM_BLE_ADVERT_TYPE_FLAG                     = 0x01,                    /**< Advertisement flags */
+    BTM_BLE_ADVERT_TYPE_16SRV_PARTIAL            = 0x02,                    /**< List of supported services - 16 bit UUIDs (partial) */
+    BTM_BLE_ADVERT_TYPE_16SRV_COMPLETE           = 0x03,                    /**< List of supported services - 16 bit UUIDs (complete) */
+    BTM_BLE_ADVERT_TYPE_32SRV_PARTIAL            = 0x04,                    /**< List of supported services - 32 bit UUIDs (partial) */
+    BTM_BLE_ADVERT_TYPE_32SRV_COMPLETE           = 0x05,                    /**< List of supported services - 32 bit UUIDs (complete) */
+    BTM_BLE_ADVERT_TYPE_128SRV_PARTIAL           = 0x06,                    /**< List of supported services - 128 bit UUIDs (partial) */
+    BTM_BLE_ADVERT_TYPE_128SRV_COMPLETE          = 0x07,                    /**< List of supported services - 128 bit UUIDs (complete) */
+    BTM_BLE_ADVERT_TYPE_NAME_SHORT               = 0x08,                    /**< Short name */
+    BTM_BLE_ADVERT_TYPE_NAME_COMPLETE            = 0x09,                    /**< Complete name */
+    BTM_BLE_ADVERT_TYPE_TX_POWER                 = 0x0A,                    /**< TX Power level  */
+    BTM_BLE_ADVERT_TYPE_DEV_CLASS                = 0x0D,                    /**< Device Class */
+    BTM_BLE_ADVERT_TYPE_SIMPLE_PAIRING_HASH_C    = 0x0E,                    /**< Simple Pairing Hash C */
+    BTM_BLE_ADVERT_TYPE_SIMPLE_PAIRING_RAND_C    = 0x0F,                    /**< Simple Pairing Randomizer R */
+    BTM_BLE_ADVERT_TYPE_SM_TK                    = 0x10,                    /**< Security manager TK value */
+    BTM_BLE_ADVERT_TYPE_SM_OOB_FLAG              = 0x11,                    /**< Security manager Out-of-Band data */
+    BTM_BLE_ADVERT_TYPE_INTERVAL_RANGE           = 0x12,                    /**< Peripheral connection interval range */
+    BTM_BLE_ADVERT_TYPE_SOLICITATION_SRV_UUID    = 0x14,                    /**< List of solicitated services - 16 bit UUIDs */
+    BTM_BLE_ADVERT_TYPE_128SOLICITATION_SRV_UUID = 0x15,                    /**< List of solicitated services - 128 bit UUIDs */
+    BTM_BLE_ADVERT_TYPE_SERVICE_DATA             = 0x16,                    /**< Service data - 16 bit UUID */
+    BTM_BLE_ADVERT_TYPE_PUBLIC_TARGET            = 0x17,                    /**< Public target address */
+    BTM_BLE_ADVERT_TYPE_RANDOM_TARGET            = 0x18,                    /**< Random target address */
+    BTM_BLE_ADVERT_TYPE_APPEARANCE               = 0x19,                    /**< Appearance */
+    BTM_BLE_ADVERT_TYPE_ADVERT_INTERVAL          = 0x1a,                    /**< Advertising interval */
+    BTM_BLE_ADVERT_TYPE_LE_BD_ADDR               = 0x1b,                    /**< LE device bluetooth address */
+    BTM_BLE_ADVERT_TYPE_LE_ROLE                  = 0x1c,                    /**< LE role */
+    BTM_BLE_ADVERT_TYPE_256SIMPLE_PAIRING_HASH   = 0x1d,                    /**< Simple Pairing Hash C-256 */
+    BTM_BLE_ADVERT_TYPE_256SIMPLE_PAIRING_RAND   = 0x1e,                    /**< Simple Pairing Randomizer R-256 */
+    BTM_BLE_ADVERT_TYPE_32SOLICITATION_SRV_UUID  = 0x1f,                    /**< List of solicitated services - 32 bit UUIDs */
+    BTM_BLE_ADVERT_TYPE_32SERVICE_DATA           = 0x20,                    /**< Service data - 32 bit UUID */
+    BTM_BLE_ADVERT_TYPE_128SERVICE_DATA          = 0x21,                    /**< Service data - 128 bit UUID */
+    BTM_BLE_ADVERT_TYPE_CONN_CONFIRM_VAL         = 0x22,                    /**< LE Secure Connections Confirmation Value */
+    BTM_BLE_ADVERT_TYPE_CONN_RAND_VAL            = 0x23,                    /**< LE Secure Connections Random Value */
+    BTM_BLE_ADVERT_TYPE_URI                      = 0x24,                    /**< URI */
+    BTM_BLE_ADVERT_TYPE_INDOOR_POS               = 0x25,                    /**< Indoor Positioning */
+    BTM_BLE_ADVERT_TYPE_TRANS_DISCOVER_DATA      = 0x26,                    /**< Transport Discovery Data */
+    BTM_BLE_ADVERT_TYPE_SUPPORTED_FEATURES       = 0x27,                    /**< LE Supported Features */
+    BTM_BLE_ADVERT_TYPE_UPDATE_CH_MAP_IND        = 0x28,                    /**< Channel Map Update Indication */
+    BTM_BLE_ADVERT_TYPE_PB_ADV                   = 0x29,                    /**< PB-ADV */
+    BTM_BLE_ADVERT_TYPE_MESH_MSG                 = 0x2A,                    /**< Mesh Message */
+    BTM_BLE_ADVERT_TYPE_MESH_BEACON              = 0x2B,                    /**< Mesh Beacon */
+    BTM_BLE_ADVERT_TYPE_3D_INFO_DATA             = 0x3D,                    /**< 3D Information Data */
+    BTM_BLE_ADVERT_TYPE_MANUFACTURER             = 0xFF,                    /**< Manufacturer data */
 };
+
 typedef uint8_t   wiced_bt_ble_advert_type_t;    /**< LE advertisement data type (see #wiced_bt_ble_advert_type_e) */
 
 /** security settings used with L2CAP LE COC */
@@ -237,27 +245,30 @@ typedef uint8_t   wiced_bt_ble_advert_type_t;    /**< LE advertisement data type
 #define BTM_SEC_LE_LINK_SEC_FLAGS
 enum wiced_bt_ble_sec_flags_e
 {
-    BTM_SEC_LE_LINK_ENCRYPTED                       = 0x01,                 /**< Link encrypted */
-    BTM_SEC_LE_LINK_PAIRED_WITHOUT_MITM             = 0x02,                 /**< Paired without man-in-the-middle protection */
-    BTM_SEC_LE_LINK_PAIRED_WITH_MITM                = 0x04                  /**< Link with man-in-the-middle protection */
+    BTM_SEC_LE_LINK_ENCRYPTED           = 0x01,                             /**< Link encrypted */
+    BTM_SEC_LE_LINK_PAIRED_WITHOUT_MITM = 0x02,                             /**< Paired without man-in-the-middle protection */
+    BTM_SEC_LE_LINK_PAIRED_WITH_MITM    = 0x04,                             /**< Link with man-in-the-middle protection */
 };
+
 #endif
 
 typedef struct
 {
-    uint8_t                     *p_data;        /**< Advertisement data */
-    uint16_t                    len;            /**< Advertisement length */
-    wiced_bt_ble_advert_type_t  advert_type;    /**< Advertisement data type */
-}wiced_bt_ble_advert_elem_t;
+    uint8_t                   *p_data;          /**< Advertisement data */
+    uint16_t                   len;             /**< Advertisement length */
+    wiced_bt_ble_advert_type_t advert_type;     /**< Advertisement data type */
+} wiced_bt_ble_advert_elem_t;
 
 /** Scan result event type */
-enum wiced_bt_dev_ble_evt_type_e {
-    BTM_BLE_EVT_CONNECTABLE_ADVERTISEMENT           = 0x00,                 /**< Connectable advertisement */
-    BTM_BLE_EVT_CONNECTABLE_DIRECTED_ADVERTISEMENT  = 0x01,                 /**< Connectable Directed advertisement */
-    BTM_BLE_EVT_SCANNABLE_ADVERTISEMENT             = 0x02,                 /**< Scannable advertisement */
-    BTM_BLE_EVT_NON_CONNECTABLE_ADVERTISEMENT       = 0x03,                 /**< Non connectable advertisement */
-    BTM_BLE_EVT_SCAN_RSP                            = 0x04                  /**< Scan response */
+enum wiced_bt_dev_ble_evt_type_e
+{
+    BTM_BLE_EVT_CONNECTABLE_ADVERTISEMENT          = 0x00,                  /**< Connectable advertisement */
+    BTM_BLE_EVT_CONNECTABLE_DIRECTED_ADVERTISEMENT = 0x01,                  /**< Connectable Directed advertisement */
+    BTM_BLE_EVT_SCANNABLE_ADVERTISEMENT            = 0x02,                  /**< Scannable advertisement */
+    BTM_BLE_EVT_NON_CONNECTABLE_ADVERTISEMENT      = 0x03,                  /**< Non connectable advertisement */
+    BTM_BLE_EVT_SCAN_RSP                           = 0x04,                  /**< Scan response */
 };
+
 typedef uint8_t wiced_bt_dev_ble_evt_type_t;    /**< Scan result event value (see #wiced_bt_dev_ble_evt_type_e) */
 
 /** Background connection type */
@@ -265,21 +276,22 @@ typedef uint8_t wiced_bt_dev_ble_evt_type_t;    /**< Scan result event value (se
 #define BTM_BLE_CONN_TYPES
 enum wiced_bt_ble_conn_type_e
 {
-    BTM_BLE_CONN_NONE                               = 0x00,                  /**< No background connection */
-    BTM_BLE_CONN_AUTO                               = 0x01,                  /**< Auto connection */
-    BTM_BLE_CONN_SELECTIVE                          = 0x02                  /**< Selective connection */
+    BTM_BLE_CONN_NONE      = 0x00,                                           /**< No background connection */
+    BTM_BLE_CONN_AUTO      = 0x01,                                           /**< Auto connection */
+    BTM_BLE_CONN_SELECTIVE = 0x02,                                          /**< Selective connection */
 };
+
 #endif
 typedef uint8_t wiced_bt_ble_conn_type_t;       /**< Connection type (see #wiced_bt_ble_conn_type_e) */
 
 /** LE inquiry result type */
 typedef struct
 {
-    wiced_bt_device_address_t       remote_bd_addr;                         /**< Device address */
-    uint8_t                         ble_addr_type;                          /**< LE Address type */
-    wiced_bt_dev_ble_evt_type_t     ble_evt_type;                           /**< Scan result event type */
-    int8_t                          rssi;                                   /**< Set to #BTM_INQ_RES_IGNORE_RSSI, if not valid */
-    uint8_t                         flag;
+    wiced_bt_device_address_t   remote_bd_addr;                             /**< Device address */
+    uint8_t                     ble_addr_type;                              /**< LE Address type */
+    wiced_bt_dev_ble_evt_type_t ble_evt_type;                               /**< Scan result event type */
+    int8_t                      rssi;                                       /**< Set to #BTM_INQ_RES_IGNORE_RSSI, if not valid */
+    uint8_t                     flag;
 } wiced_bt_ble_scan_results_t;
 
 /* Maximum number of advertisment instances*/
@@ -295,7 +307,7 @@ typedef struct
     Mid   :  -7 dBm     #define BTM_BLE_ADV_TX_POWER_MID        2
     Upper :   1 dBm     #define BTM_BLE_ADV_TX_POWER_UPPER      3
     Max   :   9 dBm     #define BTM_BLE_ADV_TX_POWER_MAX        4
-*/
+ */
 #define MULTI_ADV_TX_POWER_MIN                     0
 #define MULTI_ADV_TX_POWER_MAX                     4
 
@@ -305,11 +317,12 @@ typedef struct
 #define BTM_BLE_SEC_ACTION_TYPES
 enum
 {
-    BTM_BLE_SEC_NONE                    = 0x00,                             /**< No encryption */
-    BTM_BLE_SEC_ENCRYPT                 = 0x01,                             /**< encrypt the link using current key */
-    BTM_BLE_SEC_ENCRYPT_NO_MITM         = 0x02,                             /**< encryption without MITM */
-    BTM_BLE_SEC_ENCRYPT_MITM            = 0x03                              /**< encryption with MITM*/
+    BTM_BLE_SEC_NONE            = 0x00,                                     /**< No encryption */
+    BTM_BLE_SEC_ENCRYPT         = 0x01,                                     /**< encrypt the link using current key */
+    BTM_BLE_SEC_ENCRYPT_NO_MITM = 0x02,                                     /**< encryption without MITM */
+    BTM_BLE_SEC_ENCRYPT_MITM    = 0x03,                                     /**< encryption with MITM*/
 };
+
 #endif
 typedef uint8_t wiced_bt_ble_sec_action_type_t;
 
@@ -330,7 +343,7 @@ typedef UINT8   wiced_bt_ble_host_phy_preferences_t;
     The Host may specify a preferred coding even if it prefers not to use the LE
     Coded transmitter PHY since the Controller may override the PHY preference.
     Bit 2-15 reserved for future use.
-Note:-  These preferences applicable only when BTM_BLE_PREFER_LELR_PHY flag gest set */
+   Note:-  These preferences applicable only when BTM_BLE_PREFER_LELR_PHY flag gest set */
 #define BTM_BLE_PREFER_NO_LELR                         0x0000
 #define BTM_BLE_PREFER_LELR_125K                       0x0001
 #define BTM_BLE_PREFER_LELR_512K                       0x0002
@@ -339,20 +352,20 @@ typedef UINT16  wiced_bt_ble_lelr_phy_preferences_t;
 /** Host PHY preferences */
 typedef struct
 {
-    wiced_bt_device_address_t               remote_bd_addr;     /**< Peer Device address */
-    wiced_bt_ble_host_phy_preferences_t     tx_phys;            /**< Host preference among the TX PHYs */
-    wiced_bt_ble_host_phy_preferences_t     rx_phys;            /**< Host preference among the RX PHYs */
-    wiced_bt_ble_lelr_phy_preferences_t     phy_opts;           /**< Host preference on LE coded PHY */
-}wiced_bt_ble_phy_preferences_t;
+    wiced_bt_device_address_t           remote_bd_addr;         /**< Peer Device address */
+    wiced_bt_ble_host_phy_preferences_t tx_phys;                /**< Host preference among the TX PHYs */
+    wiced_bt_ble_host_phy_preferences_t rx_phys;                /**< Host preference among the RX PHYs */
+    wiced_bt_ble_lelr_phy_preferences_t phy_opts;               /**< Host preference on LE coded PHY */
+} wiced_bt_ble_phy_preferences_t;
 
 /** LE connection parameteres */
 typedef struct
 {
-    uint8_t     role;
-    uint16_t    conn_interval;
-    uint16_t    conn_latency;
-    uint16_t    supervision_timeout;
-}wiced_bt_ble_conn_params_t;
+    uint8_t  role;
+    uint16_t conn_interval;
+    uint16_t conn_latency;
+    uint16_t supervision_timeout;
+} wiced_bt_ble_conn_params_t;
 
 /* Transmit Power in dBm ( MULTI_ADV_TX_POWER_MIN to MULTI_ADV_TX_POWER_MAX ) */
 typedef int8_t wiced_bt_ble_adv_tx_power_t;
@@ -360,54 +373,57 @@ typedef int8_t wiced_bt_ble_adv_tx_power_t;
 /** Multi-advertisement start/stop */
 enum wiced_bt_ble_multi_advert_start_e
 {
-    MULTI_ADVERT_STOP                               = 0x00,                 /**< Stop Multi-adverstisment */
-    MULTI_ADVERT_START                              = 0x01                  /**< Start Multi-adverstisment */
+    MULTI_ADVERT_STOP  = 0x00,                                              /**< Stop Multi-adverstisment */
+    MULTI_ADVERT_START = 0x01,                                              /**< Start Multi-adverstisment */
 };
 
 /** Multi-advertisement type */
 enum wiced_bt_ble_multi_advert_type_e
 {
-    MULTI_ADVERT_CONNECTABLE_UNDIRECT_EVENT         = 0x00,
-    MULTI_ADVERT_CONNECTABLE_DIRECT_EVENT           = 0x01,
-    MULTI_ADVERT_DISCOVERABLE_EVENT                 = 0x02,
-    MULTI_ADVERT_NONCONNECTABLE_EVENT               = 0x03,
-    MULTI_ADVERT_LOW_DUTY_CYCLE_DIRECT_EVENT        = 0x04
+    MULTI_ADVERT_CONNECTABLE_UNDIRECT_EVENT  = 0x00,
+    MULTI_ADVERT_CONNECTABLE_DIRECT_EVENT    = 0x01,
+    MULTI_ADVERT_DISCOVERABLE_EVENT          = 0x02,
+    MULTI_ADVERT_NONCONNECTABLE_EVENT        = 0x03,
+    MULTI_ADVERT_LOW_DUTY_CYCLE_DIRECT_EVENT = 0x04,
 };
+
 typedef uint8_t wiced_bt_ble_multi_advert_type_t;    /**< LE advertisement type (see #wiced_bt_ble_multi_advert_type_e) */
 
 /** Multi-advertisement Filtering policy */
 enum wiced_bt_ble_multi_advert_filtering_policy_e
 {
-    MULTI_ADVERT_FILTER_POLICY_FILTER_ACCEPT_LIST_NOT_USED                    = 0x00,   // Filter Accept List not used
-    MULTI_ADVERT_FILTER_ACCEPT_LIST_POLICY_ADV_ALLOW_UNKNOWN_CONNECTION       = 0x01,   // Filter Accept List for scan request
-    MULTI_ADVERT_FILTER_ACCEPT_LIST_POLICY_ADV_ALLOW_UNKNOWN_SCANNING         = 0x02,   // Filter Accept List for connection request
-    MULTI_ADVERT_FILTER_POLICY_FILTER_ACCEPT_LIST_USED_FOR_ALL                = 0x03
+    MULTI_ADVERT_FILTER_POLICY_FILTER_ACCEPT_LIST_NOT_USED              = 0x00,         // Filter Accept List not used
+    MULTI_ADVERT_FILTER_ACCEPT_LIST_POLICY_ADV_ALLOW_UNKNOWN_CONNECTION = 0x01,         // Filter Accept List for scan request
+    MULTI_ADVERT_FILTER_ACCEPT_LIST_POLICY_ADV_ALLOW_UNKNOWN_SCANNING   = 0x02,         // Filter Accept List for connection request
+    MULTI_ADVERT_FILTER_POLICY_FILTER_ACCEPT_LIST_USED_FOR_ALL          = 0x03,
 };
+
 typedef uint8_t wiced_bt_ble_multi_advert_filtering_policy_t;    /**< LE advertisement filtering policy (see #wiced_bt_ble_multi_advert_filtering_policy_e) */
 
 /* LE Multi advertising parameter */
 typedef struct
 {
     /**< BTM_BLE_ADVERT_INTERVAL_MIN to BTM_BLE_ADVERT_INTERVAL_MAX ( As per spec ) */
-    uint16_t                                      adv_int_min;            /**< Minimum adv interval */
+    uint16_t adv_int_min;                                                 /**< Minimum adv interval */
     /**< BTM_BLE_ADVERT_INTERVAL_MIN to BTM_BLE_ADVERT_INTERVAL_MAX ( As per spec ) */
-    uint16_t                                      adv_int_max;            /**< Maximum adv interval */
-    wiced_bt_ble_multi_advert_type_t              adv_type;               /**< Adv event type */
-    wiced_bt_ble_advert_chnl_map_t                channel_map;            /**< Adv channel map */
-    wiced_bt_ble_multi_advert_filtering_policy_t  adv_filter_policy;      /**< Advertising filter policy */
-    wiced_bt_ble_adv_tx_power_t                   adv_tx_power;           /**< Adv tx power */
-    wiced_bt_device_address_t                     peer_bd_addr;           /**< Peer Device address */
-    wiced_bt_ble_address_type_t                   peer_addr_type;         /**< Peer LE Address type */
-    wiced_bt_device_address_t                     own_bd_addr;            /**< Own LE address */
-    wiced_bt_ble_address_type_t                   own_addr_type;          /**< Own LE Address type */
-}wiced_bt_ble_multi_adv_params_t;
+    uint16_t                                     adv_int_max;             /**< Maximum adv interval */
+    wiced_bt_ble_multi_advert_type_t             adv_type;                /**< Adv event type */
+    wiced_bt_ble_advert_chnl_map_t               channel_map;             /**< Adv channel map */
+    wiced_bt_ble_multi_advert_filtering_policy_t adv_filter_policy;       /**< Advertising filter policy */
+    wiced_bt_ble_adv_tx_power_t                  adv_tx_power;            /**< Adv tx power */
+    wiced_bt_device_address_t                    peer_bd_addr;            /**< Peer Device address */
+    wiced_bt_ble_address_type_t                  peer_addr_type;          /**< Peer LE Address type */
+    wiced_bt_device_address_t                    own_bd_addr;             /**< Own LE address */
+    wiced_bt_ble_address_type_t                  own_addr_type;           /**< Own LE Address type */
+} wiced_bt_ble_multi_adv_params_t;
 
 /* Privacy mode */
 enum
 {
     BTM_BLE_PRIVACY_MODE_NETWORK,                           /**< network privacy mode*/
-    BTM_BLE_PRIVACY_MODE_DEVICE                             /**< device privacy mode*/
+    BTM_BLE_PRIVACY_MODE_DEVICE,                            /**< device privacy mode*/
 };
+
 typedef uint8_t wiced_bt_ble_privacy_mode_t;
 
 /**
@@ -514,105 +530,105 @@ wiced_result_t wiced_bt_ble_set_raw_advertisement_data(UINT8 num_elem,
  *
  */
 wiced_bt_dev_status_t wiced_bt_ble_set_raw_scan_response_data(uint8_t num_elem,
-                                                        wiced_bt_ble_advert_elem_t *p_data);
+                                                              wiced_bt_ble_advert_elem_t *p_data);
 
 /**
-* Function         wiced_bt_ble_observe
-*
-*
-* This API allows the device to register a callback to receive both connectable
-* and non-connectable ADV packets. It is fundamentally the same as the API
-* \ref wiced_bt_ble_scan, except that the scan results are filtered to allow
-* non-connectable packets. Furthermore, the scan parameters used by the observe
-* API are the 'low_duty' parameters set in \ref wiced_bt_cfg_settings_t, which
-* is passed to \ref wiced_bt_stack_init.
-*
-* Refer to \ref wiced_bt_ble_scan for an example of the callback to be used.
-*
-* \param[in] start                    WICED_TRUE==start, WICED_FALSE==stop
-* \param[in] duration                 num_seconds to scan
-* \param[in] p_scan_result_cback      callback to receive packets asynchronously
-*
-* \return
-*  - WICED_SUCCESS
-*  - WICED_ERROR
-*
-* \note
-* This API should not be used at the same time as \ref wiced_bt_ble_scan.
+ * Function         wiced_bt_ble_observe
+ *
+ *
+ * This API allows the device to register a callback to receive both connectable
+ * and non-connectable ADV packets. It is fundamentally the same as the API
+ * \ref wiced_bt_ble_scan, except that the scan results are filtered to allow
+ * non-connectable packets. Furthermore, the scan parameters used by the observe
+ * API are the 'low_duty' parameters set in \ref wiced_bt_cfg_settings_t, which
+ * is passed to \ref wiced_bt_stack_init.
+ *
+ * Refer to \ref wiced_bt_ble_scan for an example of the callback to be used.
+ *
+ * \param[in] start                    WICED_TRUE==start, WICED_FALSE==stop
+ * \param[in] duration                 num_seconds to scan
+ * \param[in] p_scan_result_cback      callback to receive packets asynchronously
+ *
+ * \return
+ *  - WICED_SUCCESS
+ *  - WICED_ERROR
+ *
+ * \note
+ * This API should not be used at the same time as \ref wiced_bt_ble_scan.
  *
  * Note : It will use Low Duty Scan configuration
  *
  */
-wiced_bt_dev_status_t wiced_bt_ble_observe (wiced_bool_t start, uint8_t duration, wiced_bt_ble_scan_result_cback_t *p_scan_result_cback);
+wiced_bt_dev_status_t wiced_bt_ble_observe(wiced_bool_t start, uint8_t duration, wiced_bt_ble_scan_result_cback_t *p_scan_result_cback);
 
 /**
  * Function         wiced_bt_ble_scan
  *
  * This API allows the device to register a callback to receive _connectable_
-* ADV packets from peripheral devices. It is fundamentally the same as the API
-* \ref wiced_bt_ble_observe, except that the scan results are filtered to only
-* allow connectable packets. The scan interval, window, duration, and type
-* (active or passive), are initialized in \ref wiced_bt_cfg_settings_t upon
-* calling the stack initialization API (\ref wiced_bt_stack_init). The packets
-* received in the callback can be limited to a small, known set of devices
-* using \ref wiced_bt_ble_update_scanner_filter_policy.
-*
-* Below is an example of how to start receiving scan results in a callback
-* and print the name of the advertised device if found in the received
-* packet:
-*
-* \code
-* void scan_cback( wiced_bt_ble_scan_results_t *scan_res, uint8_t *adv_data )
-* {
-*     uint8_t length;
-*     uint8_t *p_data;
-*
-*     if ( p_scan_result )
-*     {
-*         p_data = wiced_bt_ble_check_advertising_data( p_adv_data,
-*             BTM_BLE_ADVERT_TYPE_NAME_COMPLETE, &length );
-*
-*         if(length)
-*         {
-*             WICED_BT_TRACE("%B %s RSSI: %i\r\n",
-*                 p_scan_result->remote_bd_addr, (char *)p_data,
-*                 p_scan_result->rssi );
-*         }
-*         else
-*         {
-*             WICED_BT_TRACE("%B UNK RSSI: %i\r\n",
-*                 p_scan_result->remote_bd_addr, p_scan_result->rssi );
-*         }
-*     }
-*     else
-*     {
-*         WICED_BT_TRACE( "Scan completed\r\n" );
-*     }
-* }
-*
-* {
-*     wiced_bt_ble_scan( BTM_BLE_SCAN_TYPE_HIGH_DUTY, WICED_TRUE, scan_cback);
-* }
-* \endcode
-*
-* \param[in] scan_type
-*  - BTM_BLE_SCAN_TYPE_NONE: disable scan
-*  - BTM_BLE_SCAN_TYPE_HIGH_DUTY: use scan params prefixed high_duty_conn_scan_*
-*  - BTM_BLE_SCAN_TYPE_LOW_DUTY: use scan params prefixed low_duty_conn_scan_*
-* \param[in] duplicate_filter_enable  WICED_TRUE==enable, WICED_FALSE==disable
-* \param[in] p_scan_result_cback      callback to receive packets asynchronously
-*
-* \return
-*  - WICED_BT_PENDING if successfully initiated
-*  - WICED_BT_BUSY if already in progress
-*  - WICED_BT_ILLEGAL_VALUE if parameter(s) are out of range
-*  - WICED_BT_NO_RESOURCES if could not allocate resources to start the command
-*  - WICED_BT_WRONG_MODE if the device is not up.
-*
-* \note
-* This API should not be used at the same time as \ref wiced_bt_ble_observe.
-*/
-wiced_result_t  wiced_bt_ble_scan (wiced_bt_ble_scan_type_t scan_type, wiced_bool_t duplicate_filter_enable, wiced_bt_ble_scan_result_cback_t *p_scan_result_cback);
+ * ADV packets from peripheral devices. It is fundamentally the same as the API
+ * \ref wiced_bt_ble_observe, except that the scan results are filtered to only
+ * allow connectable packets. The scan interval, window, duration, and type
+ * (active or passive), are initialized in \ref wiced_bt_cfg_settings_t upon
+ * calling the stack initialization API (\ref wiced_bt_stack_init). The packets
+ * received in the callback can be limited to a small, known set of devices
+ * using \ref wiced_bt_ble_update_scanner_filter_policy.
+ *
+ * Below is an example of how to start receiving scan results in a callback
+ * and print the name of the advertised device if found in the received
+ * packet:
+ *
+ * \code
+ * void scan_cback( wiced_bt_ble_scan_results_t *scan_res, uint8_t *adv_data )
+ * {
+ *     uint8_t length;
+ *     uint8_t *p_data;
+ *
+ *     if ( p_scan_result )
+ *     {
+ *         p_data = wiced_bt_ble_check_advertising_data( p_adv_data,
+ *             BTM_BLE_ADVERT_TYPE_NAME_COMPLETE, &length );
+ *
+ *         if(length)
+ *         {
+ *             WICED_BT_TRACE("%B %s RSSI: %i\r\n",
+ *                 p_scan_result->remote_bd_addr, (char *)p_data,
+ *                 p_scan_result->rssi );
+ *         }
+ *         else
+ *         {
+ *             WICED_BT_TRACE("%B UNK RSSI: %i\r\n",
+ *                 p_scan_result->remote_bd_addr, p_scan_result->rssi );
+ *         }
+ *     }
+ *     else
+ *     {
+ *         WICED_BT_TRACE( "Scan completed\r\n" );
+ *     }
+ * }
+ *
+ * {
+ *     wiced_bt_ble_scan( BTM_BLE_SCAN_TYPE_HIGH_DUTY, WICED_TRUE, scan_cback);
+ * }
+ * \endcode
+ *
+ * \param[in] scan_type
+ *  - BTM_BLE_SCAN_TYPE_NONE: disable scan
+ *  - BTM_BLE_SCAN_TYPE_HIGH_DUTY: use scan params prefixed high_duty_conn_scan_*
+ *  - BTM_BLE_SCAN_TYPE_LOW_DUTY: use scan params prefixed low_duty_conn_scan_*
+ * \param[in] duplicate_filter_enable  WICED_TRUE==enable, WICED_FALSE==disable
+ * \param[in] p_scan_result_cback      callback to receive packets asynchronously
+ *
+ * \return
+ *  - WICED_BT_PENDING if successfully initiated
+ *  - WICED_BT_BUSY if already in progress
+ *  - WICED_BT_ILLEGAL_VALUE if parameter(s) are out of range
+ *  - WICED_BT_NO_RESOURCES if could not allocate resources to start the command
+ *  - WICED_BT_WRONG_MODE if the device is not up.
+ *
+ * \note
+ * This API should not be used at the same time as \ref wiced_bt_ble_observe.
+ */
+wiced_result_t wiced_bt_ble_scan(wiced_bt_ble_scan_type_t scan_type, wiced_bool_t duplicate_filter_enable, wiced_bt_ble_scan_result_cback_t *p_scan_result_cback);
 
 /**
  *
@@ -659,8 +675,8 @@ void wiced_bt_ble_security_grant(wiced_bt_device_address_t bd_addr, uint8_t res)
  * @return          TRUE if signing successful, otherwise FALSE.
  *
  */
-wiced_bool_t wiced_bt_ble_data_signature (wiced_bt_device_address_t bd_addr, uint8_t *p_text, uint16_t len,
-                                             wiced_dev_ble_signature_t signature);
+wiced_bool_t wiced_bt_ble_data_signature(wiced_bt_device_address_t bd_addr, uint8_t *p_text, uint16_t len,
+                                         wiced_dev_ble_signature_t signature);
 
 /**
  *
@@ -677,9 +693,9 @@ wiced_bool_t wiced_bt_ble_data_signature (wiced_bt_device_address_t bd_addr, uin
  * @return          TRUE if signature verified correctly; otherwise FALSE.
  *
  */
-wiced_bool_t wiced_bt_ble_verify_signature (wiced_bt_device_address_t bd_addr, uint8_t *p_orig,
-                                            uint16_t len, uint32_t counter,
-                                            uint8_t *p_comp);
+wiced_bool_t wiced_bt_ble_verify_signature(wiced_bt_device_address_t bd_addr, uint8_t *p_orig,
+                                           uint16_t len, uint32_t counter,
+                                           uint8_t *p_comp);
 
 /**
  *
@@ -693,7 +709,7 @@ wiced_bool_t wiced_bt_ble_verify_signature (wiced_bt_device_address_t bd_addr, u
  * @return          TRUE if background connection set
  *
  */
-wiced_bool_t wiced_bt_ble_set_background_connection_type (wiced_bt_ble_conn_type_t conn_type, wiced_bt_ble_selective_conn_cback_t *p_select_cback);
+wiced_bool_t wiced_bt_ble_set_background_connection_type(wiced_bt_ble_conn_type_t conn_type, wiced_bt_ble_selective_conn_cback_t *p_select_cback);
 
 /**
  *
@@ -701,8 +717,8 @@ wiced_bool_t wiced_bt_ble_set_background_connection_type (wiced_bt_ble_conn_type
  *
  *                  This function is called to add or remove a device into/from
  *                  background connection procedure. The background connection
-*                   procedure is decided by the background connection type, it can be
-*                   auto connection, or selective connection.
+ *                   procedure is decided by the background connection type, it can be
+ *                   auto connection, or selective connection.
  *
  * @param[in]       add_remove: TRUE to add; FALSE to remove.
  * @param[in]       remote_bda: device address to add/remove.
@@ -726,7 +742,7 @@ wiced_bool_t wiced_bt_ble_update_background_connection_device(wiced_bool_t add_r
  * @return          pointer to start of requested advertisement data (if found). NULL if requested data type not found.
  *
  */
-uint8_t *wiced_bt_ble_check_advertising_data( uint8_t *p_adv, wiced_bt_ble_advert_type_t type, uint8_t *p_length);
+uint8_t *wiced_bt_ble_check_advertising_data(uint8_t *p_adv, wiced_bt_ble_advert_type_t type, uint8_t *p_length);
 
 /**
  *
@@ -741,7 +757,7 @@ uint8_t *wiced_bt_ble_check_advertising_data( uint8_t *p_adv, wiced_bt_ble_adver
  * @return          TRUE if successful
  *
  */
-wiced_bool_t wiced_bt_ble_get_security_state (wiced_bt_device_address_t bd_addr, uint8_t *p_le_sec_flags, uint8_t *p_le_key_size);
+wiced_bool_t wiced_bt_ble_get_security_state(wiced_bt_device_address_t bd_addr, uint8_t *p_le_sec_flags, uint8_t *p_le_key_size);
 
 /**
  *
@@ -782,7 +798,7 @@ wiced_bool_t wiced_btm_ble_update_advertisement_filter_policy(wiced_bt_ble_adver
  * @return          WICED_TRUE if successful else WICED_FALSE
  *
  */
-wiced_bool_t wiced_bt_ble_update_scanner_filter_list(wiced_bool_t add, wiced_bt_device_address_t remote_bda,  wiced_bt_ble_address_type_t addr_type);
+wiced_bool_t wiced_bt_ble_update_scanner_filter_list(wiced_bool_t add, wiced_bt_device_address_t remote_bda, wiced_bt_ble_address_type_t addr_type);
 
 /**
  *
@@ -820,31 +836,31 @@ wiced_bool_t wiced_bt_ble_clear_filter_accept_list(void);
  */
 uint8_t wiced_bt_ble_get_filter_accept_list_size(void);
 /**
-* Function         wiced_bt_ble_set_adv_tx_power
-*
-*  Command to set LE Advertisement tx power
-*
-* @param[in]       power          :  power value in db (min:-24 max:4)
-*
-* @return          wiced_result_t
-*
-**/
+ * Function         wiced_bt_ble_set_adv_tx_power
+ *
+ *  Command to set LE Advertisement tx power
+ *
+ * @param[in]       power          :  power value in db (min:-24 max:4)
+ *
+ * @return          wiced_result_t
+ *
+ **/
 wiced_result_t wiced_bt_ble_set_adv_tx_power(INT8 power);
 
 /**
-* Function         wiced_bt_ble_read_adv_tx_power
-*
-*                  Read LE Advertisement transmit power
-*
-* @param[in]       p_cback         : Result callback (wiced_bt_tx_power_result_t will be passed to the callback)
-*
-* @return
-*
-*                  WICED_BT_PENDING if command issued to controller.
-*                  WICED_BT_NO_RESOURCES if couldn't allocate memory to issue command
-*                  WICED_BT_BUSY if command is already in progress
-*
-*/
+ * Function         wiced_bt_ble_read_adv_tx_power
+ *
+ *                  Read LE Advertisement transmit power
+ *
+ * @param[in]       p_cback         : Result callback (wiced_bt_tx_power_result_t will be passed to the callback)
+ *
+ * @return
+ *
+ *                  WICED_BT_PENDING if command issued to controller.
+ *                  WICED_BT_NO_RESOURCES if couldn't allocate memory to issue command
+ *                  WICED_BT_BUSY if command is already in progress
+ *
+ */
 wiced_result_t wiced_bt_ble_read_adv_tx_power(wiced_bt_dev_cmpl_cback_t *p_cback);
 
 /**
@@ -873,15 +889,15 @@ wiced_result_t wiced_bt_ble_set_channel_classification(const wiced_bt_ble_chnl_m
  *                  Host to configure the LE link to 1M or 2M and LE coding to be used
  *
  * @param[in]       wiced_bt_ble_phy_preferences_t      - Phy preferences
-**
-** Returns
-**                  WICED_BT_SUCCESS is returned if the request was successfully sent to HCI.
-**                  WICED_BT_ILLEGAL_VALUE if phy_preferences is NULL
-**                  WICED_BT_NO_RESOURCES if device address is bad
-**                  BTM_NO_RESOURCES if could not allocate resources to start the command
-**
+ **
+ ** Returns
+ **                  WICED_BT_SUCCESS is returned if the request was successfully sent to HCI.
+ **                  WICED_BT_ILLEGAL_VALUE if phy_preferences is NULL
+ **                  WICED_BT_NO_RESOURCES if device address is bad
+ **                  BTM_NO_RESOURCES if could not allocate resources to start the command
+ **
  */
-wiced_bt_dev_status_t wiced_bt_ble_set_phy (wiced_bt_ble_phy_preferences_t *phy_preferences);
+wiced_bt_dev_status_t wiced_bt_ble_set_phy(wiced_bt_ble_phy_preferences_t *phy_preferences);
 
 /**
  * Function         wiced_bt_gatt_ble_get_connection_parameters
@@ -920,7 +936,7 @@ wiced_result_t wiced_bt_ble_get_connection_parameters(wiced_bt_device_address_t 
  *                  WICED_BT_SUCCESS if successfully initiated
  *                  WICED_BT_NO_RESOURCES if could not allocate resources to start the command
  */
- wiced_result_t wiced_start_multi_advertisements( uint8_t advertising_enable, uint8_t adv_instance );
+wiced_result_t wiced_start_multi_advertisements(uint8_t advertising_enable, uint8_t adv_instance);
 
 /**
  * Function         wiced_set_multi_advertisement_scan_response_data
@@ -936,7 +952,7 @@ wiced_result_t wiced_bt_ble_get_connection_parameters(wiced_bt_device_address_t 
  *
  *                  TRUE if command succeeded
  */
-wiced_bt_dev_status_t wiced_set_multi_advertisement_scan_response_data( uint8_t * p_data, uint8_t data_len, uint8_t adv_instance );
+wiced_bt_dev_status_t wiced_set_multi_advertisement_scan_response_data(uint8_t *p_data, uint8_t data_len, uint8_t adv_instance);
 
 /**
  * Function         wiced_set_multi_advertisement_params
@@ -954,7 +970,7 @@ wiced_bt_dev_status_t wiced_set_multi_advertisement_scan_response_data( uint8_t 
  *                  WICED_BT_NO_RESOURCES if could not allocate resources to start the command
  *                  WICED_BT_ILLEGAL_VALUE if parameter(s) are out of range
  */
-wiced_result_t wiced_set_multi_advertisement_params( uint8_t adv_instance, wiced_bt_ble_multi_adv_params_t *p_param );
+wiced_result_t wiced_set_multi_advertisement_params(uint8_t adv_instance, wiced_bt_ble_multi_adv_params_t *p_param);
 
 /**
  * Function         wiced_set_multi_advertisement_data
@@ -972,7 +988,7 @@ wiced_result_t wiced_set_multi_advertisement_params( uint8_t adv_instance, wiced
  *                  WICED_BT_NO_RESOURCES if could not allocate resources to start the command
  *                  WICED_BT_ILLEGAL_VALUE if parameter(s) are out of range
  */
-wiced_result_t wiced_set_multi_advertisement_data( uint8_t * p_data, uint8_t data_len, uint8_t adv_instance );
+wiced_result_t wiced_set_multi_advertisement_data(uint8_t *p_data, uint8_t data_len, uint8_t adv_instance);
 
 
 /**
@@ -991,8 +1007,8 @@ wiced_result_t wiced_set_multi_advertisement_data( uint8_t * p_data, uint8_t dat
  *
  *                  TRUE if command succeeded
  */
-wiced_bool_t wiced_bt_notify_multi_advertisement_packet_transmissions( uint8_t adv_instance, void (*clientCallback)( uint32_t ),
-                                                                       uint32_t advanceNoticeInMicroSeconds );
+wiced_bool_t wiced_bt_notify_multi_advertisement_packet_transmissions(uint8_t adv_instance, void (*clientCallback)(uint32_t),
+                                                                      uint32_t advanceNoticeInMicroSeconds);
 
 /**
  * Function         wiced_bt_ble_set_channel_classification

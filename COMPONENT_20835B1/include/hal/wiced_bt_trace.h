@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,16 +32,16 @@
  */
 
 /** @file
-*
-* \defgroup wiced_utils AIROC Trace Utilities
-* \ingroup wicedsys
-*
-* @{
-*
-*Trace Utilities
-*
-* Support for applications to send debug or information messages to debug UART destinations.
-*/
+ *
+ * \defgroup wiced_utils AIROC Trace Utilities
+ * \ingroup wicedsys
+ *
+ * @{
+ *
+ * Trace Utilities
+ *
+ * Support for applications to send debug or information messages to debug UART destinations.
+ */
 #ifndef _WICED_BT_TRACE_H_
 #define _WICED_BT_TRACE_H_
 
@@ -62,12 +62,12 @@
 /** Debug trace message destinations. Used when calling wiced_set_debug_uart().*/
 typedef enum
 {
-    WICED_ROUTE_DEBUG_NONE  =  0x00, /**< No traces */
+    WICED_ROUTE_DEBUG_NONE =  0x00,  /**< No traces */
     WICED_ROUTE_DEBUG_TO_WICED_UART, /**< send debug strings in formatted AIROC HCI messages over HCI UART to ClientControl or MCU */
     WICED_ROUTE_DEBUG_TO_HCI_UART,   /**< send debug strings as plain text to HCI UART, used by default if wiced_set_debug_uart() not called */
     WICED_ROUTE_DEBUG_TO_DBG_UART,   /**< Deprecated */
-    WICED_ROUTE_DEBUG_TO_PUART       /**< send debug strings as plain text to the peripheral uart (PUART) */
-}wiced_debug_uart_types_t;
+    WICED_ROUTE_DEBUG_TO_PUART,      /**< send debug strings as plain text to the peripheral uart (PUART) */
+} wiced_debug_uart_types_t;
 
 #ifdef WICED_BT_TRACE_ENABLE
 /**
@@ -111,7 +111,7 @@ typedef enum
  * @return          void
  *
  */
-void wiced_set_debug_uart ( wiced_debug_uart_types_t uart );
+void wiced_set_debug_uart(wiced_debug_uart_types_t uart);
 
 /* @} */
 
@@ -126,7 +126,7 @@ void wiced_set_debug_uart ( wiced_debug_uart_types_t uart );
 #define WICED_BT_TRACE_CRIT(...)            wiced_printf(NULL, 0, __VA_ARGS__)
 #endif
 
-void wiced_trace_array( const uint8_t* p_array, uint16_t len);
-int wiced_printf(char * buffer, int len, ...);
+void wiced_trace_array(const uint8_t *p_array, uint16_t len);
+int wiced_printf(char *buffer, int len, ...);
 
 #endif /* _WICED_BT_TRACE_H_ */

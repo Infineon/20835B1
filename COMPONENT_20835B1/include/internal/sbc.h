@@ -1,7 +1,7 @@
 #ifndef __SBC_H__
 #define __SBC_H__
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -34,14 +34,14 @@
  */
 
 /****************************************************************
-*
-*    File Name: sbc.h
-*
-*    Abstract: This header file publishes the A2DP SBC common
-*    API and data structures
-*
-*
-*****************************************************************/
+ *
+ *    File Name: sbc.h
+ *
+ *    Abstract: This header file publishes the A2DP SBC common
+ *    API and data structures
+ *
+ *
+ *****************************************************************/
 
 /*******************************************************************
  *   Macro
@@ -88,15 +88,15 @@
 typedef struct
 {
     unsigned char syncword;
-    unsigned char sampling_frequency:2;
-    unsigned char blocks:2;
-    unsigned char channel_mode:2;
-    unsigned char allocation_method:1;
-    unsigned char subbands:1;
+    unsigned char sampling_frequency :2;
+    unsigned char blocks             :2;
+    unsigned char channel_mode       :2;
+    unsigned char allocation_method  :1;
+    unsigned char subbands           :1;
     unsigned char bitpool;
     unsigned char crc_check;
     unsigned char join;
-}SBC_FRAME_HEADER;
+} SBC_FRAME_HEADER;
 
 /*******************************************************************
  *   Function Prototypes

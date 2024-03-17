@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -31,15 +31,15 @@
  * so agrees to indemnify Cypress against all liability.
  */
 /*
-********************************************************************
-*    File Name: spar_setup.c
-*
-*           The Stackable Patch and Application Runtime
-*
-*    Abstract: C-runtime setup of this SPAR tier
-*
-********************************************************************
-*/
+ ********************************************************************
+ *    File Name: spar_setup.c
+ *
+ *           The Stackable Patch and Application Runtime
+ *
+ *    Abstract: C-runtime setup of this SPAR tier
+ *
+ ********************************************************************
+ */
 
 #include "spar_utils.h"
 #include "sparcommon.h"
@@ -51,15 +51,19 @@
 #include "wiced_memory_pre_init.h"
 
 /*****************************************************************
-*   External definitions
-*
-*****************************************************************/
-extern BYTE* g_dynamic_memory_MinAddress;
+ *   External definitions
+ *
+ *****************************************************************/
+extern BYTE *g_dynamic_memory_MinAddress;
 extern void install_libs(void);
-extern void application_start( void );
+extern void application_start(void);
 extern void wiced_platform_init(void);
 
-__attribute__((section(".app_init_code"))) void application_start_internal( void )
+__attribute__((section(".app_init_code")))
+/*
+ * application_start_internal
+ */
+void application_start_internal(void)
 {
     wiced_platform_init();
     application_start();
@@ -75,6 +79,9 @@ __attribute__((section(".app_init_code"))) void application_start_internal( void
  *****************************************************************/
 #ifndef __GNUC__
 #pragma arm section code = "spar_setup"
+/*
+ * SPAR_CRT_SETUP
+ */
 void SPAR_CRT_SETUP(void)
 {
     typedef struct
@@ -84,7 +91,7 @@ void SPAR_CRT_SETUP(void)
         UINT32 len;
     } armlink_copy_secinfo_t;
 
-    extern void *_tx_initialize_unused_memory;
+    extern void  *_tx_initialize_unused_memory;
     extern UINT32 Region$$Table$$Base;
     extern UINT32 Region$$Table$$Limit;
 
@@ -96,16 +103,16 @@ void SPAR_CRT_SETUP(void)
 
     // Get the section info base of this spar slice
     UINT32 cpysecinfobase = (UINT32)&Region$$Table$$Base;
-    UINT32 cpysecinfolim = (UINT32)&Region$$Table$$Limit;
+    UINT32 cpysecinfolim  = (UINT32)&Region$$Table$$Limit;
 
     UINT32 clrsecbase = (UINT32)&Image$$SPAR_DRAM_ZI_AREA$$ZI$$Base;
-    UINT32 clrseclen = (UINT32)&Image$$SPAR_DRAM_ZI_AREA$$ZI$$Length;
-    UINT32 endofspar = (UINT32)&Image$$first_free_section_in_spar_NV_RAM$$Base;
+    UINT32 clrseclen  = (UINT32)&Image$$SPAR_DRAM_ZI_AREA$$ZI$$Length;
+    UINT32 endofspar  = (UINT32)&Image$$first_free_section_in_spar_NV_RAM$$Base;
 
     // Here we ought to assert that we're linked against the right
     // image, before we call memcpy/memset in ROM/Flash...
 
-    if(cpysecinfobase != cpysecinfolim)
+    if (cpysecinfobase != cpysecinfolim)
     {
         // Section info length is not zero
         // which means that there is RW data
@@ -114,8 +121,10 @@ void SPAR_CRT_SETUP(void)
     }
 
     // Clear ZI section
-    if(clrseclen != 0)
+    if (clrseclen != 0)
+    {
         memset((void *)clrsecbase, 0x00, clrseclen);
+    }
 
     // And move avail memory above this spar if required
     // Note that if there are other spars will be placed with minimum
@@ -123,15 +132,16 @@ void SPAR_CRT_SETUP(void)
     // is responsible for moving the avail mem ptr.
     g_dynamic_memory_MinAddress = (char *)endofspar;
 
-	// Install included libraries and patches if any
-	install_libs();
+    // Install included libraries and patches if any
+    install_libs();
 
     // Setup the application start function.
-	wiced_bt_set_app_start_function(application_start_internal);
+    wiced_bt_set_app_start_function(application_start_internal);
 }
+
 #pragma arm section code
 
-#else
+#else /* ifndef __GNUC__ */
 
 #ifdef TARGET_HAS_NO_32K_CLOCK
 //! PMU LPO structure definitions.
@@ -145,27 +155,30 @@ typedef enum PMU_LPO_CLK_SOURCE_TAG
     PMU_LPO_LHL_703,    // for 20835/739
     PMU_LPO_LHL_732,    // for 20835/739
     PMU_LPO_LHL_LPO2,   // for 43012/4347
-}PMU_LPO_CLK_SOURCE;
+} PMU_LPO_CLK_SOURCE;
 
 typedef enum DEFAULT_ENHANCED_LPO_TAG
 {
     // 3 bits for this field!
-    PMU_DEFAULT_NO_LHL  = 0,
-    PMU_DEFAULT_32kHz   = 1,    // for 20835/739 and 43012/4347
-    PMU_DEFAULT_LHL_703 = 2,    // for 20835/739
-    PMU_DEFAULT_LHL_LPO2 =2,    // for 43012/4347
-    PMU_DEFAULT_LHL_732 = 4,    // for 20835/739
-}DEFAULT_ENHANCED_LPO;
-
+    PMU_DEFAULT_NO_LHL   = 0,
+    PMU_DEFAULT_32kHz    = 1,   // for 20835/739 and 43012/4347
+    PMU_DEFAULT_LHL_703  = 2,   // for 20835/739
+    PMU_DEFAULT_LHL_LPO2 = 2,    // for 43012/4347
+    PMU_DEFAULT_LHL_732  = 4,   // for 20835/739
+} DEFAULT_ENHANCED_LPO;
 
 
 extern uint32_t g_aon_flags[];
+/*
+ * wiced_platform_default_lpo_init
+ */
 void wiced_platform_default_lpo_init()
 {
     g_aon_flags[0] |= PMU_DEFAULT_LHL_703 | PMU_DEFAULT_LHL_732;
     g_aon_flags[0] &= ~PMU_DEFAULT_32kHz;
 }
-#endif
+
+#endif /* ifdef TARGET_HAS_NO_32K_CLOCK */
 
 /**
  * this weak symbol will have the default values for memory pre-init firmware allocations
@@ -182,12 +195,15 @@ WICED_MEM_PRE_INIT_CONTROL g_mem_pre_init __attribute__((weak)) =
 };
 
 __attribute__ ((section(".spar_setup")))
+/*
+ * SPAR_CRT_SETUP
+ */
 void SPAR_CRT_SETUP(void)
 {
-    extern void* spar_iram_bss_begin;
+    extern void    *spar_iram_bss_begin;
     extern unsigned spar_iram_data_length, spar_iram_bss_length;
-    extern void* spar_irom_data_begin, *spar_iram_data_begin, *spar_iram_end, *aon_iram_end;
-    extern BYTE* g_aon_memory_manager_MinAddress;
+    extern void    *spar_irom_data_begin, *spar_iram_data_begin, *spar_iram_end, *aon_iram_end;
+    extern BYTE    *g_aon_memory_manager_MinAddress;
 
 #ifdef WICED_HOMEKIT
     extern UINT16 g_mpaf_config_StackSize;
@@ -196,13 +212,15 @@ void SPAR_CRT_SETUP(void)
 #endif
 
     // Initialize initialized data if .data length is non-zero and it needs to be copied from NV to RAM.
-    if(((UINT32)&spar_irom_data_begin != (UINT32)&spar_iram_data_begin) && ((UINT32)&spar_iram_data_length != 0))
-        memcpy((void*)&spar_iram_data_begin, (void*)&spar_irom_data_begin, (UINT32)&spar_iram_data_length);
+    if (((UINT32)&spar_irom_data_begin != (UINT32)&spar_iram_data_begin) && ((UINT32)&spar_iram_data_length != 0))
+    {
+        memcpy((void *)&spar_iram_data_begin, (void *)&spar_irom_data_begin, (UINT32)&spar_iram_data_length);
+    }
 
     // // Clear the ZI section
-    if((UINT32)&spar_iram_bss_length != 0)
+    if ((UINT32)&spar_iram_bss_length != 0)
     {
-        memset((void*)&spar_iram_bss_begin, 0x00, (UINT32)&spar_iram_bss_length);
+        memset((void *)&spar_iram_bss_begin, 0x00, (UINT32)&spar_iram_bss_length);
     }
 
     // And move avail memory above this spar if required
@@ -211,9 +229,9 @@ void SPAR_CRT_SETUP(void)
     // is responsible for moving the avail mem ptr.
     g_dynamic_memory_MinAddress = (BYTE *)(((UINT32)&spar_iram_end + 32) & 0xFFFFFFF0);
 
-    if( WICED_SLEEP_COLD_BOOT == wiced_sleep_get_boot_mode() )
+    if (WICED_SLEEP_COLD_BOOT == wiced_sleep_get_boot_mode())
     {
-        g_aon_memory_manager_MinAddress = (BYTE*)(&aon_iram_end);
+        g_aon_memory_manager_MinAddress = (BYTE *)(&aon_iram_end);
     }
 
     // Install included libraries and patches if any
@@ -237,4 +255,4 @@ void SPAR_CRT_SETUP(void)
 #endif
 }
 
-#endif
+#endif /* ifndef __GNUC__ */

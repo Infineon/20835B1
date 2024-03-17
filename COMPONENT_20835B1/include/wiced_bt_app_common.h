@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -65,13 +65,13 @@
  *
  * Initializes Application events serialization. Performs the HAL initialization
  *
-  * @return   wiced_result_t
+ * @return   wiced_result_t
  */
-wiced_result_t wiced_bt_app_init( void );
+wiced_result_t wiced_bt_app_init(void);
 
 /** Starts the application timers . One is app timer which is a seconds timer, and the other is
  * app fine timerwhich is a milli second timer.This function initializes the timers using the application
- *defined timeouts and also starts the timers. If application does not want to start the timer,
+ * defined timeouts and also starts the timers. If application does not want to start the timer,
  * timer interval can be passed as 0
  *
  *@param[in]    app_timer_interval       :App timer interval in seconds
@@ -84,33 +84,33 @@ wiced_result_t wiced_bt_app_init( void );
  *
  * @return      wiced_result_t
  */
-wiced_result_t wiced_bt_app_start_timer ( uint16_t app_timer_interval,
-    uint16_t fine_timer_interval, wiced_timer_callback_t p_app_timer_cb,
-    wiced_timer_callback_t p_app_fine_timer_cb  );
+wiced_result_t wiced_bt_app_start_timer(uint16_t app_timer_interval,
+                                        uint16_t fine_timer_interval, wiced_timer_callback_t p_app_timer_cb,
+                                        wiced_timer_callback_t p_app_fine_timer_cb);
 
 /** Stops the application timers.
  *
  * @return   None
  */
-void wiced_bt_app_stop_timer ( void );
+void wiced_bt_app_stop_timer(void);
 
 /** Starts the application connection idle timer.This function initialize the timer using the application
- *defined connection idle timeout and also starts the timer
+ * defined connection idle timeout and also starts the timer
  *
-  *@param[in]   con_idle_timeout         :Connection idle timeout in seconds
+ *@param[in]   con_idle_timeout         :Connection idle timeout in seconds
  *
  *@param[in]    p_app_idle_timer_cb      :Pointer to the application idle timer callback
  *
  * @return      wiced_result_t
  */
 wiced_result_t wiced_bt_app_start_conn_idle_timer(
-                        UINT8 con_idle_timeout,
-                        wiced_timer_callback_t p_app_idle_timer_cb );
+    UINT8 con_idle_timeout,
+    wiced_timer_callback_t p_app_idle_timer_cb);
 
 /** Stops the application connection idle timer.
  *
  * @return   None
  */
-void wiced_bt_app_stop_conn_idle_timer( void );
+void wiced_bt_app_stop_conn_idle_timer(void);
 
 #endif //_WICED_BT_APP_COMMON_H_

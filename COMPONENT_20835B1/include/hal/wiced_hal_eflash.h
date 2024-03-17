@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -33,19 +33,19 @@
 
 /** @file
  *
-* List of parameters and defined functions needed to access the
-* Embedded Flash interface driver.
-*
-*/
+ * List of parameters and defined functions needed to access the
+ * Embedded Flash interface driver.
+ *
+ */
 
 #ifndef _WICED_HAL_EFLASH_H_
 #define _WICED_HAL_EFLASH_H_
 
 /**  \addtogroup EmbeddedFlashInterfaceDriver Embedded Flash Interface
-* \ingroup HardwareDrivers
-* Defines a driver for the Embedded Flash interface.
-* @{
-*/
+ * \ingroup HardwareDrivers
+ * Defines a driver for the Embedded Flash interface.
+ * @{
+ */
 
 /**
  * Function         wiced_hal_eflash_init
@@ -54,7 +54,7 @@
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_hal_eflash_init( void );
+wiced_result_t wiced_hal_eflash_init(void);
 
 /**
  * Function         wiced_hal_eflash_read
@@ -67,7 +67,7 @@ wiced_result_t wiced_hal_eflash_init( void );
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_hal_eflash_read( uint32_t offset, uint8_t* p_buffer, uint32_t length );
+wiced_result_t wiced_hal_eflash_read(uint32_t offset, uint8_t *p_buffer, uint32_t length);
 
 /**
  * Function         wiced_hal_eflash_write
@@ -81,7 +81,7 @@ wiced_result_t wiced_hal_eflash_read( uint32_t offset, uint8_t* p_buffer, uint32
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_hal_eflash_write( uint32_t offset, uint8_t* p_buffer, uint32_t length );
+wiced_result_t wiced_hal_eflash_write(uint32_t offset, uint8_t *p_buffer, uint32_t length);
 
 /**
  * Function         wiced_hal_eflash_erase
@@ -94,7 +94,7 @@ wiced_result_t wiced_hal_eflash_write( uint32_t offset, uint8_t* p_buffer, uint3
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_hal_eflash_erase( uint32_t offset, uint32_t length );
+wiced_result_t wiced_hal_eflash_erase(uint32_t offset, uint32_t length);
 
 /**
  * Function         wiced_hal_eflash_erase_whole
@@ -103,7 +103,7 @@ wiced_result_t wiced_hal_eflash_erase( uint32_t offset, uint32_t length );
  *
  * @return     : wiced_result_t
  */
-wiced_result_t wiced_hal_eflash_erase_whole( void );
+wiced_result_t wiced_hal_eflash_erase_whole(void);
 
 /**
  * Function         wiced_hal_eflash_get_size
@@ -112,7 +112,7 @@ wiced_result_t wiced_hal_eflash_erase_whole( void );
  *
  * @return     : eflash size
  */
-uint32_t wiced_hal_eflash_get_size( void );
+uint32_t wiced_hal_eflash_get_size(void);
 
 /* @} */
 

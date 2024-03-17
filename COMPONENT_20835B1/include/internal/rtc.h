@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,13 +32,13 @@
  */
 
 /*
-********************************************************************
-*    File Name: rtc.h
-*
-*    This file defines an RTC driver
-*
-********************************************************************
-*/
+ ********************************************************************
+ *    File Name: rtc.h
+ *
+ *    This file defines an RTC driver
+ *
+ ********************************************************************
+ */
 #ifndef __RTC_H__
 #define __RTC_H__
 
@@ -49,47 +49,46 @@
 #pragma pack(1)
 typedef struct
 {
-
     /// configure the oscillator frequency
-    UINT8       oscillatorFrequencykHz;
+    UINT8 oscillatorFrequencykHz;
 
     /// The reference clock to use for RTC - the 32K or 128 Mia LPO
-    UINT8       rtcRefClock;
+    UINT8 rtcRefClock;
 } RTCconfig;
 #pragma pack()
 extern RTCconfig rtcConfig;
 
 /**  \addtogroup RTC
  *  \ingroup HardwareDrivers
-*/
+ */
 
 /*! @{ */
 /**
-* Defines an Rtc driver.
-*
-* 20730/20733 support 48 bits RTC timer from 32kHz crystal
-* oscillator.
-*
-* Usage:
-*
-*  (1) use Rtc->getInstance() to get the RTC driver instance
-*  first.
-*
-* (2) use Rtc->setRTCTime() to set the current calender time
-*
-* (3) user Rtc->getRTCTime() to retrieve the current calender
-* time.
-*
-* (4) Rtrc->ctime(), will convert the RTC_time to ascii user
-* friendly string.
-*
-*/
+ * Defines an Rtc driver.
+ *
+ * 20730/20733 support 48 bits RTC timer from 32kHz crystal
+ * oscillator.
+ *
+ * Usage:
+ *
+ *  (1) use Rtc->getInstance() to get the RTC driver instance
+ *  first.
+ *
+ * (2) use Rtc->setRTCTime() to set the current calender time
+ *
+ * (3) user Rtc->getRTCTime() to retrieve the current calender
+ * time.
+ *
+ * (4) Rtrc->ctime(), will convert the RTC_time to ascii user
+ * friendly string.
+ *
+ */
 
 enum
 {
-    LHL_CTL_32K_OSC_POWER_UP = 0x04,
-    LHL_CTL_32K_OSC_POWER_DN = 0x00,
-    LHL_CTL_32K_OSC_POWER_MASK = 0x04
+    LHL_CTL_32K_OSC_POWER_UP   = 0x04,
+    LHL_CTL_32K_OSC_POWER_DN   = 0x00,
+    LHL_CTL_32K_OSC_POWER_MASK = 0x04,
 };
 
 //
@@ -98,28 +97,28 @@ enum
 //
 typedef union
 {
-    UINT32          lhl_adc_rtc_ctl_reg;
+    UINT32 lhl_adc_rtc_ctl_reg;
 
     struct
     {
         /// bit 0:11  reserved
-        UINT32                  reserved1              : 12;
+        UINT32 reserved1              : 12;
 
         /// bit 12 -   Real time clock terminal count status enable
-        UINT32                  rtcTerminalCntStatusEn  : 1;
+        UINT32 rtcTerminalCntStatusEn  : 1;
 
         /// bit 13 - RTC reset counter
-        UINT32                  rtcResetCounter         : 1;
+        UINT32 rtcResetCounter         : 1;
 
         /// Bit 14 - RTC timer function enable
-        UINT32                  rtcTimerFuncEn          : 1;
+        UINT32 rtcTimerFuncEn          : 1;
 
         /// Bit 15 - RTC counter enable
-        UINT32                  rtcCounterEn            : 1;
+        UINT32 rtcCounterEn            : 1;
 
         /// reserved 31:3
-        UINT32                  reserved2               : 16;
-    }bitmap;
+        UINT32 reserved2               : 16;
+    } bitmap;
 } tRTC_LHL_ADC_RTC_CTL_REG;
 
 
@@ -127,18 +126,17 @@ typedef union
 typedef enum
 {
     // enable RTC and power up 32kHz crystal oscillator
-    LHL_CTL_RTC_ENABLE              = 1,
+    LHL_CTL_RTC_ENABLE = 1,
 
     // disable RTC and power down the 32kHz crystal oscillator
-    LHL_CTL_RTC_DISABLE             = 0,
-
-}tRTC_LHL_CTL_RTC_ENABLE_MODE;
+    LHL_CTL_RTC_DISABLE = 0,
+} tRTC_LHL_CTL_RTC_ENABLE_MODE;
 
 
 enum
 {
     RTC_REF_CLOCK_SRC_32KHZ  = 32,
-    RTC_REF_CLOCK_SRC_128KHZ = 128
+    RTC_REF_CLOCK_SRC_128KHZ = 128,
 };
 
 
@@ -149,18 +147,17 @@ enum
 ///
 typedef union
 {
-    UINT64          rtc64;
+    UINT64 rtc64;
 
     struct
     {
-        UINT16      rtc16[4];
-    }reg16map;
+        UINT16 rtc16[4];
+    } reg16map;
 
     struct
     {
-        UINT32      rtc32[2];
-    }reg32map;
-
+        UINT32 rtc32[2];
+    } reg32map;
 } tRTC_REAL_TIME_CLOCK;
 
 
@@ -170,9 +167,9 @@ typedef union
 //
 typedef enum
 {
-    BASE_LINE_REF_YEAR      =   2010,
-    BASE_LINE_REF_MONTH     =   1,
-    BASE_LINE_REF_DATE      =   1,
+    BASE_LINE_REF_YEAR  =   2010,
+    BASE_LINE_REF_MONTH =   1,
+    BASE_LINE_REF_DATE  =   1,
 } tRTC_REFERENCE_TIME_BASE_LINE;
 
 ///
@@ -181,31 +178,30 @@ typedef enum
 typedef struct
 {
     /// seconds (0 - 59), not support leap seconds
-    UINT16  second;
+    UINT16 second;
 
     /// minutes (0 - 59),
-    UINT16  minute;
+    UINT16 minute;
 
     /// hours (0 - 23)
-    UINT16  hour;
+    UINT16 hour;
 
     /// day of the month (1 - 31)
-    UINT16  day;
+    UINT16 day;
 
     /// month (0 - 11, 0=January)
-    UINT16  month;
+    UINT16 month;
 
     /// year
     /// should larger then 2010
-    UINT16  year;
-
+    UINT16 year;
 } RtcTime;
 
 // Internal runtime-state of RTC driver
 typedef struct
 {
-    UINT32                       userSetRtcClockInSeconds;
-    tRTC_REAL_TIME_CLOCK         userSetRtcHWTimeStamp;
+    UINT32               userSetRtcClockInSeconds;
+    tRTC_REAL_TIME_CLOCK userSetRtcHWTimeStamp;
 } RtcState;
 
 
@@ -225,12 +221,12 @@ void rtc_getRTCTime(RtcTime *timebuf);
 //
 // set original reference time.
 //
-void rtc_setReferenceTime(RtcTime* ref_time);
+void rtc_setReferenceTime(RtcTime *ref_time);
 
 //
 // set the current time
 //
-BOOL32 rtc_setRTCTime(RtcTime  *newTime);
+BOOL32 rtc_setRTCTime(RtcTime *newTime);
 
 // convert the tm object pointed by timer to
 // c string containing a human-readable verion of the corresponding local time and data
@@ -247,20 +243,19 @@ BOOL32 rtc_setRTCTime(RtcTime  *newTime);
 char *rtc_ctime(RtcTime *timer, char *outbuf);
 
 
-
 // conver the 32 bit seconds to RTC_time broken down format
-void    rtc_sec2RtcTime(UINT32 second, RtcTime *rtctime);
+void rtc_sec2RtcTime(UINT32 second, RtcTime *rtctime);
 
 // convert RTC_time broken-down format to 32-bits seconds
-void    rtc_RtcTime2Sec(RtcTime *rtctime, UINT32 *second);
+void rtc_RtcTime2Sec(RtcTime *rtctime, UINT32 *second);
 
 //
 // User/application set the RTC time
 // will conver the user/app settings to
 // seconds
-extern UINT32                       userSetRtcClockInSeconds;
-extern tRTC_REAL_TIME_CLOCK         userSetRtcHWTimeStamp;
+extern UINT32               userSetRtcClockInSeconds;
+extern tRTC_REAL_TIME_CLOCK userSetRtcHWTimeStamp;
 
 
 /* @}  */
-#endif
+#endif // ifndef __RTC_H__

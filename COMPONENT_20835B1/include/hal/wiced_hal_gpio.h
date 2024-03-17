@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* General Purpose Input/Ouput (GPIO) driver.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * General Purpose Input/Ouput (GPIO) driver.
+ *
+ */
 
 #ifndef __WICED_GPIO_H__
 #define __WICED_GPIO_H__
@@ -45,22 +45,22 @@
 #include "wiced.h"
 
 /**  \addtogroup GPIODriver GPIO
-* \ingroup HardwareDrivers
-* @{
-* Defines a driver to facilitate interfacing with the GPIO pins.
-*
-* Use this driver to control the behavior of any desired pin, such as
-* driving a 1 or a 0, or as part of other drivers such as controlling
-* the chip-select (CS) line for the SPI driver.
-*
-*/
+ * \ingroup HardwareDrivers
+ * @{
+ * Defines a driver to facilitate interfacing with the GPIO pins.
+ *
+ * Use this driver to control the behavior of any desired pin, such as
+ * driving a 1 or a 0, or as part of other drivers such as controlling
+ * the chip-select (CS) line for the SPI driver.
+ *
+ */
 
 /******************************************************************************
-*** Parameters.
-***
-*** The following parameters are used to configure the driver or define
-*** return status. They are not modifiable.
-******************************************************************************/
+ *** Parameters.
+ ***
+ *** The following parameters are used to configure the driver or define
+ *** return status. They are not modifiable.
+ ******************************************************************************/
 
 /// Pin output config
 typedef enum
@@ -75,80 +75,80 @@ enum
 {
     /// Trigger Type
     /// GPIO configuration bit 0, Interrupt type defines
-    GPIO_EDGE_TRIGGER_MASK       = 0x0001,
-    GPIO_EDGE_TRIGGER            = 0x0001,
-    GPIO_LEVEL_TRIGGER           = 0x0000,
+    GPIO_EDGE_TRIGGER_MASK = 0x0001,
+    GPIO_EDGE_TRIGGER      = 0x0001,
+    GPIO_LEVEL_TRIGGER     = 0x0000,
 
     /// Negative Edge Triggering
     /// GPIO configuration bit 1, Interrupt polarity defines
-    GPIO_TRIGGER_POLARITY_MASK   = 0x0002,
-    GPIO_TRIGGER_NEG             = 0x0002,
+    GPIO_TRIGGER_POLARITY_MASK = 0x0002,
+    GPIO_TRIGGER_NEG           = 0x0002,
 
     /// Dual Edge Triggering
     /// GPIO configuration bit 2, single/dual edge defines
-    GPIO_DUAL_EDGE_TRIGGER_MASK  = 0x0004,
-    GPIO_EDGE_TRIGGER_BOTH       = 0x0004,
-    GPIO_EDGE_TRIGGER_SINGLE     = 0x0000,
+    GPIO_DUAL_EDGE_TRIGGER_MASK = 0x0004,
+    GPIO_EDGE_TRIGGER_BOTH      = 0x0004,
+    GPIO_EDGE_TRIGGER_SINGLE    = 0x0000,
 
 
     /// Interrupt Enable
     /// GPIO configuration bit 3, interrupt enable/disable defines
-    GPIO_INTERRUPT_ENABLE_MASK   = 0x0008,
-    GPIO_INTERRUPT_ENABLE        = 0x0008,
-    GPIO_INTERRUPT_DISABLE       = 0x0000,
+    GPIO_INTERRUPT_ENABLE_MASK = 0x0008,
+    GPIO_INTERRUPT_ENABLE      = 0x0008,
+    GPIO_INTERRUPT_DISABLE     = 0x0000,
 
 
     /// Interrupt Config
     /// GPIO configuration bit 0:3, Summary of Interrupt enabling type
-    GPIO_EN_INT_MASK             = GPIO_EDGE_TRIGGER_MASK | GPIO_TRIGGER_POLARITY_MASK | GPIO_DUAL_EDGE_TRIGGER_MASK | GPIO_INTERRUPT_ENABLE_MASK,
-    GPIO_EN_INT_LEVEL_HIGH       = GPIO_INTERRUPT_ENABLE | GPIO_LEVEL_TRIGGER,
-    GPIO_EN_INT_LEVEL_LOW        = GPIO_INTERRUPT_ENABLE | GPIO_LEVEL_TRIGGER | GPIO_TRIGGER_NEG,
-    GPIO_EN_INT_RISING_EDGE      = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER,
-    GPIO_EN_INT_FALLING_EDGE     = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER | GPIO_TRIGGER_NEG,
-    GPIO_EN_INT_BOTH_EDGE        = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER | GPIO_EDGE_TRIGGER_BOTH,
+    GPIO_EN_INT_MASK         = GPIO_EDGE_TRIGGER_MASK | GPIO_TRIGGER_POLARITY_MASK | GPIO_DUAL_EDGE_TRIGGER_MASK | GPIO_INTERRUPT_ENABLE_MASK,
+    GPIO_EN_INT_LEVEL_HIGH   = GPIO_INTERRUPT_ENABLE | GPIO_LEVEL_TRIGGER,
+    GPIO_EN_INT_LEVEL_LOW    = GPIO_INTERRUPT_ENABLE | GPIO_LEVEL_TRIGGER | GPIO_TRIGGER_NEG,
+    GPIO_EN_INT_RISING_EDGE  = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER,
+    GPIO_EN_INT_FALLING_EDGE = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER | GPIO_TRIGGER_NEG,
+    GPIO_EN_INT_BOTH_EDGE    = GPIO_INTERRUPT_ENABLE | GPIO_EDGE_TRIGGER | GPIO_EDGE_TRIGGER_BOTH,
 
 
     /// GPIO Output Buffer Control and Output Value Multiplexing Control
     /// GPIO configuration bit 4:5, and 14 output enable control and
     /// muxing control
-    GPIO_INPUT_ENABLE            = 0x0000,
-    GPIO_OUTPUT_DISABLE          = 0x0000,
-    GPIO_OUTPUT_ENABLE           = 0x4000,
-    GPIO_KS_OUTPUT_ENABLE        = 0x0001, //Keyscan Output enable
-    GPIO_OUTPUT_FN_SEL_MASK      = 0x0000,
-    GPIO_OUTPUT_FN_SEL_SHIFT     = 0,
+    GPIO_INPUT_ENABLE        = 0x0000,
+    GPIO_OUTPUT_DISABLE      = 0x0000,
+    GPIO_OUTPUT_ENABLE       = 0x4000,
+    GPIO_KS_OUTPUT_ENABLE    = 0x0001,     //Keyscan Output enable
+    GPIO_OUTPUT_FN_SEL_MASK  = 0x0000,
+    GPIO_OUTPUT_FN_SEL_SHIFT = 0,
 
 
     /// Global Input Disable
     /// GPIO configuration bit 6, "Global_input_disable" Disable bit
     /// This bit when set to "1" , P0 input_disable signal will control
     /// ALL GPIOs. Default value (after power up or a reset event) is "0".
-    GPIO_GLOBAL_INPUT_ENABLE     = 0x0000,
-    GPIO_GLOBAL_INPUT_DISABLE    = 0x0040,
+    GPIO_GLOBAL_INPUT_ENABLE  = 0x0000,
+    GPIO_GLOBAL_INPUT_DISABLE = 0x0040,
 
 
     /// Pull-up/Pull-down
     /// GPIO configuration bit 9 and bit 10, pull-up and pull-down enable
     /// Default value is [0,0]--means no pull resistor.
-    GPIO_PULL_UP_DOWN_NONE       = 0x0000,   //[0,0]
-    GPIO_PULL_UP                 = 0x0400,   //[1,0]
-    GPIO_PULL_DOWN               = 0x0200,   //[0,1]
-    GPIO_INPUT_DISABLE           = 0x0600,   //[1,1] // input disables the GPIO
+    GPIO_PULL_UP_DOWN_NONE = 0x0000,         //[0,0]
+    GPIO_PULL_UP           = 0x0400,         //[1,0]
+    GPIO_PULL_DOWN         = 0x0200,         //[0,1]
+    GPIO_INPUT_DISABLE     = 0x0600,         //[1,1] // input disables the GPIO
 
     /// Drive Strength
     /// GPIO configuration bit 11
-    GPIO_DRIVE_SEL_MASK         = 0x0800,
-    GPIO_DRIVE_SEL_LOWEST       = 0x0000,  // 2mA @ 1.8V
-    GPIO_DRIVE_SEL_MIDDLE_0     = 0x0000,  // 4mA @ 3.3v
-    GPIO_DRIVE_SEL_MIDDLE_1     = 0x0800,  // 4mA @ 1.8v
-    GPIO_DRIVE_SEL_HIGHEST      = 0x0800,  // 8mA @ 3.3v
+    GPIO_DRIVE_SEL_MASK     = 0x0800,
+    GPIO_DRIVE_SEL_LOWEST   = 0x0000,      // 2mA @ 1.8V
+    GPIO_DRIVE_SEL_MIDDLE_0 = 0x0000,      // 4mA @ 3.3v
+    GPIO_DRIVE_SEL_MIDDLE_1 = 0x0800,      // 4mA @ 1.8v
+    GPIO_DRIVE_SEL_HIGHEST  = 0x0800,      // 8mA @ 3.3v
 
 
     /// Input Hysteresis
     /// GPIO configuration bit 13, hysteresis control
-    GPIO_HYSTERESIS_MASK         = 0x2000,
-    GPIO_HYSTERESIS_ON           = 0x2000,
-    GPIO_HYSTERESIS_OFF          = 0x0000,
+    GPIO_HYSTERESIS_MASK = 0x2000,
+    GPIO_HYSTERESIS_ON   = 0x2000,
+    GPIO_HYSTERESIS_OFF  = 0x0000,
 };
 
 //! GPIO Numbers : last 8 are ARM GPIOs and rest are LHL GPIOs
@@ -203,8 +203,8 @@ typedef enum
     WICED_GPIO_05,  /**< ARM GPIO 5 - 45 */
     WICED_GPIO_06,  /**< ARM GPIO 6 - 46 */
     WICED_GPIO_07,  /**< ARM GPIO 7 - 47 */
-    MAX_NUM_OF_GPIO
-}wiced_bt_gpio_numbers_t;
+    MAX_NUM_OF_GPIO,
+} wiced_bt_gpio_numbers_t;
 
 //! possible functions to be brought out through LHL GPIO's
 typedef enum
@@ -294,7 +294,7 @@ typedef enum
     WICED_PWM3,
     WICED_PWM4,
     WICED_PWM5,
-    WICED_UNAVAILABLE = 0xFF  /**< Invalid functionality for error check */
+    WICED_UNAVAILABLE = 0xFF, /**< Invalid functionality for error check */
 } wiced_bt_gpio_function_t;
 
 //! Possible return values from wiced_hal_gpio_select_function(...), Callers only need to check for the
@@ -304,7 +304,7 @@ typedef enum GPIO_STATUS_e
     GPIO_FAILURE, //!< The requested pin and function mapping is not supported by hardware
     GPIO_SUCCESS, //!< The requested pin and function mapping is complete, The pin was previously not used and the function was previously not mapped
     GPIO_REMAPPED,//!< The requested pin and function mapping is complete, The pin was previously used by another function, that function was disabled and the new function applied
-    GPIO_MOVED    //!< The requested pin and function mapping is complete, The requested function was already mapped to a different pin, that pin was disabled and the function moved to the new pin
+    GPIO_MOVED,   //!< The requested pin and function mapping is complete, The requested function was already mapped to a different pin, that pin was disabled and the function moved to the new pin
 } wiced_bt_gpio_select_status_t;
 
 /*! GPIO Active Level HIGH */
@@ -314,8 +314,8 @@ typedef enum GPIO_STATUS_e
 #define WICED_GPIO_ACTIVE_LOW       0
 
 /******************************************************************************
-*** Function prototypes and defines.
-******************************************************************************/
+ *** Function prototypes and defines.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Initializes the GPIO driver and its private values.
@@ -373,7 +373,7 @@ UINT8 wiced_hal_gpio_pin_to_port_pin(UINT8 pin);
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
 void wiced_hal_gpio_configure_pin(UINT32 pin, UINT32 config,
-                                                UINT32 outputVal);
+                                  UINT32 outputVal);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retrieve the current configuration of the specified pin.
@@ -482,7 +482,7 @@ UINT32 wiced_hal_gpio_get_pin_interrupt_status(UINT32 pin);
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
 void wiced_hal_gpio_register_pin_for_interrupt(UINT16 pin,
-                                               void (*userfn)(void*, BYTE), void* userdata);
+                                               void (*userfn)(void *, BYTE), void *userdata);
 
 
 ///////////////////////////////////////////////////////////////////////////////

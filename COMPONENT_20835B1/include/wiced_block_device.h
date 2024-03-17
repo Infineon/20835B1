@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -75,7 +75,7 @@ typedef enum
 {
     BLOCK_DEVICE_READ_ONLY,
     BLOCK_DEVICE_WRITE_IMMEDIATELY,
-    BLOCK_DEVICE_WRITE_BEHIND_ALLOWED
+    BLOCK_DEVICE_WRITE_BEHIND_ALLOWED,
 } wiced_block_device_write_mode_t;
 
 typedef unsigned int   wiced_bool_t;
@@ -88,7 +88,7 @@ typedef unsigned int   wiced_bool_t;
 typedef struct wiced_block_device_struct        wiced_block_device_t;         /** This is the main block device handle */
 typedef struct wiced_block_device_driver_struct wiced_block_device_driver_t;
 
-typedef void (*wiced_block_device_status_change_callback_t)( wiced_block_device_t* device, wiced_block_device_status_t new_status );
+typedef void (*wiced_block_device_status_change_callback_t)(wiced_block_device_t *device, wiced_block_device_status_t new_status);
 
 /******************************************************
  *                    Structures
@@ -96,25 +96,25 @@ typedef void (*wiced_block_device_status_change_callback_t)( wiced_block_device_
 
 typedef struct
 {
-    uint32_t                                    base_address_offset;                         /** Offset address used when accessing the device */
-    uint32_t                                    maximum_size;                                /** 0 = use the underlying device limit */
-    wiced_bool_t                                volatile_and_requires_format_when_mounting;  /** Will cause the device to be formatted before EVERY mount - use for RAM disks */
+    uint32_t     base_address_offset;                                                        /** Offset address used when accessing the device */
+    uint32_t     maximum_size;                                                               /** 0 = use the underlying device limit */
+    wiced_bool_t volatile_and_requires_format_when_mounting;                                 /** Will cause the device to be formatted before EVERY mount - use for RAM disks */
 } wiced_block_device_init_data_t;
 
 
 struct wiced_block_device_struct
 {
-    const wiced_block_device_init_data_t* init_data;
-    const wiced_block_device_driver_t*    driver;
-    wiced_bool_t                          initialized;
-    uint32_t                              device_id;
-    uint32_t                              device_size;
-    uint32_t                              read_block_size;      /** 1 indicates data can be accessed byte-by-byte */
-    uint32_t                              write_block_size;     /** Zero if writing is not allowed - e.g. device is read only.   1 indicates data can be accessed byte-by-byte */
-    uint32_t                              erase_block_size;     /** Zero if erasing is not required - e.g. for a RAM disk.       1 indicates data can be accessed byte-by-byte */
-    void*                                 device_specific_data; /** Points to init data & space for variables for the specific underlying device e.g. SD-Card, USB, Serial-Flash etc */
+    const wiced_block_device_init_data_t       *init_data;
+    const wiced_block_device_driver_t          *driver;
+    wiced_bool_t                                initialized;
+    uint32_t                                    device_id;
+    uint32_t                                    device_size;
+    uint32_t                                    read_block_size; /** 1 indicates data can be accessed byte-by-byte */
+    uint32_t                                    write_block_size; /** Zero if writing is not allowed - e.g. device is read only.   1 indicates data can be accessed byte-by-byte */
+    uint32_t                                    erase_block_size; /** Zero if erasing is not required - e.g. for a RAM disk.       1 indicates data can be accessed byte-by-byte */
+    void                                       *device_specific_data; /** Points to init data & space for variables for the specific underlying device e.g. SD-Card, USB, Serial-Flash etc */
     wiced_block_device_status_change_callback_t callback;
-	uint8_t                               spiffy_instance;
+    uint8_t                                     spiffy_instance;
 };
 
 struct wiced_block_device_driver_struct
@@ -130,7 +130,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success
      */
-    wiced_result_t (*init)( wiced_block_device_t* device, wiced_block_device_write_mode_t write_mode );
+    wiced_result_t (*init)(wiced_block_device_t *device, wiced_block_device_write_mode_t write_mode);
 
     /**
      * De-initialises the block device
@@ -141,7 +141,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success
      */
-    wiced_result_t (*deinit)( wiced_block_device_t* device );
+    wiced_result_t (*deinit)(wiced_block_device_t *device);
 
     /**
      * Erases a block on the device
@@ -155,7 +155,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an erase block boundary
      */
-    wiced_result_t (*erase)( wiced_block_device_t* device, uint32_t start_address, uint32_t size );
+    wiced_result_t (*erase)(wiced_block_device_t *device, uint32_t start_address, uint32_t size);
 
     /**
      * Writes data to the device
@@ -172,7 +172,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an write block boundary
      */
-    wiced_result_t (*write)( wiced_block_device_t* device, uint32_t start_address, const uint8_t* data, uint32_t size );
+    wiced_result_t (*write)(wiced_block_device_t *device, uint32_t start_address, const uint8_t *data, uint32_t size);
 
     /**
      * Flushes data to the device
@@ -186,7 +186,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an write block boundary
      */
-    wiced_result_t (*flush)( wiced_block_device_t* device );
+    wiced_result_t (*flush)(wiced_block_device_t *device);
 
     /**
      * Reads data from the device
@@ -198,7 +198,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an read block boundary
      */
-    wiced_result_t (*read)( wiced_block_device_t* device, uint32_t start_address, uint8_t* data, uint32_t size );
+    wiced_result_t (*read)(wiced_block_device_t *device, uint32_t start_address, uint8_t *data, uint32_t size);
 
 
     /**
@@ -209,7 +209,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an read block boundary
      */
-    wiced_result_t (*status)( wiced_block_device_t* device, wiced_block_device_status_t* status );
+    wiced_result_t (*status)(wiced_block_device_t *device, wiced_block_device_status_t *status);
 
 
     /**
@@ -220,8 +220,7 @@ struct wiced_block_device_driver_struct
      *
      * @return WICED_SUCCESS on success, Error on failure or if start/end are not on an read block boundary
      */
-    wiced_result_t (*register_callback)( wiced_block_device_t* device, wiced_block_device_status_change_callback_t callback );
-
+    wiced_result_t (*register_callback)(wiced_block_device_t *device, wiced_block_device_status_change_callback_t callback);
 };
 
 

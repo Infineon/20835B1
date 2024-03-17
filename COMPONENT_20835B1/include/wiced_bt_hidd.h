@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -70,8 +70,9 @@ enum wiced_bt_hidd_status_e
     WICED_BT_HIDD_ERR_SDP_BUSY,                 /**< SDP busy */
     WICED_BT_HIDD_ERR_GATT,                     /**< GATT */
 
-    WICED_BT_HIDD_ERR_INVALID = 0xFF            /**< Invalid */
+    WICED_BT_HIDD_ERR_INVALID = 0xFF,           /**< Invalid */
 };
+
 typedef uint8_t wiced_bt_hidd_status_t;         /**< HIDD status codes (see #wiced_bt_hidd_status_e) */
 
 
@@ -90,7 +91,7 @@ typedef uint8_t wiced_bt_hidd_status_t;         /**< HIDD status codes (see #wic
 #define HID_GET_TRANS_FROM_HDR(x) ((x >> 4) & 0x0f)
 #define HID_GET_PARAM_FROM_HDR(x) (x & 0x0f)
 #ifndef HID_BUILD_HDR
-#define HID_BUILD_HDR(t,p)  (uint8_t)((t << 4) | (p & 0x0f))
+#define HID_BUILD_HDR(t, p)  (uint8_t)((t << 4) | (p & 0x0f))
 #endif
 #define HID_HDR_LEN (1)
 
@@ -144,9 +145,9 @@ typedef uint8_t wiced_bt_hidd_status_t;         /**< HIDD status codes (see #wic
 /** HIDD QoS configuration */
 typedef struct
 {
-    wiced_bt_flow_spec_t    ctrl_ch;    /**< Control channel */
-    wiced_bt_flow_spec_t    int_ch;     /**< Interrupt */
-    wiced_bt_flow_spec_t    hci;        /**< HCI */
+    wiced_bt_flow_spec_t ctrl_ch;       /**< Control channel */
+    wiced_bt_flow_spec_t int_ch;        /**< Interrupt */
+    wiced_bt_flow_spec_t hci;           /**< HCI */
 } wiced_bt_hidd_qos_info_t;             /**< HIDD QOS info */
 
 typedef struct wiced_bt_rep_data
@@ -176,32 +177,35 @@ enum wiced_bt_hidd_cback_event_e
     WICED_BT_HIDD_EVT_DATA,
     WICED_BT_HIDD_EVT_DATC,
 
-    WICED_BT_HIDD_EVT_L2CAP_CONGEST /**< L2CAP channel congested */
+    WICED_BT_HIDD_EVT_L2CAP_CONGEST, /**< L2CAP channel congested */
 };
+
 typedef uint8_t wiced_bt_hidd_cback_event_t;   /**< HIDD events (see #wiced_bt_hidd_cback_event_e)*/
 
 enum wiced_bt_hidd_st_e
 {
     WICED_BT_HIDD_BUSY_CONN_ST,         /**< Busy state */
     WICED_BT_HIDD_IDLE_CONN_ST,         /**< Idle state */
-    WICED_BT_HIDD_SUSP_CONN_ST          /**< Suspension state */
+    WICED_BT_HIDD_SUSP_CONN_ST,         /**< Suspension state */
 };
+
 typedef uint8_t wiced_bt_hidd_st_t;     /**< HIDD state (see #wiced_bt_hidd_st_e) */
 
 /** Incoming data */
 typedef struct
 {
-    uint8_t         *p_data;            /**< Pointer to incoming data */
-    uint16_t        len;                /**< data length */
+    uint8_t *p_data;                    /**< Pointer to incoming data */
+    uint16_t len;                       /**< data length */
 } wiced_bt_hidd_data_t;
 
 /** Data types for HIDD event callback */
-typedef union {
-    wiced_bt_device_address_t           host_bdaddr;    /**< Host bd address */
-    wiced_bt_hidd_data_t                data;           /**< Incoming data */
-    wiced_bt_hidd_get_rep_data_t        get_rep;        /**< Get report data */
-    uint8_t                             pm_err_code;    /**< Power mode error code */
-    uint16_t                            pm_interval;    /**< Power mode interval */
+typedef union
+{
+    wiced_bt_device_address_t    host_bdaddr;           /**< Host bd address */
+    wiced_bt_hidd_data_t         data;                  /**< Incoming data */
+    wiced_bt_hidd_get_rep_data_t get_rep;               /**< Get report data */
+    uint8_t                      pm_err_code;           /**< Power mode error code */
+    uint16_t                     pm_interval;           /**< Power mode interval */
 } wiced_bt_hidd_event_data_t;                           /**< HIDD callback data */
 
 /**
@@ -216,22 +220,22 @@ typedef union {
  * @return void
  */
 
-typedef void (wiced_bt_hidd_callback_t) (wiced_bt_hidd_cback_event_t  event, uint32_t data, wiced_bt_hidd_event_data_t *p_event_data );
+typedef void (wiced_bt_hidd_callback_t) (wiced_bt_hidd_cback_event_t  event, uint32_t data, wiced_bt_hidd_event_data_t *p_event_data);
 
 typedef struct
 {
-    wiced_bt_device_address_t   host_addr;      /**< Host bd address */
-    wiced_bt_hidd_qos_info_t    *p_qos_info;    /**< Qos info */
-    wiced_bt_hidd_callback_t    *p_app_cback;   /**< callback function */
+    wiced_bt_device_address_t host_addr;        /**< Host bd address */
+    wiced_bt_hidd_qos_info_t *p_qos_info;       /**< Qos info */
+    wiced_bt_hidd_callback_t *p_app_cback;      /**< callback function */
 } wiced_bt_hidd_reg_info_t;                     /**< HIDD registration info */
 
 typedef struct wiced_bt_hidd_pwr_md
 {
-    uint16_t            max;        /**< Max interval */
-    uint16_t            min;        /**< Min interval */
-    uint16_t            attempt;    /**< Number of attempt */
-    uint16_t            timeout;    /**< Timeout */
-    uint8_t             mode;       /**< Power mode */
+    uint16_t max;                   /**< Max interval */
+    uint16_t min;                   /**< Min interval */
+    uint16_t attempt;               /**< Number of attempt */
+    uint16_t timeout;               /**< Timeout */
+    uint8_t  mode;                  /**< Power mode */
 } wiced_bt_hidd_pm_pwr_md_t;        /**< HIDD power mode */
 
 #ifdef BR_EDR_API_SUPPORT

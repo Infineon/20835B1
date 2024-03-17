@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -105,19 +105,19 @@ typedef unsigned char BOOL8;
 
 #define PAD_EMPTY_FUNCTION()
 //! Macro to divide numerator by denominator, rounding up.
-#define DIV_ROUND_UP( n, d )                                    ( ( (n) + (d)-1 ) / (d) )
+#define DIV_ROUND_UP(n, d)                                    ( ( (n) + (d)-1 ) / (d) )
 
 //! Macro to divide numerator by denominator, rounding to the nearest number.
-#define DIV_ROUND_NEAREST( n, d )                               ( ( (n) + (d)/2 ) / (d) )
+#define DIV_ROUND_NEAREST(n, d)                               ( ( (n) + (d)/2 ) / (d) )
 
 //! Macro to obtain the absolute value of an integer.
 #define ABS(v)                                                  ( ( (v) < 0 ) ? ( 0-(v) ) : (v) )
 
 //! Macro to obtain the minimum (smaller) of two numbers.
-#define MIN( a, b )                                             ( ( (a) < (b) ) ? (a) : (b) )
+#define MIN(a, b)                                             ( ( (a) < (b) ) ? (a) : (b) )
 
 //! Macro to obtain the maximum (larger) of two numbers.
-#define MAX( a, b )                                             ( ( (a) > (b) ) ? (a) : (b) )
+#define MAX(a, b)                                             ( ( (a) > (b) ) ? (a) : (b) )
 
 //! Macro to swap the endianness of a 16 bit value.
 #define SWAP_ENDIAN_16(x)       ((((x) << 8) | (((x) >> 8) & 0xFF)))
@@ -140,21 +140,21 @@ typedef unsigned char BOOL8;
 // Properties of the CPU
 //==================================================================================================
 #if CPU_CM3 || CPU_CM4
-    //! Flag indicating that the CPU is little endian.  That means that words that are more than 8
-    //! bits have the 8 least significant bits in the lowest byte address of the word.  If it was a
-    //! big endian CPU (having the most significant 8 bits in the first byte of a word),
-    //! CPU_BIG_ENDIAN would have been defined.
+//! Flag indicating that the CPU is little endian.  That means that words that are more than 8
+//! bits have the 8 least significant bits in the lowest byte address of the word.  If it was a
+//! big endian CPU (having the most significant 8 bits in the first byte of a word),
+//! CPU_BIG_ENDIAN would have been defined.
     #define CPU_LITTLE_ENDIAN           1
-    //no:   CPU_BIG_ENDIAN
+//no:   CPU_BIG_ENDIAN
 
-    //! Even though the CM3 CPU doesn't directly allow unaligned access (e.g. reading a 32-bit word
-    //! from an address that is not aligned to a 32-bit boundary) the AHB adaptor from the CM3 will
-    //! perform multiple reads or writes to facilitate unaligned access.  The same is not true for
-    //! ARM7, however.
+//! Even though the CM3 CPU doesn't directly allow unaligned access (e.g. reading a 32-bit word
+//! from an address that is not aligned to a 32-bit boundary) the AHB adaptor from the CM3 will
+//! perform multiple reads or writes to facilitate unaligned access.  The same is not true for
+//! ARM7, however.
     #define CPU_ALLOW_UNALIGNED_ACCESS  1
 #elif !defined WICEDX
     #error "Target CPU properties not defined"
-#endif
+#endif // if CPU_CM3 || CPU_CM4
 
 
 //==================================================================================================
@@ -180,7 +180,7 @@ typedef unsigned char BOOL8;
 //! Macro representing a boolean false condition.
 #define FALSE   0
 
-#endif
+#endif // if !(defined TRUE && defined FALSE)
 
 #ifndef _WIN32
 
@@ -274,7 +274,7 @@ typedef unsigned char BOOL8;
 //! processor, swap the four bytes.
 #define CPU_TO_BIG_ENDIAN(x)                SWAP_ENDIAN_64(x)
 
-#else   // CPU_LITTLE_ENDIAN - must be big-endian
+#else // CPU_LITTLE_ENDIAN - must be big-endian
 
 //! Macro to convert a 16 bit little endian value to the CPU's endianness. For a big endian
 //! processor, swap the two bytes.
@@ -324,7 +324,7 @@ typedef unsigned char BOOL8;
 //! processor, the value is the same.
 #define CPU_TO_BIG_ENDIAN_64(x)             (x)
 
-#endif
+#endif // if CPU_LITTLE_ENDIAN
 
 
 //==================================================================================================
@@ -335,13 +335,13 @@ typedef unsigned char BOOL8;
 #define C_ASSERT(e) typedef char __C_ASSERT__[(e)?1:-1]
 
 //! Implemenation behind the ASSERT macro.
-extern void debug_FatalError( IN char* file, int line );
+extern void debug_FatalError(IN char *file, int line);
 
 //! Implemenation behind the ASSERT1 macro.
-extern void debug_FatalErrorValue( IN char* file, int line, unsigned int value );
+extern void debug_FatalErrorValue(IN char *file, int line, unsigned int value);
 
 //! Implemenation behind the FATAL and FATAL2 macros.
-extern void debug_FatalErrorMessage2(   IN char* file, int line, IN char* msg1, IN char* msg2 );
+extern void debug_FatalErrorMessage2(IN char *file, int line, IN char *msg1, IN char *msg2);
 
 //==================================================================================================
 // Toolchain-specific stuff
@@ -360,13 +360,13 @@ extern void debug_FatalErrorMessage2(   IN char* file, int line, IN char* msg1, 
     #define PLACE_IN_EPDS_AON_RAM PLACE_IN_ALWAYS_ON_RAM
     #define PLACE_IN_EPDS_AON_UNINIT_RAM  PLACE_IN_ALWAYS_ON_UNINIT_RAM
 #else
-    //! If always on memory is not supported, we don't need this at all, place anywhere.
+//! If always on memory is not supported, we don't need this at all, place anywhere.
     #define PLACE_IN_ALWAYS_ON_RAM
     #define PLACE_IN_ALWAYS_ON_UNINIT_RAM
     #define PLACE_IN_LIMITED_RAM
     #define PLACE_IN_EPDS_AON_RAM
     #define PLACE_IN_EPDS_AON_UNINIT_RAM
-#endif
+#endif // if ALWAYS_ON_MEMORY_SUPPORT
 #if MICRO_BCS
     #define PLACE_IN_MICRO_BCS_SRAM_VAR_AREA __attribute__((section("micro_bcs_sram_var")))
 #else
@@ -411,5 +411,5 @@ extern void debug_FatalErrorMessage2(   IN char* file, int line, IN char* msg1, 
 }
 #endif
 
-#endif
+#endif // ifndef WICED_X
 #endif // _BRCM_FW_TYPES_H_

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -30,7 +30,7 @@
  * of such system or application assumes all risk of such use and in doing
  * so agrees to indemnify Cypress against all liability.
  */
- /** @file
+/** @file
  *
  *  This implements the application-thread level event handling for AIROC Apps
  *
@@ -48,27 +48,27 @@
  * Global Enumerations definitions                                            *
  ******************************************************************************/
 
- typedef enum
- {
-     WICED_SERIALIZATION_EVENT = 1,
- }wiced_bt_internal_events_t;
+typedef enum
+{
+    WICED_SERIALIZATION_EVENT = 1,
+} wiced_bt_internal_events_t;
 
 /** \endcond */
 
 /**
-* \addtogroup appthread
-* \{
-*/
+ * \addtogroup appthread
+ * \{
+ */
 
 /******************************************************************************
  * Global Data Structure definitions                                          *
  ******************************************************************************/
 
- /** Structure used in AIROC stack to add callback and data into task queue.  The serialization queue will have these callbacks */
+/** Structure used in AIROC stack to add callback and data into task queue.  The serialization queue will have these callbacks */
 typedef struct
 {
-    int (*fn)(void*); /**< Callback invoked within the app thread context */
-    void* data; /**< Any arbitrary data to be given to the callback.  wiced_app_event_serialize Caller has to allocate and free once serialized event handled */
+    int (*fn)(void *); /**< Callback invoked within the app thread context */
+    void *data; /**< Any arbitrary data to be given to the callback.  wiced_app_event_serialize Caller has to allocate and free once serialized event handled */
 } wiced_app_event_srzn_cb_t;
 
 
@@ -78,31 +78,31 @@ typedef struct
 
 
 /*******************************************************************************
-* Function Name: wiced_app_event_serialize
-****************************************************************************//**
-*
-* This function lets you serialize a call onto the application thread, which
-* has been instantiated by the AIROC stack and is used to interact with the
-* application in an event-based fashion. Once serialized, tasks are pushed onto
-* a task queue, where they are pulled based on pre-defined priority of the
-* application thread. The queue is 16 deep, but this is shared with the stack.
+ * Function Name: wiced_app_event_serialize
+ ****************************************************************************//**
  *
-* \param[in] fn         function to execute once dequeued from app thread
-* \param[in] data       pointer to non-local data to be sent as arg to callback
+ * This function lets you serialize a call onto the application thread, which
+ * has been instantiated by the AIROC stack and is used to interact with the
+ * application in an event-based fashion. Once serialized, tasks are pushed onto
+ * a task queue, where they are pulled based on pre-defined priority of the
+ * application thread. The queue is 16 deep, but this is shared with the stack.
  *
-* \return
-*  - WICED_TRUE indicates success
-*  - WICED_FALSE indicates failure
-*
-* \note
-* The data parameter must point to non-local data as the pointer will be
-* accessed after the current function returns.
-*
-* \note
-* Data will not be freed by stack. If allocated by app, must be freed by app.
-*
-*******************************************************************************/
-wiced_bool_t wiced_app_event_serialize( int (*fn)(void*), void* data );
+ * \param[in] fn         function to execute once dequeued from app thread
+ * \param[in] data       pointer to non-local data to be sent as arg to callback
+ *
+ * \return
+ *  - WICED_TRUE indicates success
+ *  - WICED_FALSE indicates failure
+ *
+ * \note
+ * The data parameter must point to non-local data as the pointer will be
+ * accessed after the current function returns.
+ *
+ * \note
+ * Data will not be freed by stack. If allocated by app, must be freed by app.
+ *
+ *******************************************************************************/
+wiced_bool_t wiced_app_event_serialize(int (*fn)(void *), void *data);
 
 /** \} appthread */
 

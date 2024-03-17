@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -47,7 +47,7 @@
 #define L2CDEFS_H
 
 /* L2CAP command codes
-*/
+ */
 #define L2CAP_CMD_REJECT                    0x01
 #define L2CAP_CMD_CONN_REQ                  0x02
 #define L2CAP_CMD_CONN_RSP                  0x03
@@ -73,7 +73,7 @@
 
 
 /* Define some packet and header lengths
-*/
+ */
 #define L2CAP_PKT_OVERHEAD      4           /* Length and CID                       */
 #define L2CAP_CMD_OVERHEAD      4           /* Cmd code, Id and length              */
 #define L2CAP_CMD_REJECT_LEN    2           /* Reason (data is optional)            */
@@ -105,7 +105,7 @@
 
 
 /* Define the packet boundary flags
-*/
+ */
 #if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
 #define L2CAP_PKT_START_FLUSHABLE       2
 #define L2CAP_PKT_START_NON_FLUSHABLE   0
@@ -124,7 +124,7 @@
 
 
 /* Define the L2CAP connection result codes
-*/
+ */
 #define L2CAP_CONN_OK                0
 #define L2CAP_CONN_PENDING           1
 #define L2CAP_CONN_NO_PSM            2
@@ -144,7 +144,7 @@
 
 
 /* Define L2CAP Move Channel Response result codes
-*/
+ */
 #define L2CAP_MOVE_OK                   0
 #define L2CAP_MOVE_PENDING              1
 #define L2CAP_MOVE_CTRL_ID_NOT_SUPPORT  2
@@ -155,20 +155,20 @@
 
 
 /* Define L2CAP Move Channel Confirmation result codes
-*/
+ */
 #define L2CAP_MOVE_CFM_OK               0
 #define L2CAP_MOVE_CFM_REFUSED          1
 
 
 /* Define the L2CAP command reject reason codes
-*/
+ */
 #define L2CAP_CMD_REJ_NOT_UNDERSTOOD    0
 #define L2CAP_CMD_REJ_MTU_EXCEEDED      1
 #define L2CAP_CMD_REJ_INVALID_CID       2
 
 
 /* L2CAP Predefined CIDs
-*/
+ */
 #define L2CAP_SIGNALLING_CID            1
 #define L2CAP_CONNECTIONLESS_CID        2
 #define L2CAP_AMP_CID                   3
@@ -184,7 +184,7 @@
 #define L2CAP_BLE_CONN_MAX_CID          0x007F
 
 /* Fixed Channels mask bits
-*/
+ */
 #define L2CAP_FIXED_CHNL_SIG_BIT        (1 << L2CAP_SIGNALLING_CID)     /* Signal Channel Supported (Mandatory) */
 #define L2CAP_FIXED_CHNL_CNCTLESS_BIT   (1 << L2CAP_CONNECTIONLESS_CID) /* Connectionless Reception             */
 #define L2CAP_FIXED_CHNL_AMP_BIT        (1 << L2CAP_AMP_CID)            /* AMP Manager Supported                */
@@ -194,9 +194,8 @@
 #define L2CAP_FIXED_CHNL_SMP_BR_BIT     (1 << L2CAP_SMP_BR_CID)         /* Security Manager over BR Supported   */
 
 
-
 /* Define the L2CAP configuration result codes
-*/
+ */
 #define L2CAP_CFG_OK                    0
 #define L2CAP_CFG_UNACCEPTABLE_PARAMS   1
 #define L2CAP_CFG_FAILED_NO_REASON      2
@@ -206,7 +205,7 @@
 
 
 /* Define the L2CAP configuration option types
-*/
+ */
 #define L2CAP_CFG_TYPE_MTU              0x01
 #define L2CAP_CFG_TYPE_FLUSH_TOUT       0x02
 #define L2CAP_CFG_TYPE_QOS              0x03
@@ -225,16 +224,16 @@
 #define L2CAP_CFG_OPTION_OVERHEAD       2           /* Type and length      */
 
 /* Configuration Cmd/Rsp Flags mask
-*/
+ */
 #define L2CAP_CFG_FLAGS_MASK_CONT       0x0001      /* Flags mask: Continuation */
 
 /* FCS Check Option values
-*/
+ */
 #define L2CAP_CFG_FCS_BYPASS            0       /* Bypass the FCS in streaming or ERTM modes */
 #define L2CAP_CFG_FCS_USE               1       /* Use the FCS in streaming or ERTM modes [default] */
 
 /* Default values for configuration
-*/
+ */
 #define L2CAP_NO_AUTOMATIC_FLUSH        0xFFFF
 #define L2CAP_NO_RETRANSMISSION         0x0001
 
@@ -250,17 +249,17 @@
 
 
 /* Define the L2CAP disconnect result codes
-*/
+ */
 #define L2CAP_DISC_OK                   0
 #define L2CAP_DISC_TIMEOUT              0xEEEE
 
 /* Define the L2CAP info resp result codes
-*/
+ */
 #define L2CAP_INFO_RESP_RESULT_SUCCESS          0
 #define L2CAP_INFO_RESP_RESULT_NOT_SUPPORTED    1
 
 /* Define the info-type fields of information request & response
-*/
+ */
 #define L2CAP_CONNLESS_MTU_INFO_TYPE      0x0001
 #define L2CAP_EXTENDED_FEATURES_INFO_TYPE 0x0002    /* Used in Information Req/Response */
 #define L2CAP_FIXED_CHANNELS_INFO_TYPE    0x0003    /* Used in AMP                      */
@@ -270,7 +269,7 @@
 #define L2CAP_FIXED_CHNL_ARRAY_SIZE            8    /* Fixed channel array size         */
 
 /* Extended features mask bits
-*/
+ */
 #define L2CAP_EXTFEA_RTRANS         0x00000001    /* Retransmission Mode (Not Supported)    */
 #define L2CAP_EXTFEA_FC             0x00000002    /* Flow Control Mode   (Not Supported)    */
 #define L2CAP_EXTFEA_QOS            0x00000004
@@ -303,20 +302,20 @@
 #define L2CAP_SDU_LEN_OFFSET       2   /* SDU length offset is 2 bytes */
 #define L2CAP_EXT_CONTROL_OVERHEAD 4   /* Extended Control Field       */
 #define L2CAP_MAX_HEADER_FCS       (L2CAP_PKT_OVERHEAD + L2CAP_EXT_CONTROL_OVERHEAD + L2CAP_SDU_LEN_OVERHEAD + L2CAP_FCS_LEN)
-                                   /* length(2), channel(2), control(4), SDU length(2) FCS(2) */
+/* length(2), channel(2), control(4), SDU length(2) FCS(2) */
 /* Part of L2CAP_MIN_OFFSET that is not part of L2CAP
-*/
+ */
 #define L2CAP_OFFSET_WO_L2HDR  (L2CAP_MIN_OFFSET-(L2CAP_PKT_OVERHEAD+L2CAP_FCR_OVERHEAD))
 
 /* SAR bits in the control word
-*/
+ */
 #define L2CAP_FCR_UNSEG_SDU    0x0000   /* Control word to begin with for unsegmented PDU*/
 #define L2CAP_FCR_START_SDU    0x4000   /* ...for Starting PDU of a semented SDU */
 #define L2CAP_FCR_END_SDU      0x8000   /* ...for ending PDU of a segmented SDU */
 #define L2CAP_FCR_CONT_SDU     0xc000   /* ...for continuation PDU of a segmented SDU */
 
 /* Supervisory frame types
-*/
+ */
 #define L2CAP_FCR_SUP_RR        0x0000   /* Supervisory frame - RR                          */
 #define L2CAP_FCR_SUP_REJ       0x0001   /* Supervisory frame - REJ                         */
 #define L2CAP_FCR_SUP_RNR       0x0002   /* Supervisory frame - RNR                         */
@@ -357,4 +356,4 @@
 #define L2CAP_FCR_FREQ_NORMAL           0       /* A single test is run */
 #define L2CAP_FCR_FREQ_RANDOM           1       /* Randomly loses or corrupts a packet */
 
-#endif
+#endif // ifndef L2CDEFS_H

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -46,53 +46,53 @@
 
 enum ble_uuid_service
 {
-    UUID_SERVICE_GAP                                    = 0x1800,
-    UUID_SERVICE_GATT                                   = 0x1801,
-    UUID_SERVICE_IMMEDIATE_ALERT                        = 0x1802,
-    UUID_SERVICE_LINK_LOSS                              = 0x1803,
-    UUID_SERVICE_TX_POWER                               = 0x1804,
-    UUID_SERVICE_CURRENT_TIME                           = 0x1805,
-    UUID_SERVICE_REFERENCE_TIME_UPDATE                  = 0x1806,
-    UUID_SERVICE_DST_CHANGE                             = 0x1807,
-    UUID_SERVICE_GLUCOSE                                = 0x1808,
-    UUID_SERVICE_HEALTH_THERMOMETER                     = 0x1809,
-    UUID_SERVICE_DEVICE_INFORMATION                     = 0x180A,
-    UUID_SERVICE_NETWORK_AVAILABILITY                   = 0x180B,
-    UUID_SERVICE_WATCHDOG                               = 0x180C,
-    UUID_SERVICE_HEART_RATE                             = 0x180D,
-    UUID_SERVICE_PHONE_ALERT_STATUS                     = 0x180E,
-    UUID_SERVICE_BATTERY                                = 0x180F,
-    UUID_SERVICE_BLOOD_PRESSURE                         = 0x1810,
-    UUID_SERVICE_ALERT_NOTIFICATION                     = 0x1811,
-    UUID_SERVICE_HID                                    = 0x1812,
-    UUID_SERVICE_SCAN_PARAMETERS                        = 0x1813,
-    UUID_SERVICE_RSC                                    = 0x1814,
-    UUID_SERVICE_AUTOMATION_IO                          = 0x1815,
-    UUID_SERVICE_CSC                                    = 0x1816,
-    UUID_SERVICE_CYCLING_POWER                          = 0x1818,
-    UUID_SERVICE_LOCATION_NAVIGATION                    = 0x1819,
-    UUID_SERVICE_ENVIRONMENTAL_SENSING                  = 0x181A,
-    UUID_SERVICE_BODY_COMPOSITION                       = 0x181B,
-    UUID_SERVICE_USER_DATA                              = 0x181C,
-    UUID_SERVICE_WEIGHT_SCALE                           = 0x181D,
-    UUID_SERVICE_BOND_MANAGEMENT                        = 0x181E,
-    UUID_SERVICE_CONTINUOUS_GLUCOSE_MONITORING          = 0x181F,
-    UUID_SERVICE_INTERNET_PROTOCOL_SUPPORT              = 0x1820,
-    UUID_SERVICE_INDOOR_POSITIONING                     = 0x1821,
-    UUID_SERVICE_PULSE_OXIMETER                         = 0x1822,
-    UUID_SERVICE_HTTP_PROXY                             = 0x1823,
-    UUID_SERVICE_TRANSPORT_DISCOVERY                    = 0x1824,
-    UUID_SERVICE_OBJECT_TRANSFER                        = 0x1825,
-    UUID_SERVICE_WPT                                    = 0xFFFE,
+    UUID_SERVICE_GAP                           = 0x1800,
+    UUID_SERVICE_GATT                          = 0x1801,
+    UUID_SERVICE_IMMEDIATE_ALERT               = 0x1802,
+    UUID_SERVICE_LINK_LOSS                     = 0x1803,
+    UUID_SERVICE_TX_POWER                      = 0x1804,
+    UUID_SERVICE_CURRENT_TIME                  = 0x1805,
+    UUID_SERVICE_REFERENCE_TIME_UPDATE         = 0x1806,
+    UUID_SERVICE_DST_CHANGE                    = 0x1807,
+    UUID_SERVICE_GLUCOSE                       = 0x1808,
+    UUID_SERVICE_HEALTH_THERMOMETER            = 0x1809,
+    UUID_SERVICE_DEVICE_INFORMATION            = 0x180A,
+    UUID_SERVICE_NETWORK_AVAILABILITY          = 0x180B,
+    UUID_SERVICE_WATCHDOG                      = 0x180C,
+    UUID_SERVICE_HEART_RATE                    = 0x180D,
+    UUID_SERVICE_PHONE_ALERT_STATUS            = 0x180E,
+    UUID_SERVICE_BATTERY                       = 0x180F,
+    UUID_SERVICE_BLOOD_PRESSURE                = 0x1810,
+    UUID_SERVICE_ALERT_NOTIFICATION            = 0x1811,
+    UUID_SERVICE_HID                           = 0x1812,
+    UUID_SERVICE_SCAN_PARAMETERS               = 0x1813,
+    UUID_SERVICE_RSC                           = 0x1814,
+    UUID_SERVICE_AUTOMATION_IO                 = 0x1815,
+    UUID_SERVICE_CSC                           = 0x1816,
+    UUID_SERVICE_CYCLING_POWER                 = 0x1818,
+    UUID_SERVICE_LOCATION_NAVIGATION           = 0x1819,
+    UUID_SERVICE_ENVIRONMENTAL_SENSING         = 0x181A,
+    UUID_SERVICE_BODY_COMPOSITION              = 0x181B,
+    UUID_SERVICE_USER_DATA                     = 0x181C,
+    UUID_SERVICE_WEIGHT_SCALE                  = 0x181D,
+    UUID_SERVICE_BOND_MANAGEMENT               = 0x181E,
+    UUID_SERVICE_CONTINUOUS_GLUCOSE_MONITORING = 0x181F,
+    UUID_SERVICE_INTERNET_PROTOCOL_SUPPORT     = 0x1820,
+    UUID_SERVICE_INDOOR_POSITIONING            = 0x1821,
+    UUID_SERVICE_PULSE_OXIMETER                = 0x1822,
+    UUID_SERVICE_HTTP_PROXY                    = 0x1823,
+    UUID_SERVICE_TRANSPORT_DISCOVERY           = 0x1824,
+    UUID_SERVICE_OBJECT_TRANSFER               = 0x1825,
+    UUID_SERVICE_WPT                           = 0xFFFE,
 };
 
 
 enum ble_uuid_attribute
 {
-    UUID_ATTRIBUTE_PRIMARY_SERVICE                      = 0x2800,
-    UUID_ATTRIBUTE_SECONDARY_SERVICE                    = 0x2801,
-    UUID_ATTRIBUTE_INCLUDE                              = 0x2802,
-    UUID_ATTRIBUTE_CHARACTERISTIC                       = 0x2803,
+    UUID_ATTRIBUTE_PRIMARY_SERVICE   = 0x2800,
+    UUID_ATTRIBUTE_SECONDARY_SERVICE = 0x2801,
+    UUID_ATTRIBUTE_INCLUDE           = 0x2802,
+    UUID_ATTRIBUTE_CHARACTERISTIC    = 0x2803,
 };
 
 
@@ -317,4 +317,5 @@ enum ble_uuid_characteristic
     UUID_CHARACTERISTIC_OBJECT_LIST_FILTER                                  = 0x2AC7,
     UUID_CHARACTERISTIC_OBJECT_CHANGED                                      = 0x2AC8,
 };
-#endif
+
+#endif // ifndef WICED_BT_UUID_H

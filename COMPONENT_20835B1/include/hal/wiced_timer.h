@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -56,8 +56,9 @@ enum wiced_timer_type_e
     WICED_SECONDS_TIMER = 1,
     WICED_MILLI_SECONDS_TIMER,          /* The minimum resolution supported is 1 ms */
     WICED_SECONDS_PERIODIC_TIMER,
-    WICED_MILLI_SECONDS_PERIODIC_TIMER
+    WICED_MILLI_SECONDS_PERIODIC_TIMER,
 };
+
 typedef uint8_t wiced_timer_type_t;/* (see #wiced_timer_type_e) */
 
 /*
@@ -85,7 +86,7 @@ typedef void(*wiced_timer_callback_t)(TIMER_PARAM_TYPE cb_params);
 typedef struct
 {
     uint32_t reserved[WICED_TIMER_INSTANCE_SIZE_IN_WORDS];
-}wiced_timer_t;
+} wiced_timer_t;
 
 /* Convert from ms to us*/
 #define QUICK_TIMER_MS_TO_US(tout)    tout*1000
@@ -105,8 +106,8 @@ extern "C"
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_init_timer( wiced_timer_t* p_timer, wiced_timer_callback_t TimerCb,
-                                 TIMER_PARAM_TYPE cBackparam, wiced_timer_type_t type);
+wiced_result_t wiced_init_timer(wiced_timer_t *p_timer, wiced_timer_callback_t TimerCb,
+                                TIMER_PARAM_TYPE cBackparam, wiced_timer_type_t type);
 
 /**  Starts the timer
  * Timer should be initialized before starting the timer. Running the timer interfere with the
@@ -119,7 +120,7 @@ wiced_result_t wiced_init_timer( wiced_timer_t* p_timer, wiced_timer_callback_t 
  * @return       wiced_result_t
  */
 
-wiced_result_t wiced_start_timer(wiced_timer_t* p_timer, uint32_t timeout);
+wiced_result_t wiced_start_timer(wiced_timer_t *p_timer, uint32_t timeout);
 
 /** Stops the timer
  *
@@ -128,23 +129,23 @@ wiced_result_t wiced_start_timer(wiced_timer_t* p_timer, uint32_t timeout);
  * @return       wiced_result_t
  */
 
-wiced_result_t wiced_stop_timer(wiced_timer_t* p_timer);
+wiced_result_t wiced_stop_timer(wiced_timer_t *p_timer);
 
 /**  Checks if the timer is in use
  *
  * @param[in]    p_timer             :Pointer to the timer structure
  *
- * @return   TRUE if the timer is in use and FALSE if the timer is not in use
+ * @return   0 if the timer is not in use and non-zero value if the timer is in use
  */
-wiced_bool_t wiced_is_timer_in_use(wiced_timer_t* p_timer);
+wiced_bool_t wiced_is_timer_in_use(wiced_timer_t *p_timer);
 
 /** Deinitialize the timer instance and stops the timer if it is running
-*
-* * @param[in]    p_timer           :Pointer to the timer
-*
-* @return   wiced_result_t
-*/
-wiced_result_t wiced_deinit_timer(wiced_timer_t* p_timer);
+ *
+ * * @param[in]    p_timer           :Pointer to the timer
+ *
+ * @return   wiced_result_t
+ */
+wiced_result_t wiced_deinit_timer(wiced_timer_t *p_timer);
 
 
 /** @} */

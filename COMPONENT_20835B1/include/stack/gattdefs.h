@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -45,25 +45,25 @@
 #define GATT_ILLEGAL_UUID            0
 
 /* GATT attribute types
-*/
+ */
 #define GATT_UUID_PRI_SERVICE           0x2800
 #define GATT_UUID_SEC_SERVICE           0x2801
 #define GATT_UUID_INCLUDE_SERVICE       0x2802
 #define GATT_UUID_CHAR_DECLARE          0x2803      /*  Characteristic Declaration*/
 
-#define GATT_UUID_CHAR_EXT_PROP         0x2900      /*	Characteristic Extended Properties */
+#define GATT_UUID_CHAR_EXT_PROP         0x2900      /*  Characteristic Extended Properties */
 #define GATT_UUID_CHAR_DESCRIPTION      0x2901      /*  Characteristic User Description*/
 #define GATT_UUID_CHAR_CLIENT_CONFIG    0x2902      /*  Client Characteristic Configuration */
 #define GATT_UUID_CHAR_SRVR_CONFIG      0x2903      /*  Server Characteristic Configuration */
 #define GATT_UUID_CHAR_PRESENT_FORMAT   0x2904      /*  Characteristic Presentation Format*/
 #define GATT_UUID_CHAR_AGG_FORMAT       0x2905      /*  Characteristic Aggregate Format*/
-#define GATT_UUID_CHAR_VALID_RANGE       0x2906      /*  Characteristic Valid Range */
+#define GATT_UUID_CHAR_VALID_RANGE      0x2906      /*  Characteristic Valid Range */
 #define GATT_UUID_EXT_RPT_REF_DESCR     0x2907
 #define GATT_UUID_RPT_REF_DESCR         0x2908
 
 
 /* GAP Profile Attributes
-*/
+ */
 #define GATT_UUID_GAP_DEVICE_NAME       0x2A00
 #define GATT_UUID_GAP_ICON              0x2A01
 #define GATT_UUID_GAP_PREF_CONN_PARAM   0x2A04
@@ -228,7 +228,7 @@ enum gatt_appearance_e
     APPEARANCE_SENSOR_WIND                      = 1360, /// Wind Sensor
     APPEARANCE_SENSOR_PROXYMITY                 = 1361, /// Proximity Sensor
     APPEARANCE_SENSOR_MULTI_SENSOR              = 1362, /// Multi - Sensor
-    APPEARANCE_LIGHT_GENERIC_FIXTURE            = 1408, /// Generic Light Fixtures	Generic category
+    APPEARANCE_LIGHT_GENERIC_FIXTURE            = 1408, /// Generic Light Fixtures  Generic category
     APPEARANCE_LIGHT_WALL                       = 1409, /// Wall Light
     APPEARANCE_LIGHT_CEILING                    = 1410, /// Ceiling Light
     APPEARANCE_LIGHT_FLOOR                      = 1411, /// Floor Light
@@ -253,4 +253,4 @@ enum gatt_appearance_e
 };
 
 
-#endif
+#endif // ifndef  _GATTDEFS_H

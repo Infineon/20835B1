@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -33,9 +33,9 @@
 
 
 /** @file
-*
-*Defines the interfaces for Buffer , Timer and Event Management Services
-*/
+ *
+ * Defines the interfaces for Buffer , Timer and Event Management Services
+ */
 #ifndef _WICED_GKI_H_
 #define _WICED_GKI_H_
 
@@ -45,7 +45,7 @@
 /*
  * Function prototype for the timer call backs.
  */
-typedef void ( *wiced_timer_callback_t )( uint32_t cb_params );
+typedef void ( *wiced_timer_callback_t )(uint32_t cb_params);
 
 /** Forward typedefinition of the wiced transport buffer pool */
 typedef struct _wiced_trans_buffer_pool_t wiced_trans_buffer_pool_t;
@@ -83,24 +83,24 @@ void wiced_bt_stack_check_init(void);
  *
  * Return           the available number of ble tx buffers
  */
-uint32_t wiced_bt_ble_get_available_tx_buffers( void );
+uint32_t wiced_bt_ble_get_available_tx_buffers(void);
 
 void wdog_generate_hw_reset(void);//TODO: #define wdog_generate_hw_reset wiced_hal_wdog_reset_system
 uint32_t wiced_get_free_memory(void);
 
 /*****************************************************************************
-*    Function: void wiced_gki_delay_us
-*
-*    Abstract: This function provides a specified amount of delay in
-*              microseconds.  The function overhead is about 18us at 16MHz.
-*              It is not possible to get a shorter delay than that.  This
-*              function can be used before the ARM timers are initialized.
-*
-*    Input/Output: UINT32 delay time in microsec.
-*
-*    Return:
-*
-*****************************************************************************/
+ *    Function: void wiced_gki_delay_us
+ *
+ *    Abstract: This function provides a specified amount of delay in
+ *              microseconds.  The function overhead is about 18us at 16MHz.
+ *              It is not possible to get a shorter delay than that.  This
+ *              function can be used before the ARM timers are initialized.
+ *
+ *    Input/Output: UINT32 delay time in microsec.
+ *
+ *    Return:
+ *
+ *****************************************************************************/
 void wiced_gki_delay_us(uint32_t delay);
 
 #endif //_WICED_GKI_H_

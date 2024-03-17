@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to utilize the
-* watchdog.
-*
-*/
+ *
+ * List of parameters and defined functions needed to utilize the
+ * watchdog.
+ *
+ */
 
 #ifndef __WICED_WDOG_RESET_H__
 #define __WICED_WDOG_RESET_H__
@@ -44,20 +44,20 @@
 #include "brcm_fw_types.h"
 
 /**  \addtogroup WatchdogInterface Watchdog Interface
-* \ingroup HardwareDrivers
-* Defines a driver for the watchdog interface. This driver manages the
-* hardware watchdog countdown timer. When enabled, the watchdog timer will generate
-* an interrupt when the timer counts down to zero, then will reload the counter.
-* If the counter counts down to zero again, the hardware performs a device reset.
-* The lowest priority "idle" thread restarts the watchdog counter preiodically,
-* and other operations that may keep the system busy call wiced_hal_wdog_restart to
-* extend the watchdog countdown.
-*/
+ * \ingroup HardwareDrivers
+ * Defines a driver for the watchdog interface. This driver manages the
+ * hardware watchdog countdown timer. When enabled, the watchdog timer will generate
+ * an interrupt when the timer counts down to zero, then will reload the counter.
+ * If the counter counts down to zero again, the hardware performs a device reset.
+ * The lowest priority "idle" thread restarts the watchdog counter preiodically,
+ * and other operations that may keep the system busy call wiced_hal_wdog_restart to
+ * extend the watchdog countdown.
+ */
 /*! @{ */
 
 /******************************************************************************
-*** Function prototypes.
-******************************************************************************/
+ *** Function prototypes.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Disable the system watchdog. Useful for debugging when the watchdog would

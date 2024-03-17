@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* Peripheral SPI driver.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * Peripheral SPI driver.
+ *
+ */
 
 #ifndef __WICED_PSPI_DRIVER_H__
 #define __WICED_PSPI_DRIVER_H__
@@ -46,42 +46,42 @@
 #endif
 
 /**  \addtogroup PeripheralSpiDriver Peripheral SPI
-* \ingroup HardwareDrivers
-* @{
-*
-* Defines an SPI driver to facilitate communication with other devices on an
-* SPI bus (such as a temperature sensor, etc). The driver is capable of
-* assuming either a master or a slave role on said bus. Applications use
-* this driver to obtain the status from and control the behavior of the SPI
-* hardware. This driver only offers services for clock control, mode control
-* and data transfer operations. The application is responsible for
-* generating the slave/chip select signals (if it's in a master role).
-* This could be done by mapping a GPIO pin for each slave the application
-* wants to control (See wiced_hal_gpio.h for more information on driving a
-* GPIO pin).
-*
-* All master data transfer operations (half/full duplex)
-* provided by this driver assume that the desired
-* slave has already been selected and will remain selected
-* throughout the duration of the transaction.
-*
-* Please note that this driver cannot access supplied off-chip memory
-* (if installed; serial flash, etc). Please use the drivers found in
-* wiced_hal_sflash.h or wiced_hal_seeprom.h to access those modules, as those
-* drivers deal with a separate SPI bus and include checks to ensure safe data
-* handling operations. This driver is intended only to interface with other
-* devices on the peripheral SPI bus, such as a motion sensor. Of course,
-* this restriction does not preclude the user from adding their own memory
-* module to the peripheral bus, and using this driver with it.
-*
-*/
+ * \ingroup HardwareDrivers
+ * @{
+ *
+ * Defines an SPI driver to facilitate communication with other devices on an
+ * SPI bus (such as a temperature sensor, etc). The driver is capable of
+ * assuming either a master or a slave role on said bus. Applications use
+ * this driver to obtain the status from and control the behavior of the SPI
+ * hardware. This driver only offers services for clock control, mode control
+ * and data transfer operations. The application is responsible for
+ * generating the slave/chip select signals (if it's in a master role).
+ * This could be done by mapping a GPIO pin for each slave the application
+ * wants to control (See wiced_hal_gpio.h for more information on driving a
+ * GPIO pin).
+ *
+ * All master data transfer operations (half/full duplex)
+ * provided by this driver assume that the desired
+ * slave has already been selected and will remain selected
+ * throughout the duration of the transaction.
+ *
+ * Please note that this driver cannot access supplied off-chip memory
+ * (if installed; serial flash, etc). Please use the drivers found in
+ * wiced_hal_sflash.h or wiced_hal_seeprom.h to access those modules, as those
+ * drivers deal with a separate SPI bus and include checks to ensure safe data
+ * handling operations. This driver is intended only to interface with other
+ * devices on the peripheral SPI bus, such as a motion sensor. Of course,
+ * this restriction does not preclude the user from adding their own memory
+ * module to the peripheral bus, and using this driver with it.
+ *
+ */
 
 /******************************************************************************
-*** Parameters.
-***
-*** The following parameters are used to configure the SPI driver or define
-*** return status. They are not modifiable.
-******************************************************************************/
+ *** Parameters.
+ ***
+ *** The following parameters are used to configure the SPI driver or define
+ *** return status. They are not modifiable.
+ ******************************************************************************/
 
 /// Type Definitions
 
@@ -89,7 +89,7 @@
 typedef enum
 {
     SPI1 = 0, /**< SPI1 Interface */
-}spi_interface_t;
+} spi_interface_t;
 
 /** SPI Device Role */
 enum
@@ -116,7 +116,7 @@ typedef enum SPI_MODE
     SPI_MODE_2,
     /// CPOL = 1, CPHA = 1
     /// Data read on clock's rising edge, data changed on a falling edge
-    SPI_MODE_3
+    SPI_MODE_3,
 } SPI_MODE;
 /// Slave select polarity (output from master)
 typedef enum SPI_SS_POLARITY
@@ -133,7 +133,7 @@ typedef enum SPI_ENDIAN
     /// Transmit most significant bit first
     SPI_MSB_FIRST,
     /// Transmit least significant bit first
-    SPI_LSB_FIRST
+    SPI_LSB_FIRST,
 } SPI_ENDIAN;
 
 ///
@@ -149,7 +149,7 @@ typedef enum SPI_SS_MODE
     /// Slave select normal
     SPI_SS_NORMAL,
     /// Slave select goes inactive between bytes
-    SPI_SS_INACTIVE_BTW_BYTES
+    SPI_SS_INACTIVE_BTW_BYTES,
 } SPI_SS_MODE;
 
 // Pull configure for input-pin
@@ -163,24 +163,24 @@ typedef enum SPI_SS_MODE
 enum
 {
     // pull up for MISO if master mode, for MOSI if Slave mode
-    INPUT_PIN_PULL_UP   = 0x0400,
+    INPUT_PIN_PULL_UP = 0x0400,
     // pull DOWN for MISO if master mode, for MOSI if Slave mode
     INPUT_PIN_PULL_DOWN = 0x0200,
     // FLOAT for MISO if master mode, for MOSI if Slave mode
-    INPUT_PIN_FLOATING  = 0x0,
+    INPUT_PIN_FLOATING = 0x0,
 };
 
 // Return values.
 typedef enum
 {
     SPIFFY_SUCCESS,
-    SPIFFY_SLAVE_NOT_ENOUGH_RX_FIFO_BYTES
+    SPIFFY_SLAVE_NOT_ENOUGH_RX_FIFO_BYTES,
 } SPIFFY_STATUS;
 
 
 /******************************************************************************
-*** Function prototypes.
-******************************************************************************/
+ *** Function prototypes.
+ ******************************************************************************/
 ///////////////////////////////////////////////////////////////////////////////
 /// Initialize the SPI driver with the given parameters. Please reference
 /// the various parameters above.
@@ -208,15 +208,15 @@ typedef enum
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pspi_init(  spi_interface_t spi,
-                           UINT8           devRole,
-                           UINT16          spiPinPullConfig,
-                           UINT32          spiGpioCfg,
-                           UINT32          clkSpeed,
-                           SPI_ENDIAN      endian,
-                           SPI_SS_POLARITY polarity,
-                           SPI_MODE        mode,
-                           UINT8           csPin);
+void wiced_hal_pspi_init(spi_interface_t spi,
+                         UINT8           devRole,
+                         UINT16          spiPinPullConfig,
+                         UINT32          spiGpioCfg,
+                         UINT32          clkSpeed,
+                         SPI_ENDIAN      endian,
+                         SPI_SS_POLARITY polarity,
+                         SPI_MODE        mode,
+                         UINT8           csPin);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Send/transmit data over SPI as the master. Assumes that the slave/chip
@@ -228,7 +228,7 @@ void wiced_hal_pspi_init(  spi_interface_t spi,
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pspi_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8* txBuf);
+void wiced_hal_pspi_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8 *txBuf);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Receive data over SPI as the master. Assumes that the slave/chip select
@@ -240,7 +240,7 @@ void wiced_hal_pspi_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8* txBu
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pspi_rx_data(spi_interface_t spi, UINT32 rxLen, UINT8* rxBuf);
+void wiced_hal_pspi_rx_data(spi_interface_t spi, UINT32 rxLen, UINT8 *rxBuf);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -266,7 +266,7 @@ void wiced_hal_pspi_reset(spi_interface_t spi);
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pspi_exchange_data(spi_interface_t spi,UINT32 len, const UINT8* txBuf, UINT8* rxBuf);
+void wiced_hal_pspi_exchange_data(spi_interface_t spi, UINT32 len, const UINT8 *txBuf, UINT8 *rxBuf);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -320,7 +320,7 @@ void wiced_hal_pspi_slave_disable_rx(spi_interface_t spi);
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pspi_slave_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8* txBuf);
+void wiced_hal_pspi_slave_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8 *txBuf);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -333,7 +333,7 @@ void wiced_hal_pspi_slave_tx_data(spi_interface_t spi, UINT32 txLen, const UINT8
 ///
 /// \return SUCCESS if bytes were received or NOT_ENOUGH_RX_FIFO_BYTES if fail.
 ///////////////////////////////////////////////////////////////////////////////
-SPIFFY_STATUS wiced_hal_pspi_slave_rx_data(spi_interface_t spi, UINT32 rxLen, UINT8* rxBuf);
+SPIFFY_STATUS wiced_hal_pspi_slave_rx_data(spi_interface_t spi, UINT32 rxLen, UINT8 *rxBuf);
 
 
 ///////////////////////////////////////////////////////////////////////////////

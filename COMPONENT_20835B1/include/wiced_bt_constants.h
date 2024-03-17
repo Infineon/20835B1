@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -46,10 +46,10 @@ extern "C" {
  ******************************************************/
 
 #ifndef RESULT_ENUM
-#define RESULT_ENUM( prefix, name, value )  prefix ## name = (value)
+#define RESULT_ENUM(prefix, name, value)  prefix ## name = (value)
 #endif /* ifndef RESULT_ENUM */
 
-#define BT_RESULT_LIST( prefix ) \
+#define BT_RESULT_LIST(prefix) \
         RESULT_ENUM( prefix, SUCCESS,                      0 ),   /**< Success */                                               \
         RESULT_ENUM( prefix, PARTIAL_RESULTS,              3 ),   /**< Partial results */                                       \
         RESULT_ENUM( prefix, BADARG,                       5 ),   /**< Bad Arguments */                                         \
@@ -101,8 +101,8 @@ extern "C" {
         RESULT_ENUM( prefix, MODE4_LEVEL4_NOT_SUPPORTED,8119 ),   /**< Connections Only Mode can't be supported */            \
         RESULT_ENUM( prefix, USE_DEFAULT_SECURITY,      8120 ),   /**< Use default security */                                 \
         RESULT_ENUM( prefix, KEY_MISSING,               8121 ),   /**< Key Missing */                                           \
-        RESULT_ENUM( prefix, ENCRYPT_DISABLED,          8122 ),   /**< Encryption is disabled */
-
+        RESULT_ENUM( prefix, ENCRYPT_DISABLED,          8122 )    /**< Encryption is disabled */
+/* keep last entry without final comma, handled by wiced_result_t construct below */
 
 /******************************************************
  *                    Constants
@@ -115,7 +115,6 @@ extern "C" {
 /******************************************************
  *                   Enumerations
  ******************************************************/
-
 
 
 /******************************************************

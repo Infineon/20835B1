@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -85,8 +85,8 @@ extern "C" {
  *            WICED_BT_FAILED : if an error occurred
  */
 wiced_result_t wiced_bt_stack_init(wiced_bt_management_cback_t *p_bt_management_cback,
-                                   const wiced_bt_cfg_settings_t     *p_bt_cfg_settings,
-                                   const wiced_bt_cfg_buf_pool_t     wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS]);
+                                   const wiced_bt_cfg_settings_t *p_bt_cfg_settings,
+                                   const wiced_bt_cfg_buf_pool_t  wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS]);
 
 #ifdef WICED_STACK_DEINIT_SUPPORTED
 /**

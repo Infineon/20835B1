@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -78,17 +78,17 @@ typedef enum
     WICED_HCI_PORT_2 = 1,       /**< Reserved */
     WICED_HCI_PORT_3 = 2,       /**< Reserved */
     WICED_HCI_PORT_4 = 3,       /**< Used for raw data transfers */
-    WICED_HCI_PORT_5 = 4        /**< Verify if this port is usable. Max ports available is only 5 */
-}wiced_hci_port_t;
+    WICED_HCI_PORT_5 = 4,       /**< Verify if this port is usable. Max ports available is only 5 */
+} wiced_hci_port_t;
 
 /*
  * Wiced HCI Channel Data Direction
  */
 typedef enum
 {
-    WICED_HCI_DIR_DEVICE_IN   = 0,
-    WICED_HCI_DIR_DEVICE_OUT  = 1
-}wiced_hci_dir_t;
+    WICED_HCI_DIR_DEVICE_IN  = 0,
+    WICED_HCI_DIR_DEVICE_OUT = 1,
+} wiced_hci_dir_t;
 
 /*
  * Wiced HCI Channel Endpoint Address
@@ -101,15 +101,15 @@ typedef uint8_t wiced_hci_ep_t;
 typedef enum
 {
     WICED_HCI_CTRL = 0,
-    WICED_HCI_DATA = 1
-}wiced_hci_channel_type_t;
+    WICED_HCI_DATA = 1,
+} wiced_hci_channel_type_t;
 
 /*****************************************************************************
 **                                                Type Definitions
 *****************************************************************************/
 
 /*
- *Defines the wiced hci channel
+ * Defines the wiced hci channel
  */
 /* Todo  This note shall be removed .Note: Defining the hci channel structure using a
                reserved parameter to hide the  internal structure parameters from the application.
@@ -117,15 +117,15 @@ typedef enum
 typedef struct
 {
     uint8_t reserved[WICED_HCI_CHANNEL_INSTANCE_SIZE];
-}wiced_hci_channel_t;
+} wiced_hci_channel_t;
 
 /*
  * Function prototype for Data Sink handler.
  */
-typedef uint8_t (*wiced_hci_data_handler_t)( uint8_t * data_ptr, uint32_t data_len );
+typedef uint8_t (*wiced_hci_data_handler_t)(uint8_t *data_ptr, uint32_t data_len);
 
-typedef void (*wiced_hci_data_sink_t)(uint8_t* buf, uint32_t len, uint32_t sink_ctx );
-typedef void* (*wiced_uart_mem_alloc_t)(uint32_t size_bytes);
+typedef void (*wiced_hci_data_sink_t)(uint8_t *buf, uint32_t len, uint32_t sink_ctx);
+typedef void * (*wiced_uart_mem_alloc_t)(uint32_t size_bytes);
 
 
 /*****************************************************************************
@@ -142,20 +142,20 @@ typedef void* (*wiced_uart_mem_alloc_t)(uint32_t size_bytes);
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_init_hci_channel( wiced_hci_channel_t* p_channel,
-                                           wiced_hci_port_t port,
-                                           wiced_hci_channel_type_t type,
-                                           wiced_hci_ep_t ep,
-                                           wiced_hci_dir_t  dir );
+wiced_result_t wiced_init_hci_channel(wiced_hci_channel_t *p_channel,
+                                      wiced_hci_port_t port,
+                                      wiced_hci_channel_type_t type,
+                                      wiced_hci_ep_t ep,
+                                      wiced_hci_dir_t  dir);
 
 /** Opens a channel for data transfer
- *Channel should be initialized before opening the channel
+ * Channel should be initialized before opening the channel
  *@param[in]    p_channel           :Pointer to the hci channel
  *
  * @return   channel id on success,
  *               WICED_HCI_INVALID_CHANNEL, on failure
  */
-uint32_t wiced_open_hci_channel( wiced_hci_channel_t* p_channel );
+uint32_t wiced_open_hci_channel(wiced_hci_channel_t *p_channel);
 
 
 /** Closes the hci channel
@@ -164,17 +164,17 @@ uint32_t wiced_open_hci_channel( wiced_hci_channel_t* p_channel );
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_close_hci_channel( wiced_hci_channel_t* p_channel );
+wiced_result_t wiced_close_hci_channel(wiced_hci_channel_t *p_channel);
 
 
 /** Deletes the hci channel. instance
- *Deletes the memory associated with the hci channel
+ * Deletes the memory associated with the hci channel
  *
  *@param[in]    p_channel           :Pointer to the hci channel
  *
  * @return   None
  */
-wiced_result_t wiced_deinit_hci_channel( wiced_hci_channel_t* p_channel );
+wiced_result_t wiced_deinit_hci_channel(wiced_hci_channel_t *p_channel);
 
 
 /** Attaches a sink to the hci channel
@@ -185,9 +185,9 @@ wiced_result_t wiced_deinit_hci_channel( wiced_hci_channel_t* p_channel );
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_attach_sink_hci_channel( wiced_hci_channel_t* p_channel,
-                                                          wiced_hci_data_sink_t sink,
-                                                          uint32_t  sink_ctx );
+wiced_result_t wiced_attach_sink_hci_channel(wiced_hci_channel_t *p_channel,
+                                             wiced_hci_data_sink_t sink,
+                                             uint32_t  sink_ctx);
 
 /** Sends data through the channel
  *
@@ -198,9 +198,9 @@ wiced_result_t wiced_attach_sink_hci_channel( wiced_hci_channel_t* p_channel,
  * @return   wiced_result_t
  */
 
-wiced_result_t wiced_send_hci_channel( wiced_hci_channel_t* p_channel,
-                                                   uint8_t* p_data,
-                                                   uint32_t data_len );
+wiced_result_t wiced_send_hci_channel(wiced_hci_channel_t *p_channel,
+                                      uint8_t *p_data,
+                                      uint32_t data_len);
 
 /** Flushes the data from the channel
  *
@@ -208,6 +208,6 @@ wiced_result_t wiced_send_hci_channel( wiced_hci_channel_t* p_channel,
  *
  * @return   wiced_result_t
  */
-wiced_result_t wiced_flush_hci_channel( wiced_hci_channel_t* p_channel );
-#endif
+wiced_result_t wiced_flush_hci_channel(wiced_hci_channel_t *p_channel);
+#endif // if 0
 #endif // _WICED_HCI_H_

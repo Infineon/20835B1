@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -46,20 +46,20 @@
 
 #ifdef CYW20835B1
 /**
-* \addtogroup  interfaces   Audio Codec Interface
-* \ingroup     wicedbt
-*/
+ * \addtogroup  interfaces   Audio Codec Interface
+ * \ingroup     wicedbt
+ */
 #else
 /**
-* \addtogroup  interfaces   Audio Codec Interface
-* \ingroup     wicedbt_av
-*/
+ * \addtogroup  interfaces   Audio Codec Interface
+ * \ingroup     wicedbt_av
+ */
 #endif
 /*! @{ */
 /**
-* Defines an audio codec interface.  Application uses this
-* interface to control external audio codec activities.
-*/
+ * Defines an audio codec interface.  Application uses this
+ * interface to control external audio codec activities.
+ */
 
 typedef struct
 {
@@ -84,4 +84,4 @@ typedef struct
 
 /** @} */
 
-#endif
+#endif // ifndef __WICED_AUDIOCODEC_INTERFACE_H__

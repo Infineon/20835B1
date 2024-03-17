@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* This file lists the API's and structs required to access the
-* Pulse-Width Modulation (PWM) driver.
-*
-*/
+ *
+ * This file lists the API's and structs required to access the
+ * Pulse-Width Modulation (PWM) driver.
+ *
+ */
 
 #ifndef __WICED_PWM_H__
 #define __WICED_PWM_H__
@@ -44,17 +44,17 @@
 #include "wiced_bt_dev.h"
 
 /**  \addtogroup PwmDriver Pulse Width Modulation (PWM)
-* \ingroup HardwareDrivers
-* @{
-* Defines a driver to facilitate interfacing with the Pulse-Width
-* Modulation (PWM) driver.
-*
-* Use this driver to output a PWM signal to a GPIO pin for external use. There
-* are six, 16-bit hardware PWM channels avaliable (0-5). Typical use-cases
-* include fine-control over small devices such as LEDs. Please reference the
-* Kit Guide or HW User Manual for your device for more information.
-*
-*/
+ * \ingroup HardwareDrivers
+ * @{
+ * Defines a driver to facilitate interfacing with the Pulse-Width
+ * Modulation (PWM) driver.
+ *
+ * Use this driver to output a PWM signal to a GPIO pin for external use. There
+ * are six, 16-bit hardware PWM channels avaliable (0-5). Typical use-cases
+ * include fine-control over small devices such as LEDs. Please reference the
+ * Kit Guide or HW User Manual for your device for more information.
+ *
+ */
 
 
 /******************************************************************************
@@ -62,22 +62,22 @@
  ******************************************************************************/
 
 /**
-* \addtogroup group_pwm_data_structures Structures
-* PWM Structures
-* \{
-*/
+ * \addtogroup group_pwm_data_structures Structures
+ * PWM Structures
+ * \{
+ */
 
 /// PWM HW block has 6 PWM channels each with its own 16 bit counter.
 /// The first PWM channel is PWM0.
 typedef enum
 {
-    PWM0  = 0,
-    PWM1  = 1,
-    PWM2  = 2,
-    PWM3  = 3,
-    PWM4  = 4,
-    PWM5  = 5,
-    MAX_PWMS = 6
+    PWM0     = 0,
+    PWM1     = 1,
+    PWM2     = 2,
+    PWM3     = 3,
+    PWM4     = 4,
+    PWM5     = 5,
+    MAX_PWMS = 6,
 } PwmChannels;
 
 /// Clock used for PWM. When LHL_CLK is set, 128 KHz is used.
@@ -85,13 +85,14 @@ typedef enum
 typedef enum
 {
     LHL_CLK,
-    PMU_CLK
+    PMU_CLK,
 } PwmClockType;
 
 /**
-* wiced_pwm_config_t is used only in wiced_hal_pwm_get_params() utility API .
-*/
-typedef struct{
+ * wiced_pwm_config_t is used only in wiced_hal_pwm_get_params() utility API .
+ */
+typedef struct
+{
     UINT32 init_count;
     UINT32 toggle_count;
 } pwm_config_t;
@@ -101,14 +102,14 @@ typedef pwm_config_t wiced_pwm_config_t;
 /** \} group_pwm_data_structures */
 
 /******************************************************************************
-*** Global functions .
-******************************************************************************/
+ *** Global functions .
+ ******************************************************************************/
 
 /**
-* \addtogroup group_pwm_functions Functions
-* PWM Functions
-* \{
-*/
+ * \addtogroup group_pwm_functions Functions
+ * PWM Functions
+ * \{
+ */
 ///////////////////////////////////////////////////////////////////////////////
 /// Configures, enables, and starts the PWM to be active on a
 /// preconfigured GPIO pin.
@@ -149,10 +150,10 @@ typedef pwm_config_t wiced_pwm_config_t;
 ///
 ///////////////////////////////////////////////////////////////////////////////
 BOOL32 wiced_hal_pwm_start(UINT8        channel,
-                                         PwmClockType clk,
-                                         UINT32       toggleCount,
-                                         UINT32       initCount,
-                                         BOOL32       invert);
+                           PwmClockType clk,
+                           UINT32       toggleCount,
+                           UINT32       initCount,
+                           BOOL32       invert);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Changes the PWM settings after the PWM HW has already been started.
@@ -166,8 +167,8 @@ BOOL32 wiced_hal_pwm_start(UINT8        channel,
 /// \return 1 if PWM was successfully changed, 0 otherwise.
 ///////////////////////////////////////////////////////////////////////////////
 BOOL32 wiced_hal_pwm_change_values(UINT8 channel,
-                                                 UINT32 toggleCount,
-                                                 UINT32 initCount);
+                                   UINT32 toggleCount,
+                                   UINT32 initCount);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Returns the current toggle count setting for the corresponding PWM channel.
@@ -214,7 +215,7 @@ void wiced_hal_pwm_enable(UINT8 channel);
 ///
 /// \return VOID
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pwm_configure_pin( UINT8  pin, UINT8 PWM) __attribute__ ((deprecated("Please use supermux tool to configure PWM pin")));
+void wiced_hal_pwm_configure_pin(UINT8  pin, UINT8 PWM) __attribute__ ((deprecated("Please use supermux tool to configure PWM pin")));
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Calculate PWM parameters
@@ -226,7 +227,7 @@ void wiced_hal_pwm_configure_pin( UINT8  pin, UINT8 PWM) __attribute__ ((depreca
 ///
 /// \return VOID
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_pwm_get_params( uint32_t clock_frequency_in, uint32_t duty_cycle, uint32_t pwm_frequency_out, pwm_config_t * params_out);
+void wiced_hal_pwm_get_params(uint32_t clock_frequency_in, uint32_t duty_cycle, uint32_t pwm_frequency_out, pwm_config_t *params_out);
 /** \} group_pwm_functions */
 /* @} */
 

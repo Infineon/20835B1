@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -549,7 +549,7 @@
 
 /*Link Layer Topology Added States Combo */
 /*Initiating State and Central Role combination supported.
-  Central Role and Central Role combination is also supported. 0x0000000010000000 */
+   Central Role and Central Role combination is also supported. 0x0000000010000000 */
 #define HCI_SUPP_LE_STATES_INIT_CENTRAL_MASK          0x10
 #define HCI_SUPP_LE_STATES_INIT_CENTRAL_OFF           3
 #define HCI_LE_STATES_INIT_CENTRAL_SUPPORTED(x)      ((x)[HCI_SUPP_LE_STATES_INIT_CENTRAL_OFF] & HCI_SUPP_LE_STATES_INIT_CENTRAL_MASK)
@@ -692,7 +692,6 @@
 #define HCI_SET_TRIGGERED_CLOCK_CAPTURE_EVT 0x4E
 
 
-
 /* ULP HCI Event */
 #define HCI_BLE_EVENT                       0x3e
 /* ULP Event sub code */
@@ -728,8 +727,8 @@
 
 #define HCI_VENDOR_SPECIFIC_EVT             0xFF  /* Vendor specific events */
 #define HCI_NAP_TRACE_EVT                   0xFF  /* was define 0xFE, 0xFD, change to 0xFF
-                                                 because conflict w/ TCI_EVT and per
-                                                 specification compliant */
+                                                     because conflict w/ TCI_EVT and per
+                                                     specification compliant */
 
 /*
 **  Defentions for HCI Error Codes that are past in the events
@@ -896,7 +895,7 @@
     0x0000000000000800 AMP Receiver Report Event
     0x0000000000001000 Short Range Mode Change Complete Event
     0x0000000000002000 AMP Status Change Event
-*/
+ */
 
 /* the event mask page 2 (CLB + CSA4 + SC) for BR/EDR controller */
 #define HCI_PAGE_2_EVENT_MASK                  "\x00\x00\x00\x00\x00\xBF\xC0\x00"
@@ -910,7 +909,7 @@
     0x0000000000200000 Connectionless Broadcast Channel Map Change Event
     0x0000000000400000 Inquiry Response Notification Event  // mask off this event, not processed on host
     0x0000000000800000 Authenticated_Payload_Timeout_Expired Event
-*/
+ */
 #if BTM_BLE_PRIVACY_SPT == TRUE
 /* LE event mask */
 #define HCI_BLE_EVENT_MASK_DEF               "\x00\x00\x00\x00\x00\x00\x07\xff"
@@ -941,9 +940,6 @@
                                            |  HCI_PKT_TYPES_MASK_HV2       \
                                            |  HCI_PKT_TYPES_MASK_HV3)) == 0)) \
                                     && ((t) != 0))
-
-
-
 
 
 /* Packet type should not be invalid and at least one should be specified */
@@ -1359,7 +1355,7 @@
 #define HCI_CLB_FRAGMENT_SINGLE         0x03
 
 /* AMP Controller Status codes
-*/
+ */
 #define HCI_AMP_CTRLR_PHYSICALLY_DOWN   0
 #define HCI_AMP_CTRLR_USABLE_BY_BT      1
 #define HCI_AMP_CTRLR_UNUSABLE_FOR_BT   2
@@ -1380,12 +1376,12 @@
 /* Define the extended flow specification fields used by AMP */
 typedef struct
 {
-    UINT8       id;
-    UINT8       stype;
-    UINT16      max_sdu_size;
-    UINT32      sdu_inter_time;
-    UINT32      access_latency;
-    UINT32      flush_timeout;
+    UINT8  id;
+    UINT8  stype;
+    UINT16 max_sdu_size;
+    UINT32 sdu_inter_time;
+    UINT32 access_latency;
+    UINT32 flush_timeout;
 } tHCI_EXT_FLOW_SPEC;
 
 
@@ -1800,7 +1796,7 @@ typedef struct
 #define HCI_FEATURE_ANON_MODE_MASK      0x40
 #define HCI_FEATURE_ANON_MODE_OFF       4
 #define HCI_LMP_ANON_MODE_SUPPORTED(x)  ((x)[HCI_FEATURE_ANON_MODE_OFF] & HCI_FEATURE_ANON_MODE_MASK)
-#endif
+#endif // if 1
 
 #define HCI_FEATURE_3_SLOT_EDR_ACL_MASK 0x80
 #define HCI_FEATURE_3_SLOT_EDR_ACL_OFF  4
@@ -2950,8 +2946,8 @@ typedef struct
 #define HCI_BRCM_I15DOT4_COMMAND            (0x0177 | HCI_GRP_VENDOR_SPECIFIC)
 #endif
 /*
-Commands of HCI_GRP_VENDOR_SPECIFIC group for WIDCOMM SW LM Simulator
-*/
+   Commands of HCI_GRP_VENDOR_SPECIFIC group for WIDCOMM SW LM Simulator
+ */
 #ifdef _WIDCOMM
 
 #define HCI_SET_HCI_TRACE               (0x0001 | HCI_GRP_VENDOR_SPECIFIC)
@@ -3019,6 +3015,6 @@ Commands of HCI_GRP_VENDOR_SPECIFIC group for WIDCOMM SW LM Simulator
 #define HCI_DEBUG_LC_CMD_MIN           (0x0300 | HCI_GRP_VENDOR_SPECIFIC)
 #define HCI_DEBUG_LC_CMD_MAX           (0x03FF | HCI_GRP_VENDOR_SPECIFIC)
 #define HCI_DEBUG_LC_COMMAND           HCI_DEBUG_LC_CMD_MAX
-#endif
+#endif // ifdef _WIDCOMM
 
-#endif
+#endif // ifndef HCIDEFS_H

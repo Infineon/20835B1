@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,46 +32,46 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to access the
-* Serial Flash interface driver.
-*
-*/
+ *
+ * List of parameters and defined functions needed to access the
+ * Serial Flash interface driver.
+ *
+ */
 
 #ifndef __WICED_SFLASH_H__
 #define __WICED_SFLASH_H__
 
 /**  \addtogroup SerialFlashInterfaceDriver Serial Flash Interface
-* \ingroup HardwareDrivers
-* Defines a driver for the Serial Flash interface. The driver is responsible
-* for interfacing with a Serial Flash memory module via the second SPI bus,
-* with its main purpose being data handling operations. For instance, any
-* unused space (from the system partition) can be used for any purpose to
-* store and access data. It is a handy way for an app to save information to
-* non-volatile storage.
-*
-*
-* The software driver supports SPI Flashes with the following parameters:
-* 1. Address Width - 24 bit addressing
-* 2. Data Rate is specific to the IoT chip:
-*       CYW20835 supports SPI data rate upto 24MHz
-* 3. Supports JEDEC's CFI (Common Flash Interface) compatible SPI Flash chips from
-*    Cypress Semiconductors, SST, STMicroelectronics, Atmel, MXIC, Adesto, Winbond.
-*
-* Similar to the I2C EEPROM Interface Driver, this driver includes checks to
-* ensure safe data handling operation--it will not allow any write or erase
-* operations to take place within active sections (i.e., sections that the
-* system currently uses for boot, etc). Note that read operations are
-* unrestricted. Please reference the Kit Guide or HW User Manual for your device
-* for more information regarding these active sections, their importance, and
-* what roles they play in the system.
-*
-*/
+ * \ingroup HardwareDrivers
+ * Defines a driver for the Serial Flash interface. The driver is responsible
+ * for interfacing with a Serial Flash memory module via the second SPI bus,
+ * with its main purpose being data handling operations. For instance, any
+ * unused space (from the system partition) can be used for any purpose to
+ * store and access data. It is a handy way for an app to save information to
+ * non-volatile storage.
+ *
+ *
+ * The software driver supports SPI Flashes with the following parameters:
+ * 1. Address Width - 24 bit addressing
+ * 2. Data Rate is specific to the IoT chip:
+ *       CYW20835 supports SPI data rate upto 24MHz
+ * 3. Supports JEDEC's CFI (Common Flash Interface) compatible SPI Flash chips from
+ *    Cypress Semiconductors, SST, STMicroelectronics, Atmel, MXIC, Adesto, Winbond.
+ *
+ * Similar to the I2C EEPROM Interface Driver, this driver includes checks to
+ * ensure safe data handling operation--it will not allow any write or erase
+ * operations to take place within active sections (i.e., sections that the
+ * system currently uses for boot, etc). Note that read operations are
+ * unrestricted. Please reference the Kit Guide or HW User Manual for your device
+ * for more information regarding these active sections, their importance, and
+ * what roles they play in the system.
+ *
+ */
 /*! @{ */
 
 /******************************************************************************
-*** Function prototypes.
-******************************************************************************/
+ *** Function prototypes.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Initialize the SPI lines and low-level Serial Flash Interface Driver.

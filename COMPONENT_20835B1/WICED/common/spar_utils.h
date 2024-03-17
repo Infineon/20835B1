@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -31,14 +31,14 @@
  * so agrees to indemnify Cypress against all liability.
  */
 /*
-********************************************************************
-*    File Name: spar_utils.h
-*
-*    Abstract: A few utilities with a reasonable implementation for
-*              SPAR.
-*
-********************************************************************
-*/
+ ********************************************************************
+ *    File Name: spar_utils.h
+ *
+ *    Abstract: A few utilities with a reasonable implementation for
+ *              SPAR.
+ *
+ ********************************************************************
+ */
 
 #ifndef __SPAR_UTILS_H__
 #define __SPAR_UTILS_H__
@@ -56,24 +56,24 @@ unsigned int _tx_v7m_get_and_disable_int(void);
 void _tx_v7m_set_int(unsigned int posture);
 
 /// When debugging is enabled, sets up the HW for debugging.
-#define SETUP_APP_FOR_DEBUG_IF_DEBUG_ENABLED()   do{		\
-		wiced_hal_gpio_select_function(CY_PLATFORM_SWDCK, WICED_SWDCK); \
-		wiced_hal_gpio_select_function(CY_PLATFORM_SWDIO, WICED_SWDIO); \
-		wiced_hal_wdog_disable();							\
-	}while(0)
+#define SETUP_APP_FOR_DEBUG_IF_DEBUG_ENABLED()   do{        \
+        wiced_hal_gpio_select_function(CY_PLATFORM_SWDCK, WICED_SWDCK); \
+        wiced_hal_gpio_select_function(CY_PLATFORM_SWDIO, WICED_SWDIO); \
+        wiced_hal_wdog_disable();                           \
+    }while(0)
 
 /// Optionally waits in a pseudo while(1) until the user allows the CPU to continue
-#define BUSY_WAIT_TILL_MANUAL_CONTINUE_IF_DEBUG_ENABLED()     do{	\
-		volatile UINT8 spar_debug_continue = 0;						\
+#define BUSY_WAIT_TILL_MANUAL_CONTINUE_IF_DEBUG_ENABLED()     do{   \
+        volatile UINT8 spar_debug_continue = 0;                     \
         unsigned int interrupt_save = _tx_v7m_get_and_disable_int();\
-		while(!spar_debug_continue)									\
-			;														\
+        while(!spar_debug_continue)                                 \
+            ;                                                       \
         _tx_v7m_set_int(interrupt_save);                            \
-		}while(0)
-#else
+        }while(0)
+#else // if ENABLE_DEBUG
 #define SETUP_APP_FOR_DEBUG_IF_DEBUG_ENABLED()
 #define BUSY_WAIT_TILL_MANUAL_CONTINUE_IF_DEBUG_ENABLED()
-#endif
+#endif // if ENABLE_DEBUG
 
 /// Allow the app to place code in retention RAM.
 /// Note that there is very limited retention RAM, so choose
@@ -91,4 +91,4 @@ void _tx_v7m_set_int(unsigned int posture);
     do { if (!(expr)) while (1) ; } while(0)
 
 
-#endif
+#endif // ifndef __SPAR_UTILS_H__

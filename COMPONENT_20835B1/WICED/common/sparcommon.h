@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -46,11 +46,11 @@
 #define EXTERN_C extern
 #endif
 
-EXTERN_C void (*wiced_bt_app_pre_init)(void );
-EXTERN_C void application_start( void );
+EXTERN_C void (*wiced_bt_app_pre_init)(void);
+EXTERN_C void application_start(void);
 
 #define APPLICATION_START() void application_start( void )
 
 // TODO: Other technologies.
 
-#endif
+#endif // ifndef _SPAR_COMMON_H_

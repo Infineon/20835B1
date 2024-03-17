@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -32,11 +32,11 @@
  */
 
 /** @file
-*
-* List of parameters and defined functions needed to utilize the
-*
-*
-*/
+ *
+ * List of parameters and defined functions needed to utilize the
+ *
+ *
+ */
 
 #ifndef __WICED_HAL_RAND_H__
 #define __WICED_HAL_RAND_H__
@@ -44,19 +44,19 @@
 #include "wiced.h"
 
 /**  \addtogroup RandomNumberGenerator Random Number Generator (RNG)
-* \ingroup HardwareDrivers
-* @{
-*
-* Defines a driver for the Random Number Generator (RNG). The RNG uses a
-* special hardware module to generate either a single 32-bit random number or
-* fill a given array with 32-bit random numbers. These are useful for
-* applications such as authentication.
-*
-*/
+ * \ingroup HardwareDrivers
+ * @{
+ *
+ * Defines a driver for the Random Number Generator (RNG). The RNG uses a
+ * special hardware module to generate either a single 32-bit random number or
+ * fill a given array with 32-bit random numbers. These are useful for
+ * applications such as authentication.
+ *
+ */
 
 /******************************************************************************
-*** Function prototypes.
-******************************************************************************/
+ *** Function prototypes.
+ ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Generates and returns a random 32-bit integer. Internal functions check
@@ -83,7 +83,7 @@ uint32_t wiced_hal_rand_gen_num(void);
 ///
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
-void wiced_hal_rand_gen_num_array(uint32_t* randNumberArrayPtr, uint32_t length);
+void wiced_hal_rand_gen_num_array(uint32_t *randNumberArrayPtr, uint32_t length);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// This functin returns a pseudo random number

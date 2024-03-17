@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2024, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -34,42 +34,41 @@
 #define _SLIST_H_
 
 /*******************************************************************************
-*
-* File Name: slist.h
-*
-* Abstract:  This file constains utilities of generic single linked list
-*
-* Functions:
-*
-*******************************************************************************/
+ *
+ * File Name: slist.h
+ *
+ * Abstract:  This file constains utilities of generic single linked list
+ *
+ * Functions:
+ *
+ *******************************************************************************/
 
 /*
  * overview of the generic single linked list structure:
-
-            +------+
-list_head:  | next |--------------------------------------+
-            +------+                                      |
-                                                          |
-                                                          |
-                                                          |
-                                                          v
-        +-----------+       +-----------+           +-----------+
-list:   | item1     |       | item2     |           | itemN     |
-        |           |       |           |           |           |
-        |           |       |           |           |           |
-        +-----------+       +-----------+           +-----------+
- +----->|   next    |------>|   next    |   ...  -->|   next    |-------+
- |      +-----------+       +-----------+           +-----------+       |
- |      |           |       |           |           |           |       |
- |      |           |       |           |           |           |       |
- |      +-----------+       +-----------+           +-----------+       |
- |                                                                      |
- |                                                                      |
- |                                                                      |
- +----------------------------------------------------------------------+
-
- The reason that the list_head points to the last item of the list instead
- of first item is for better performance to insert an item at the tail.
+ *
+ *             +------+
+ * list_head:  | next |--------------------------------------+
+ *             +------+                                      |
+ *                                                           |
+ *                                                           |
+ *                                                           |
+ *                                                           v
+ *         +-----------+       +-----------+           +-----------+
+ * list:   | item1     |       | item2     |           | itemN     |
+ *         |           |       |           |           |           |
+ *         |           |       |           |           |           |
+ *         +-----------+       +-----------+           +-----------+
+ *  +----->|   next    |------>|   next    |   ...  -->|   next    |-------+
+ *  |      +-----------+       +-----------+           +-----------+       |
+ *  |      |           |       |           |           |           |       |
+ *  |      |           |       |           |           |           |       |
+ *  |      +-----------+       +-----------+           +-----------+       |
+ *  |                                                                      |
+ *  |                                                                      |
+ *  |                                                                      |
+ *  +----------------------------------------------------------------------+
+ *  The reason that the list_head points to the last item of the list instead
+ *  of first item is for better performance to insert an item at the tail.
  *
  */
 
@@ -81,17 +80,18 @@ extern "C" {
 
 #pragma pack(push, 4)
 
-typedef struct slist_node_t {
-	struct slist_node_t *next;
+typedef struct slist_node_t
+{
+    struct slist_node_t *next;
 } slist_node_t;
 
 #define SLIST_NODE_INIT(name) { 0 }
 
 #define SLIST_NODE(name) \
-	struct slist_node_t name = SLIST_NODE_INIT(name)
+    struct slist_node_t name = SLIST_NODE_INIT(name)
 
 #define INIT_SLIST_NODE(ptr) do { \
-	(ptr)->next = 0; \
+    (ptr)->next = 0; \
 } while (0)
 
 /**
@@ -104,9 +104,9 @@ typedef struct slist_node_t {
  */
 INLINE void slist_add_front(struct slist_node_t *_new, struct slist_node_t *head)
 {
-    if(head->next)
+    if (head->next)
     {
-        _new->next = head->next->next;
+        _new->next       = head->next->next;
         head->next->next = _new;
     }
     else
@@ -126,11 +126,11 @@ INLINE void slist_add_front(struct slist_node_t *_new, struct slist_node_t *head
  */
 INLINE void slist_add_tail(struct slist_node_t *_new, struct slist_node_t *head)
 {
-    if(head->next)
+    if (head->next)
     {
-        _new->next = head->next->next;
+        _new->next       = head->next->next;
         head->next->next = _new;
-        head->next = _new;
+        head->next       = _new;
     }
     else
     {
@@ -161,7 +161,7 @@ INLINE void slist_add_after(struct slist_node_t *_new, struct slist_node_t *node
 {
     _new->next = node->next;
     node->next = _new;
-    if(head->next == node)
+    if (head->next == node)
     {
         head->next = _new;
     }
@@ -171,17 +171,19 @@ INLINE void slist_add_after(struct slist_node_t *_new, struct slist_node_t *node
  * slist_del_front - deletes the first entry from list.
  * @head: list head where the entry is
  */
-INLINE void slist_del_front(struct slist_node_t* head)
+INLINE void slist_del_front(struct slist_node_t *head)
 {
     struct slist_node_t *tail = head->next;
     struct slist_node_t *front;
 
-    if(tail == 0)
+    if (tail == 0)
+    {
         return;
+    }
 
     front = tail->next;
 
-    if(front == tail)
+    if (front == tail)
     {
         head->next = 0;
     }
@@ -197,7 +199,7 @@ INLINE void slist_del_front(struct slist_node_t* head)
  * @entry: the element to delete from the list.
  * @head: list head where the entry is
  */
-void slist_del(struct slist_node_t *entry, struct slist_node_t* head);
+void slist_del(struct slist_node_t *entry, struct slist_node_t *head);
 
 /**
  * slist_empty - tests whether a list is empty
@@ -205,27 +207,27 @@ void slist_del(struct slist_node_t *entry, struct slist_node_t* head);
  */
 INLINE int slist_empty(struct slist_node_t *head)
 {
-	return head->next == 0;
+    return head->next == 0;
 }
 
 /**
  * slist_front - return the front node pointer
  * @head: the list.
  */
-INLINE struct slist_node_t* slist_front(struct slist_node_t *head)
+INLINE struct slist_node_t *slist_front(struct slist_node_t *head)
 {
-    if(!head->next)
+    if (!head->next)
     {
-        return (slist_node_t*)0;
+        return (slist_node_t *)0;
     }
-	return head->next->next;
+    return head->next->next;
 }
 
 /**
  * slist_tail - return the tail node pointer
  * @head: the list
  */
-INLINE struct slist_node_t* slist_tail(struct slist_node_t *head)
+INLINE struct slist_node_t *slist_tail(struct slist_node_t *head)
 {
     return head->next;
 }
@@ -234,26 +236,23 @@ INLINE struct slist_node_t* slist_tail(struct slist_node_t *head)
  * slist_get - remove the first entry from the list
  * @head: list head where the entry is
  */
-INLINE struct slist_node_t* slist_get(struct slist_node_t* head)
+INLINE struct slist_node_t *slist_get(struct slist_node_t *head)
 {
-    struct slist_node_t* item;
+    struct slist_node_t *item;
 
     item = slist_front(head);
     slist_del_front(head);
     return item;
 }
 
-
-
 /**
  * slist_entry - get the struct for this entry
- * @ptr:	the &struct dlist_node_t pointer.
- * @type:	the type of the struct this is embedded in.
- * @member:	the name of the dlist_node_t within the struct.
+ * @ptr:    the &struct dlist_node_t pointer.
+ * @type:   the type of the struct this is embedded in.
+ * @member: the name of the dlist_node_t within the struct.
  */
 #define slist_entry(ptr, type, member) \
-	((type *)((char *)(ptr)-(unsigned long)(&((type *)0)->member)))
-
+    ((type *)((char *)(ptr)-(unsigned long)(&((type *)0)->member)))
 
 
 /**
@@ -262,19 +261,19 @@ INLINE struct slist_node_t* slist_get(struct slist_node_t* head)
  */
 INLINE int slist_count(struct slist_node_t *head)
 {
-    struct slist_node_t* pos;
-    int i;
+    struct slist_node_t *pos;
+    int                  i;
 
-    if(head->next == 0)
+    if (head->next == 0)
     {
         return 0;
     }
 
     pos = head->next->next;
-    i = 1;
-    while(pos != head->next)
+    i   = 1;
+    while (pos != head->next)
     {
-        i ++;
+        i++;
         pos = pos->next;
     }
     return i;
