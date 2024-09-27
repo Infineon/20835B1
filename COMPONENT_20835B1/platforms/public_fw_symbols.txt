@@ -101,6 +101,7 @@ rmulp_constInfo                                  ,           SYMBOL ,      PUBLI
 wdog_generate_hw_reset                           ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 rtcConfig                                        ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 slist_get                                        ,           SYMBOL ,      PUBLIC,      0,                      ,              1
+slist_add_tail                                   ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #
 wiced_*                                          ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #

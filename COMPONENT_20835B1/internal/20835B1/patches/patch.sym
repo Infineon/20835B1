@@ -991,3 +991,4 @@ A560a1c00 = 0x2829c0;
 Abacf4c00 = 0x283278;
 Affe3ec00 = 0x2832f3;
 A674a2e00 = 0x2833d9;
+slist_add_tail = 0x095c5b;
